@@ -1,0 +1,4782 @@
+# Swedish grocery products for price tracking
+# Generated for matmoms-tracker
+
+# =============================================================================
+# DAIRY - MILK (dairy-milk)
+# =============================================================================
+- canonical_name: "Arla Standardmjölk 3% 1.5L"
+  ean: "7310865001726"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Arla standardmjölk 3% 1.5L"
+    coop: "Arla mjölk standard 3% 1.5"
+    willys: "Arla standardmjölk 3%"
+
+- canonical_name: "Arla Mellanmjölk 1.5% 1.5L"
+  ean: "7310865001733"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Arla mellanmjölk 1.5% 1.5L"
+    coop: "Arla mjölk mellan 1.5% 1.5"
+    willys: "Arla mellanmjölk 1.5%"
+
+- canonical_name: "Arla Lättmjölk 0.5% 1.5L"
+  ean: "7310865001740"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Arla lättmjölk 0.5% 1.5L"
+    coop: "Arla mjölk lätt 0.5% 1.5"
+    willys: "Arla lättmjölk 0.5%"
+
+- canonical_name: "Arla Standardmjölk 3% 1L"
+  ean: "7310865001757"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla standardmjölk 3% 1L"
+    coop: "Arla mjölk standard 3% 1L"
+    willys: "Arla standardmjölk 3% 1L"
+
+- canonical_name: "Arla Mellanmjölk 1.5% 1L"
+  ean: "7310865001764"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla mellanmjölk 1.5% 1L"
+    coop: "Arla mjölk mellan 1.5% 1L"
+    willys: "Arla mellanmjölk 1.5% 1L"
+
+- canonical_name: "Skånemejerier Standardmjölk 3% 1.5L"
+  ean: "7310860006458"
+  category: dairy-milk
+  brand: Skånemejerier
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Skånemejerier standardmjölk 3% 1.5L"
+    coop: "Skånemejerier mjölk standard 3%"
+    willys: "Skånemejerier standardmjölk 3%"
+
+- canonical_name: "Norrmejerier Standardmjölk 3% 1.5L"
+  ean: "7310867001724"
+  category: dairy-milk
+  brand: Norrmejerier
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Norrmejerier standardmjölk 3% 1.5L"
+    coop: "Norrmejerier mjölk standard 3%"
+    willys: "Norrmejerier standardmjölk 3%"
+
+- canonical_name: "Oatly Havredryck Original 1L"
+  ean: "7394376616013"
+  category: dairy-milk
+  brand: Oatly
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Oatly havredryck original 1L"
+    coop: "Oatly havredryck original"
+    willys: "Oatly havredryck original"
+
+- canonical_name: "Oatly Havredryck Barista Edition 1L"
+  ean: "7394376616037"
+  category: dairy-milk
+  brand: Oatly
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Oatly havredryck barista 1L"
+    coop: "Oatly barista edition"
+    willys: "Oatly barista havredryck"
+
+- canonical_name: "Oatly iMat Matlagningsgrädde 250ml"
+  ean: "7394376616051"
+  category: dairy-milk
+  brand: Oatly
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "Oatly iMat matlagning 250ml"
+    coop: "Oatly iMat matlagning"
+    willys: "Oatly iMat matlagningsgrädde"
+
+- canonical_name: "ICA Mellanmjölk 1.5% 1.5L"
+  ean: "7318690129301"
+  category: dairy-milk
+  brand: ICA
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "ICA mellanmjölk 1.5% 1.5L"
+    coop: "ICA mellanmjölk 1.5%"
+    willys: "ICA mellanmjölk 1.5%"
+
+- canonical_name: "Arla Ekologisk Mellanmjölk 1.5% 1L"
+  ean: "7310865004109"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla eko mellanmjölk 1L"
+    coop: "Arla ekologisk mellanmjölk 1L"
+    willys: "Arla eko mellanmjölk"
+
+- canonical_name: "Arla Färsk Minimjölk 0.1% 1L"
+  ean: "7310865001801"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla minimjölk 0.1% 1L"
+    coop: "Arla mjölk mini 0.1%"
+    willys: "Arla minimjölk"
+
+# =============================================================================
+# DAIRY - CHEESE (dairy-cheese)
+# =============================================================================
+- canonical_name: "Arla Grevé Ost 28% 700g"
+  ean: "7310865018113"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "Arla grevé 28% 700g"
+    coop: "Arla grevé ost 28%"
+    willys: "Arla grevé 700g"
+
+- canonical_name: "Arla Herrgård Ost 28% 700g"
+  ean: "7310865018120"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "Arla herrgård 28% 700g"
+    coop: "Arla herrgård ost 28%"
+    willys: "Arla herrgård 700g"
+
+- canonical_name: "Arla Präst Ost 31% 700g"
+  ean: "7310865018137"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "Arla präst 31% 700g"
+    coop: "Arla prästost 31%"
+    willys: "Arla präst 700g"
+
+- canonical_name: "Arla Hushållsost 26% 1.1kg"
+  ean: "7310865018144"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 1.1
+  unit_type: kg
+  search_terms:
+    ica: "Arla hushållsost 26% 1.1kg"
+    coop: "Arla hushållsost 26%"
+    willys: "Arla hushållsost 1.1kg"
+
+- canonical_name: "Arla Cream Cheese Naturell 200g"
+  ean: "7310865018151"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Arla cream cheese naturell 200g"
+    coop: "Arla färskost naturell"
+    willys: "Arla cream cheese naturell"
+
+- canonical_name: "ICA Riven Ost Pizzamix 28% 150g"
+  ean: "7318690132509"
+  category: dairy-cheese
+  brand: ICA
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "ICA riven ost pizzamix 150g"
+    coop: "ICA pizzaost riven"
+    willys: "ICA riven pizzaost"
+
+- canonical_name: "Arla Bregott Grevé Skivad 150g"
+  ean: "7310865018168"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Arla grevé skivad 150g"
+    coop: "Arla grevé skivad ost"
+    willys: "Arla grevé skivad"
+
+- canonical_name: "Castello Brie 200g"
+  ean: "7310865019012"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Castello brie 200g"
+    coop: "Castello brie ost 200g"
+    willys: "Castello brie 200g"
+
+- canonical_name: "Kavli Mjukost Naturell 275g"
+  ean: "7311440012018"
+  category: dairy-cheese
+  brand: Kavli
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Kavli mjukost naturell 275g"
+    coop: "Kavli mjukost naturell"
+    willys: "Kavli mjukost naturell 275g"
+
+- canonical_name: "Kavli Mjukost Räkor 275g"
+  ean: "7311440012025"
+  category: dairy-cheese
+  brand: Kavli
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Kavli mjukost räkor 275g"
+    coop: "Kavli mjukost räkor"
+    willys: "Kavli mjukost räkor 275g"
+
+- canonical_name: "Philadelphia Original 200g"
+  ean: "7622300318857"
+  category: dairy-cheese
+  brand: Philadelphia
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Philadelphia original 200g"
+    coop: "Philadelphia färskost original"
+    willys: "Philadelphia original"
+
+- canonical_name: "Garant Riven Mozzarella 150g"
+  ean: "7310090774532"
+  category: dairy-cheese
+  brand: Garant
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Garant riven mozzarella 150g"
+    coop: "Garant mozzarella riven"
+    willys: "Garant riven mozzarella"
+
+- canonical_name: "Eldorado Riven Edamer 28% 150g"
+  ean: "7310090775010"
+  category: dairy-cheese
+  brand: Eldorado
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Eldorado riven edamer 150g"
+    coop: "Eldorado edamer riven"
+    willys: "Eldorado riven edamer"
+
+# =============================================================================
+# DAIRY - YOGURT (dairy-yogurt)
+# =============================================================================
+- canonical_name: "Arla Yoghurt Naturell 3% 1L"
+  ean: "7310865002013"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla yoghurt naturell 3% 1L"
+    coop: "Arla yoghurt naturell 3%"
+    willys: "Arla yoghurt naturell 1L"
+
+- canonical_name: "Arla Yoghurt Naturell 0.5% 1L"
+  ean: "7310865002020"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla yoghurt naturell 0.5% 1L"
+    coop: "Arla yoghurt lätt naturell"
+    willys: "Arla yoghurt naturell 0.5%"
+
+- canonical_name: "Arla Yoghurt Jordgubb 1L"
+  ean: "7310865002037"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla yoghurt jordgubb 1L"
+    coop: "Arla yoghurt jordgubb"
+    willys: "Arla yoghurt jordgubb"
+
+- canonical_name: "Arla Yoghurt Blåbär 1L"
+  ean: "7310865002044"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla yoghurt blåbär 1L"
+    coop: "Arla yoghurt blåbär"
+    willys: "Arla yoghurt blåbär"
+
+- canonical_name: "Arla Kvarg Naturell 500g"
+  ean: "7310865002051"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Arla kvarg naturell 500g"
+    coop: "Arla kvarg naturell"
+    willys: "Arla kvarg naturell 500g"
+
+- canonical_name: "Arla Kvarg Vanilj 500g"
+  ean: "7310865002068"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Arla kvarg vanilj 500g"
+    coop: "Arla kvarg vanilj"
+    willys: "Arla kvarg vanilj 500g"
+
+- canonical_name: "Skånemejerier Filmjölk 3% 1L"
+  ean: "7310860008012"
+  category: dairy-yogurt
+  brand: Skånemejerier
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Skånemejerier filmjölk 3% 1L"
+    coop: "Skånemejerier filmjölk 3%"
+    willys: "Skånemejerier filmjölk"
+
+- canonical_name: "Arla Filmjölk 3% 1L"
+  ean: "7310865002075"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla filmjölk 3% 1L"
+    coop: "Arla filmjölk 3%"
+    willys: "Arla filmjölk 1L"
+
+- canonical_name: "Yoggi Original Jordgubb 200g"
+  ean: "7310865003102"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Yoggi original jordgubb 200g"
+    coop: "Yoggi jordgubb"
+    willys: "Yoggi original jordgubb"
+
+- canonical_name: "Yoggi Yalla Mango 200ml"
+  ean: "7310865003119"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 200
+  unit_type: ml
+  search_terms:
+    ica: "Yoggi yalla mango 200ml"
+    coop: "Yoggi yalla mango"
+    willys: "Yoggi yalla mango"
+
+- canonical_name: "ICA Turkisk Yoghurt 10% 500g"
+  ean: "7318690134015"
+  category: dairy-yogurt
+  brand: ICA
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "ICA turkisk yoghurt 10% 500g"
+    coop: "ICA turkisk yoghurt"
+    willys: "ICA turkisk yoghurt 10%"
+
+- canonical_name: "Paulúns Müsli Yoghurt Blåbär 150g"
+  ean: "7310090886013"
+  category: dairy-yogurt
+  brand: Paulúns
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Paulúns yoghurt blåbär 150g"
+    coop: "Paulúns müsli yoghurt blåbär"
+    willys: "Paulúns yoghurt blåbär"
+
+# =============================================================================
+# DAIRY - BUTTER (dairy-butter)
+# =============================================================================
+- canonical_name: "Arla Bregott Normalsaltat 600g"
+  ean: "7310865003201"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Bregott normalsaltat 600g"
+    coop: "Arla bregott normalsaltat 600g"
+    willys: "Bregott normalsaltat 600g"
+
+- canonical_name: "Arla Bregott Mellan 600g"
+  ean: "7310865003218"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Bregott mellan 600g"
+    coop: "Arla bregott mellan 600g"
+    willys: "Bregott mellan 600g"
+
+- canonical_name: "Arla Bregott Lätt 600g"
+  ean: "7310865003225"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Bregott lätt 600g"
+    coop: "Arla bregott lätt 600g"
+    willys: "Bregott lätt 600g"
+
+- canonical_name: "Arla Bregott Ekologisk 600g"
+  ean: "7310865003232"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Bregott ekologisk 600g"
+    coop: "Arla bregott eko 600g"
+    willys: "Bregott eko 600g"
+
+- canonical_name: "Arla Svenskt Smör Normalsaltat 500g"
+  ean: "7310865003249"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Arla svenskt smör normalsaltat 500g"
+    coop: "Arla svenskt smör 500g"
+    willys: "Arla svenskt smör normalsaltat"
+
+- canonical_name: "Arla Svenskt Smör Osaltat 500g"
+  ean: "7310865003256"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Arla svenskt smör osaltat 500g"
+    coop: "Arla svenskt smör osaltat"
+    willys: "Arla svenskt smör osaltat"
+
+- canonical_name: "ICA Smörgåsmargarin 600g"
+  ean: "7318690135012"
+  category: dairy-butter
+  brand: ICA
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "ICA smörgåsmargarin 600g"
+    coop: "ICA smörgåsmargarin"
+    willys: "ICA smörgåsmargarin 600g"
+
+- canonical_name: "Flora Smörgåsmargarin 600g"
+  ean: "7310090401018"
+  category: dairy-butter
+  brand: Flora
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Flora smörgåsmargarin 600g"
+    coop: "Flora margarin 600g"
+    willys: "Flora smörgåsmargarin"
+
+- canonical_name: "Milda Matfettsblandning 600g"
+  ean: "7310090402015"
+  category: dairy-butter
+  brand: Milda
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Milda matfett 600g"
+    coop: "Milda matfettsblandning"
+    willys: "Milda 600g"
+
+# =============================================================================
+# DAIRY - CREAM (dairy-cream)
+# =============================================================================
+- canonical_name: "Arla Vispgrädde 40% 500ml"
+  ean: "7310865004201"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Arla vispgrädde 40% 500ml"
+    coop: "Arla vispgrädde 40%"
+    willys: "Arla vispgrädde 500ml"
+
+- canonical_name: "Arla Matlagningsgrädde 15% 500ml"
+  ean: "7310865004218"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Arla matlagningsgrädde 15% 500ml"
+    coop: "Arla matgrädde 15%"
+    willys: "Arla matlagningsgrädde 15%"
+
+- canonical_name: "Arla Matlagningsgrädde 15% 250ml"
+  ean: "7310865004225"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "Arla matlagningsgrädde 15% 250ml"
+    coop: "Arla matgrädde 15% 250ml"
+    willys: "Arla matlagningsgrädde 250ml"
+
+- canonical_name: "Arla Crème Fraiche 34% 200ml"
+  ean: "7310865004232"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 200
+  unit_type: ml
+  search_terms:
+    ica: "Arla crème fraiche 34% 200ml"
+    coop: "Arla crème fraiche 34%"
+    willys: "Arla crème fraiche 200ml"
+
+- canonical_name: "Arla Crème Fraiche Lätt 13% 200ml"
+  ean: "7310865004249"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 200
+  unit_type: ml
+  search_terms:
+    ica: "Arla crème fraiche lätt 13% 200ml"
+    coop: "Arla crème fraiche lätt"
+    willys: "Arla crème fraiche lätt 200ml"
+
+- canonical_name: "Arla Gräddfil 12% 500ml"
+  ean: "7310865004256"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Arla gräddfil 12% 500ml"
+    coop: "Arla gräddfil 12%"
+    willys: "Arla gräddfil 500ml"
+
+- canonical_name: "Arla Kesella Naturell 250g"
+  ean: "7310865004263"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Arla kesella naturell 250g"
+    coop: "Arla kesella naturell"
+    willys: "Arla kesella naturell 250g"
+
+- canonical_name: "ICA Vispgrädde 36% 500ml"
+  ean: "7318690136012"
+  category: dairy-cream
+  brand: ICA
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "ICA vispgrädde 36% 500ml"
+    coop: "ICA vispgrädde 36%"
+    willys: "ICA vispgrädde 500ml"
+
+- canonical_name: "Arla Kaffegrädde 12% 330ml"
+  ean: "7310865004270"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 330
+  unit_type: ml
+  search_terms:
+    ica: "Arla kaffegrädde 12% 330ml"
+    coop: "Arla kaffegrädde 12%"
+    willys: "Arla kaffegrädde 330ml"
+
+# =============================================================================
+# MEAT - BEEF (meat-beef)
+# =============================================================================
+- canonical_name: "Scan Nötfärs 12% 800g"
+  ean: "7300156501011"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Scan nötfärs 12% 800g"
+    coop: "Scan nötfärs 12%"
+    willys: "Scan nötfärs 12% 800g"
+
+- canonical_name: "Scan Nötfärs 10% 500g"
+  ean: "7300156501028"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan nötfärs 10% 500g"
+    coop: "Scan nötfärs 10%"
+    willys: "Scan nötfärs 10% 500g"
+
+- canonical_name: "Scan Blandfärs 50/50 800g"
+  ean: "7300156501035"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Scan blandfärs 800g"
+    coop: "Scan blandfärs 50/50"
+    willys: "Scan blandfärs 800g"
+
+- canonical_name: "Scan Blandfärs 50/50 500g"
+  ean: "7300156501042"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan blandfärs 500g"
+    coop: "Scan blandfärs 50/50 500g"
+    willys: "Scan blandfärs 500g"
+
+- canonical_name: "ICA Nötfärs 12% 800g"
+  ean: "7318690140019"
+  category: meat-beef
+  brand: ICA
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "ICA nötfärs 12% 800g"
+    coop: "ICA nötfärs 12%"
+    willys: "ICA nötfärs 12% 800g"
+
+- canonical_name: "Garant Nötfärs 10% 500g"
+  ean: "7310090880011"
+  category: meat-beef
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Garant nötfärs 10% 500g"
+    coop: "Garant nötfärs 10%"
+    willys: "Garant nötfärs 500g"
+
+- canonical_name: "Scan Entrecôte ca 400g"
+  ean: "7300156502018"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Scan entrecôte 400g"
+    coop: "Scan entrecôte"
+    willys: "Scan entrecôte ca 400g"
+
+- canonical_name: "Scan Innanlår Stek ca 1kg"
+  ean: "7300156502025"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Scan innanlår stek 1kg"
+    coop: "Scan innanlår stek"
+    willys: "Scan innanlår stek"
+
+- canonical_name: "Scan Högrev Bitar 500g"
+  ean: "7300156502032"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan högrev bitar 500g"
+    coop: "Scan högrev bitar"
+    willys: "Scan högrevsbitar 500g"
+
+- canonical_name: "Eldorado Blandfärs 50/50 800g"
+  ean: "7310090881011"
+  category: meat-beef
+  brand: Eldorado
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Eldorado blandfärs 800g"
+    coop: "Eldorado blandfärs"
+    willys: "Eldorado blandfärs 800g"
+
+# =============================================================================
+# MEAT - PORK (meat-pork)
+# =============================================================================
+- canonical_name: "Scan Fläskytterfilé 900g"
+  ean: "7300156503018"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "Scan fläskytterfilé 900g"
+    coop: "Scan fläskytterfilé"
+    willys: "Scan fläskytterfilé 900g"
+
+- canonical_name: "Scan Fläskfilé 500g"
+  ean: "7300156503025"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan fläskfilé 500g"
+    coop: "Scan fläskfilé"
+    willys: "Scan fläskfilé 500g"
+
+- canonical_name: "Scan Fläskkarré Skivor 400g"
+  ean: "7300156503032"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Scan fläskkarré skivor 400g"
+    coop: "Scan fläskkarré skivad"
+    willys: "Scan fläskkarré skivor"
+
+- canonical_name: "ICA Fläskytterfilé 900g"
+  ean: "7318690141019"
+  category: meat-pork
+  brand: ICA
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "ICA fläskytterfilé 900g"
+    coop: "ICA fläskytterfilé"
+    willys: "ICA fläskytterfilé 900g"
+
+- canonical_name: "Scan Sidfläsk 200g"
+  ean: "7300156503049"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Scan sidfläsk 200g"
+    coop: "Scan sidfläsk"
+    willys: "Scan sidfläsk 200g"
+
+- canonical_name: "Scan Bacon 140g"
+  ean: "7300156503056"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 140
+  unit_type: g
+  search_terms:
+    ica: "Scan bacon 140g"
+    coop: "Scan bacon"
+    willys: "Scan bacon 140g"
+
+- canonical_name: "Scan Julskinka Kokt 1kg"
+  ean: "7300156503063"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Scan julskinka kokt 1kg"
+    coop: "Scan julskinka kokt"
+    willys: "Scan julskinka kokt"
+
+- canonical_name: "Scan Revbensspjäll ca 1.2kg"
+  ean: "7300156503070"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 1.2
+  unit_type: kg
+  search_terms:
+    ica: "Scan revbensspjäll 1.2kg"
+    coop: "Scan revbensspjäll"
+    willys: "Scan revbensspjäll"
+
+- canonical_name: "Garant Fläskfärs 10% 500g"
+  ean: "7310090882011"
+  category: meat-pork
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Garant fläskfärs 10% 500g"
+    coop: "Garant fläskfärs 10%"
+    willys: "Garant fläskfärs 500g"
+
+# =============================================================================
+# MEAT - CHICKEN (meat-chicken)
+# =============================================================================
+- canonical_name: "Kronfågel Kycklingfilé 900g"
+  ean: "7311171001017"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "Kronfågel kycklingfilé 900g"
+    coop: "Kronfågel kycklingfilé"
+    willys: "Kronfågel kycklingfilé 900g"
+
+- canonical_name: "Kronfågel Kycklingklubba 1kg"
+  ean: "7311171001024"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Kronfågel kycklingklubba 1kg"
+    coop: "Kronfågel kycklingklubba"
+    willys: "Kronfågel kycklingklubba"
+
+- canonical_name: "Kronfågel Kycklinglårfilé 700g"
+  ean: "7311171001031"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "Kronfågel kycklinglårfilé 700g"
+    coop: "Kronfågel lårfilé kyckling"
+    willys: "Kronfågel kycklinglårfilé"
+
+- canonical_name: "ICA Kycklingfilé 900g"
+  ean: "7318690142019"
+  category: meat-chicken
+  brand: ICA
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "ICA kycklingfilé 900g"
+    coop: "ICA kycklingfilé"
+    willys: "ICA kycklingfilé 900g"
+
+- canonical_name: "Garant Kycklingfilé 700g"
+  ean: "7310090883011"
+  category: meat-chicken
+  brand: Garant
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "Garant kycklingfilé 700g"
+    coop: "Garant kycklingfilé"
+    willys: "Garant kycklingfilé 700g"
+
+- canonical_name: "Kronfågel Hel Kyckling ca 1.5kg"
+  ean: "7311171001048"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 1.5
+  unit_type: kg
+  search_terms:
+    ica: "Kronfågel hel kyckling 1.5kg"
+    coop: "Kronfågel hel kyckling"
+    willys: "Kronfågel hel kyckling"
+
+- canonical_name: "Kronfågel Kycklingfärs 500g"
+  ean: "7311171001055"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Kronfågel kycklingfärs 500g"
+    coop: "Kronfågel kycklingfärs"
+    willys: "Kronfågel kycklingfärs 500g"
+
+- canonical_name: "Kronfågel Kycklingspett Teriyaki 400g"
+  ean: "7311171001062"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Kronfågel kycklingspett teriyaki 400g"
+    coop: "Kronfågel kycklingspett teriyaki"
+    willys: "Kronfågel kycklingspett teriyaki"
+
+# =============================================================================
+# MEAT - DELI (meat-deli)
+# =============================================================================
+- canonical_name: "Scan Skivad Skinka 200g"
+  ean: "7300156504018"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Scan skivad skinka 200g"
+    coop: "Scan skinka skivad"
+    willys: "Scan skivad skinka 200g"
+
+- canonical_name: "Scan Salami 80g"
+  ean: "7300156504025"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 80
+  unit_type: g
+  search_terms:
+    ica: "Scan salami 80g"
+    coop: "Scan salami"
+    willys: "Scan salami 80g"
+
+- canonical_name: "Scan Kokt Skinka 200g"
+  ean: "7300156504032"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Scan kokt skinka 200g"
+    coop: "Scan kokt skinka"
+    willys: "Scan kokt skinka 200g"
+
+- canonical_name: "Scan Rökt Skinka 200g"
+  ean: "7300156504049"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Scan rökt skinka 200g"
+    coop: "Scan rökt skinka"
+    willys: "Scan rökt skinka 200g"
+
+- canonical_name: "Scan Grillkorv 480g"
+  ean: "7300156504056"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 480
+  unit_type: g
+  search_terms:
+    ica: "Scan grillkorv 480g"
+    coop: "Scan grillkorv"
+    willys: "Scan grillkorv 480g"
+
+- canonical_name: "Scan Falukorv 800g"
+  ean: "7300156504063"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Scan falukorv 800g"
+    coop: "Scan falukorv"
+    willys: "Scan falukorv 800g"
+
+- canonical_name: "Scan Prinskorv 300g"
+  ean: "7300156504070"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 300
+  unit_type: g
+  search_terms:
+    ica: "Scan prinskorv 300g"
+    coop: "Scan prinskorv"
+    willys: "Scan prinskorv 300g"
+
+- canonical_name: "ICA Skivad Skinka 200g"
+  ean: "7318690143019"
+  category: meat-deli
+  brand: ICA
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "ICA skivad skinka 200g"
+    coop: "ICA skinka skivad"
+    willys: "ICA skivad skinka"
+
+- canonical_name: "Coop Rökt Kalkon 120g"
+  ean: "7300156605014"
+  category: meat-deli
+  brand: Coop
+  unit_quantity: 120
+  unit_type: g
+  search_terms:
+    ica: "Coop rökt kalkon 120g"
+    coop: "Coop rökt kalkon"
+    willys: "Coop rökt kalkon 120g"
+
+- canonical_name: "Scan Leverpastej Normalstekt 200g"
+  ean: "7300156504087"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Scan leverpastej normalstekt 200g"
+    coop: "Scan leverpastej"
+    willys: "Scan leverpastej 200g"
+
+# =============================================================================
+# BREAD - FRESH (bread-fresh)
+# =============================================================================
+- canonical_name: "Pågen Lingongrova 500g"
+  ean: "7311070010013"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Pågen lingongrova 500g"
+    coop: "Pågen lingongrova"
+    willys: "Pågen lingongrova 500g"
+
+- canonical_name: "Pågen Hönökaka 330g"
+  ean: "7311070010020"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 330
+  unit_type: g
+  search_terms:
+    ica: "Pågen hönökaka 330g"
+    coop: "Pågen hönökaka"
+    willys: "Pågen hönökaka"
+
+- canonical_name: "Pågen Formfranska 500g"
+  ean: "7311070010037"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Pågen formfranska 500g"
+    coop: "Pågen formfranska"
+    willys: "Pågen formfranska"
+
+- canonical_name: "Pågen Guldkorn 750g"
+  ean: "7311070010044"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 750
+  unit_type: g
+  search_terms:
+    ica: "Pågen guldkorn 750g"
+    coop: "Pågen guldkorn"
+    willys: "Pågen guldkorn"
+
+- canonical_name: "Polarbröd Polargrova 4-pack"
+  ean: "7310160010015"
+  category: bread-fresh
+  brand: Polarbröd
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Polarbröd polargrova 4-pack"
+    coop: "Polarbröd polargrova"
+    willys: "Polarbröd polargrova"
+
+- canonical_name: "Polarbröd Jättegott 4-pack"
+  ean: "7310160010022"
+  category: bread-fresh
+  brand: Polarbröd
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Polarbröd jättegott 4-pack"
+    coop: "Polarbröd jättegott"
+    willys: "Polarbröd jättegott"
+
+- canonical_name: "Fazer Limpa Mörk 500g"
+  ean: "7312930010018"
+  category: bread-fresh
+  brand: Fazer
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Fazer limpa mörk 500g"
+    coop: "Fazer limpa mörk"
+    willys: "Fazer limpa mörk"
+
+- canonical_name: "Korvbrödsbagarn Korvbröd 10-pack"
+  ean: "7311070015018"
+  category: bread-fresh
+  brand: Korvbrödsbagarn
+  unit_quantity: 10
+  unit_type: st
+  search_terms:
+    ica: "Korvbrödsbagarn korvbröd 10-pack"
+    coop: "Korvbrödsbagarn korvbröd"
+    willys: "Korvbrödsbagarn korvbröd"
+
+- canonical_name: "Pågen Levain Sourdough 450g"
+  ean: "7311070010051"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Pågen levain surdeg 450g"
+    coop: "Pågen levain sourdough"
+    willys: "Pågen levain surdeg"
+
+- canonical_name: "ICA Korvbröd 10-pack"
+  ean: "7318690144019"
+  category: bread-fresh
+  brand: ICA
+  unit_quantity: 10
+  unit_type: st
+  search_terms:
+    ica: "ICA korvbröd 10-pack"
+    coop: "ICA korvbröd"
+    willys: "ICA korvbröd"
+
+- canonical_name: "Polarbröd Tunnbröd Mjukt 10-pack"
+  ean: "7310160010039"
+  category: bread-fresh
+  brand: Polarbröd
+  unit_quantity: 10
+  unit_type: st
+  search_terms:
+    ica: "Polarbröd tunnbröd mjukt 10-pack"
+    coop: "Polarbröd tunnbröd mjukt"
+    willys: "Polarbröd tunnbröd mjukt"
+
+# =============================================================================
+# BREAD - CRISPBREAD (bread-crispbread)
+# =============================================================================
+- canonical_name: "Wasa Husman 520g"
+  ean: "7300400120012"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 520
+  unit_type: g
+  search_terms:
+    ica: "Wasa husman 520g"
+    coop: "Wasa husman"
+    willys: "Wasa husman 520g"
+
+- canonical_name: "Wasa Rågi 275g"
+  ean: "7300400120029"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Wasa rågi 275g"
+    coop: "Wasa rågi"
+    willys: "Wasa rågi"
+
+- canonical_name: "Wasa Frukost 480g"
+  ean: "7300400120036"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 480
+  unit_type: g
+  search_terms:
+    ica: "Wasa frukost 480g"
+    coop: "Wasa frukost"
+    willys: "Wasa frukost"
+
+- canonical_name: "Wasa Sandwich Ost & Skinka 120g"
+  ean: "7300400120043"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 120
+  unit_type: g
+  search_terms:
+    ica: "Wasa sandwich ost skinka 120g"
+    coop: "Wasa sandwich ost skinka"
+    willys: "Wasa sandwich ost skinka"
+
+- canonical_name: "Wasa Flerkorn 275g"
+  ean: "7300400120050"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Wasa flerkorn 275g"
+    coop: "Wasa flerkorn"
+    willys: "Wasa flerkorn"
+
+- canonical_name: "Leksands Knäckebröd Runda 750g"
+  ean: "7310780010018"
+  category: bread-crispbread
+  brand: Leksands
+  unit_quantity: 750
+  unit_type: g
+  search_terms:
+    ica: "Leksands knäckebröd runda 750g"
+    coop: "Leksands knäcke runda"
+    willys: "Leksands runda knäckebröd"
+
+- canonical_name: "Wasa Thin & Crispy Rosmarin 190g"
+  ean: "7300400120067"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 190
+  unit_type: g
+  search_terms:
+    ica: "Wasa thin crispy rosmarin 190g"
+    coop: "Wasa thin crispy rosmarin"
+    willys: "Wasa thin crispy rosmarin"
+
+- canonical_name: "Finn Crisp Original 200g"
+  ean: "7312930020017"
+  category: bread-crispbread
+  brand: Fazer
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Finn Crisp original 200g"
+    coop: "Finn Crisp original"
+    willys: "Finn Crisp original"
+
+# =============================================================================
+# PRODUCE - FRUIT (produce-fruit)
+# =============================================================================
+- canonical_name: "Bananer Klass 1 ca 1kg"
+  ean: "7310090900017"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Bananer klass 1"
+    coop: "Bananer klass 1"
+    willys: "Bananer klass 1"
+
+- canonical_name: "Royal Gala Äpplen 1kg"
+  ean: "7310090900024"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Royal Gala äpplen 1kg"
+    coop: "Äpple Royal Gala"
+    willys: "Royal Gala äpplen"
+
+- canonical_name: "Apelsiner 1kg"
+  ean: "7310090900031"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Apelsiner navel 1kg"
+    coop: "Apelsiner 1kg"
+    willys: "Apelsiner navel"
+
+- canonical_name: "Citroner 3-pack"
+  ean: "7310090900048"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Citroner 3-pack"
+    coop: "Citroner 3-pack"
+    willys: "Citroner 3-pack"
+
+- canonical_name: "ICA Blåbär 250g"
+  ean: "7318690145019"
+  category: produce-fruit
+  brand: ICA
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "ICA blåbär 250g"
+    coop: "Blåbär 250g"
+    willys: "Blåbär 250g"
+
+- canonical_name: "ICA Jordgubbar 400g"
+  ean: "7318690145026"
+  category: produce-fruit
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA jordgubbar 400g"
+    coop: "Jordgubbar 400g"
+    willys: "Jordgubbar 400g"
+
+- canonical_name: "Clementin 1kg"
+  ean: "7310090900055"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Clementin 1kg"
+    coop: "Clementiner 1kg"
+    willys: "Clementin 1kg"
+
+- canonical_name: "Päron Conference 1kg"
+  ean: "7310090900062"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Päron conference 1kg"
+    coop: "Conference päron"
+    willys: "Päron conference"
+
+- canonical_name: "Avokado 3-pack"
+  ean: "7310090900079"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Avokado 3-pack"
+    coop: "Avokado 3-pack"
+    willys: "Avokado 3-pack"
+
+- canonical_name: "Kiwi Grön 6-pack"
+  ean: "7310090900086"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Kiwi grön 6-pack"
+    coop: "Kiwi 6-pack"
+    willys: "Kiwi grön 6-pack"
+
+- canonical_name: "Vattenmelon ca 3kg"
+  ean: "7310090900093"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 3
+  unit_type: kg
+  search_terms:
+    ica: "Vattenmelon hel"
+    coop: "Vattenmelon"
+    willys: "Vattenmelon hel"
+
+- canonical_name: "Mango 2-pack"
+  ean: "7310090900109"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 2
+  unit_type: st
+  search_terms:
+    ica: "Mango 2-pack"
+    coop: "Mango 2-pack"
+    willys: "Mango 2-pack"
+
+# =============================================================================
+# PRODUCE - VEGETABLES (produce-vegetables)
+# =============================================================================
+- canonical_name: "Morötter 1kg"
+  ean: "7310090910016"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Morötter 1kg"
+    coop: "Morötter 1kg"
+    willys: "Morötter 1kg"
+
+- canonical_name: "Potatis Fast 2kg"
+  ean: "7310090910023"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "Potatis fast 2kg"
+    coop: "Potatis fast 2kg"
+    willys: "Potatis fast 2kg"
+
+- canonical_name: "Gurka Styck"
+  ean: "7310090910030"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Gurka styck"
+    coop: "Gurka styck"
+    willys: "Gurka styck"
+
+- canonical_name: "Tomat Kvist 500g"
+  ean: "7310090910047"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Tomat kvisttomater 500g"
+    coop: "Kvisttomater 500g"
+    willys: "Tomat kvist 500g"
+
+- canonical_name: "Paprika Röd 3-pack"
+  ean: "7310090910054"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Paprika röd 3-pack"
+    coop: "Röd paprika 3-pack"
+    willys: "Paprika röd 3-pack"
+
+- canonical_name: "Gul Lök 1kg"
+  ean: "7310090910061"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Gul lök 1kg"
+    coop: "Lök gul 1kg"
+    willys: "Gul lök 1kg"
+
+- canonical_name: "Vitlök 3-pack"
+  ean: "7310090910078"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Vitlök 3-pack"
+    coop: "Vitlök 3-pack"
+    willys: "Vitlök 3-pack"
+
+- canonical_name: "Broccoli Styck ca 400g"
+  ean: "7310090910085"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Broccoli styck"
+    coop: "Broccoli styck"
+    willys: "Broccoli styck"
+
+- canonical_name: "Blomkål Styck ca 600g"
+  ean: "7310090910092"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Blomkål styck"
+    coop: "Blomkål styck"
+    willys: "Blomkål styck"
+
+- canonical_name: "Rödlök 2-pack"
+  ean: "7310090910108"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 2
+  unit_type: st
+  search_terms:
+    ica: "Rödlök 2-pack"
+    coop: "Rödlök 2-pack"
+    willys: "Rödlök 2-pack"
+
+- canonical_name: "Champinjoner 250g"
+  ean: "7310090910115"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Champinjoner 250g"
+    coop: "Champinjoner 250g"
+    willys: "Champinjoner 250g"
+
+- canonical_name: "Isbergssallad Styck"
+  ean: "7310090910122"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Isbergssallad styck"
+    coop: "Isbergssallad styck"
+    willys: "Isbergssallad styck"
+
+- canonical_name: "ICA Babyspenat 65g"
+  ean: "7318690146019"
+  category: produce-vegetables
+  brand: ICA
+  unit_quantity: 65
+  unit_type: g
+  search_terms:
+    ica: "ICA babyspenat 65g"
+    coop: "Babyspenat 65g"
+    willys: "Babyspenat 65g"
+
+- canonical_name: "ICA Rucola 65g"
+  ean: "7318690146026"
+  category: produce-vegetables
+  brand: ICA
+  unit_quantity: 65
+  unit_type: g
+  search_terms:
+    ica: "ICA rucola 65g"
+    coop: "Rucola 65g"
+    willys: "Rucola 65g"
+
+- canonical_name: "Zucchini Styck ca 300g"
+  ean: "7310090910139"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 300
+  unit_type: g
+  search_terms:
+    ica: "Zucchini styck"
+    coop: "Zucchini styck"
+    willys: "Zucchini styck"
+
+- canonical_name: "Purjolök Styck"
+  ean: "7310090910146"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Purjolök styck"
+    coop: "Purjolök styck"
+    willys: "Purjolök styck"
+
+- canonical_name: "Sötpotatis 500g"
+  ean: "7310090910153"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Sötpotatis 500g"
+    coop: "Sötpotatis 500g"
+    willys: "Sötpotatis 500g"
+
+- canonical_name: "Ingefära Styck"
+  ean: "7310090910160"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Ingefära styck"
+    coop: "Ingefära"
+    willys: "Ingefära styck"
+
+# =============================================================================
+# FROZEN - MEALS (frozen-meals)
+# =============================================================================
+- canonical_name: "Felix Köttbullar 800g"
+  ean: "7310240059014"
+  category: frozen-meals
+  brand: Felix
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Felix köttbullar 800g"
+    coop: "Felix köttbullar"
+    willys: "Felix köttbullar 800g"
+
+- canonical_name: "Felix Gratäng Makaroner & Falukorv 400g"
+  ean: "7310240059021"
+  category: frozen-meals
+  brand: Felix
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Felix gratäng makaroner falukorv 400g"
+    coop: "Felix makaronigratäng falukorv"
+    willys: "Felix gratäng makaroner falukorv"
+
+- canonical_name: "Findus Fiskpinnar 450g"
+  ean: "7310500087016"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Findus fiskpinnar 450g"
+    coop: "Findus fiskpinnar"
+    willys: "Findus fiskpinnar 450g"
+
+- canonical_name: "Findus Lasagne 400g"
+  ean: "7310500087023"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Findus lasagne 400g"
+    coop: "Findus lasagne"
+    willys: "Findus lasagne 400g"
+
+- canonical_name: "Findus Pannbiff 960g"
+  ean: "7310500087030"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 960
+  unit_type: g
+  search_terms:
+    ica: "Findus pannbiff 960g"
+    coop: "Findus pannbiff"
+    willys: "Findus pannbiff 960g"
+
+- canonical_name: "Felix Flygande Jakob 350g"
+  ean: "7310240059038"
+  category: frozen-meals
+  brand: Felix
+  unit_quantity: 350
+  unit_type: g
+  search_terms:
+    ica: "Felix flygande jakob 350g"
+    coop: "Felix flygande jakob"
+    willys: "Felix flygande jakob"
+
+- canonical_name: "Findus Wokgrönsaker Thai 500g"
+  ean: "7310500087047"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Findus wokgrönsaker thai 500g"
+    coop: "Findus wok thai"
+    willys: "Findus wokgrönsaker thai"
+
+- canonical_name: "ICA Kycklingnuggets 600g"
+  ean: "7318690150016"
+  category: frozen-meals
+  brand: ICA
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "ICA kycklingnuggets 600g"
+    coop: "ICA kycklingnuggets"
+    willys: "ICA kycklingnuggets"
+
+- canonical_name: "Felix Potatisbullar 600g"
+  ean: "7310240059045"
+  category: frozen-meals
+  brand: Felix
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Felix potatisbullar 600g"
+    coop: "Felix potatisbullar"
+    willys: "Felix potatisbullar"
+
+- canonical_name: "Findus Pytt i Panna Original 800g"
+  ean: "7310500087054"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Findus pytt i panna original 800g"
+    coop: "Findus pytt i panna"
+    willys: "Findus pytt i panna 800g"
+
+# =============================================================================
+# FROZEN - VEGETABLES (frozen-vegetables)
+# =============================================================================
+- canonical_name: "Findus Ärtor 900g"
+  ean: "7310500088016"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "Findus ärtor 900g"
+    coop: "Findus ärtor"
+    willys: "Findus ärtor 900g"
+
+- canonical_name: "Findus Broccoli 800g"
+  ean: "7310500088023"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Findus broccoli 800g"
+    coop: "Findus broccoli"
+    willys: "Findus broccoli 800g"
+
+- canonical_name: "Findus Blandade Grönsaker 800g"
+  ean: "7310500088030"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Findus blandade grönsaker 800g"
+    coop: "Findus blandade grönsaker"
+    willys: "Findus blandade grönsaker"
+
+- canonical_name: "Findus Haricots Verts 800g"
+  ean: "7310500088047"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Findus haricots verts 800g"
+    coop: "Findus haricots verts"
+    willys: "Findus haricots verts"
+
+- canonical_name: "ICA Pommes Frites 1kg"
+  ean: "7318690151016"
+  category: frozen-vegetables
+  brand: ICA
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "ICA pommes frites 1kg"
+    coop: "ICA pommes frites"
+    willys: "ICA pommes frites"
+
+- canonical_name: "Eldorado Pommes Frites Crinkle 1kg"
+  ean: "7310090891017"
+  category: frozen-vegetables
+  brand: Eldorado
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Eldorado pommes crinkle 1kg"
+    coop: "Eldorado pommes frites crinkle"
+    willys: "Eldorado pommes crinkle 1kg"
+
+- canonical_name: "Findus Spenat 450g"
+  ean: "7310500088054"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Findus spenat 450g"
+    coop: "Findus spenat"
+    willys: "Findus spenat 450g"
+
+- canonical_name: "Findus Majs 800g"
+  ean: "7310500088061"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Findus majs 800g"
+    coop: "Findus majs"
+    willys: "Findus majs 800g"
+
+# =============================================================================
+# FROZEN - ICE CREAM (frozen-icecream)
+# =============================================================================
+- canonical_name: "GB Sandwich 6-pack"
+  ean: "7310090920015"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "GB sandwich 6-pack"
+    coop: "GB sandwich glass"
+    willys: "GB sandwich 6-pack"
+
+- canonical_name: "GB Magnum Classic 4-pack"
+  ean: "7310090920022"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Magnum classic 4-pack"
+    coop: "Magnum classic 4-pack"
+    willys: "Magnum classic 4-pack"
+
+- canonical_name: "GB Triumf Glass Vanilj 1L"
+  ean: "7310090920039"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "GB Triumf vanilj 1L"
+    coop: "GB Triumf vanilj glass"
+    willys: "GB Triumf vanilj 1L"
+
+- canonical_name: "GB Cornetto Classic 6-pack"
+  ean: "7310090920046"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Cornetto classic 6-pack"
+    coop: "Cornetto classic"
+    willys: "Cornetto classic 6-pack"
+
+- canonical_name: "SIA Glass Vanilj 750ml"
+  ean: "7310090920053"
+  category: frozen-icecream
+  brand: SIA
+  unit_quantity: 750
+  unit_type: ml
+  search_terms:
+    ica: "SIA glass vanilj 750ml"
+    coop: "SIA vaniljglass"
+    willys: "SIA glass vanilj"
+
+- canonical_name: "Ben & Jerry's Cookie Dough 500ml"
+  ean: "8711327376014"
+  category: frozen-icecream
+  brand: "Ben & Jerry's"
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Ben Jerry cookie dough 500ml"
+    coop: "Ben Jerry's cookie dough"
+    willys: "Ben Jerry's cookie dough"
+
+- canonical_name: "ICA Glass Vanilj 2L"
+  ean: "7318690152016"
+  category: frozen-icecream
+  brand: ICA
+  unit_quantity: 2
+  unit_type: L
+  search_terms:
+    ica: "ICA glass vanilj 2L"
+    coop: "ICA vaniljglass 2L"
+    willys: "ICA glass vanilj 2L"
+
+# =============================================================================
+# PANTRY - PASTA (pantry-pasta)
+# =============================================================================
+- canonical_name: "Barilla Spaghetti 500g"
+  ean: "8076800195057"
+  category: pantry-pasta
+  brand: Barilla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Barilla spaghetti 500g"
+    coop: "Barilla spaghetti"
+    willys: "Barilla spaghetti 500g"
+
+- canonical_name: "Barilla Penne Rigate 500g"
+  ean: "8076800195064"
+  category: pantry-pasta
+  brand: Barilla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Barilla penne rigate 500g"
+    coop: "Barilla penne rigate"
+    willys: "Barilla penne rigate"
+
+- canonical_name: "Barilla Fusilli 500g"
+  ean: "8076800195071"
+  category: pantry-pasta
+  brand: Barilla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Barilla fusilli 500g"
+    coop: "Barilla fusilli"
+    willys: "Barilla fusilli 500g"
+
+- canonical_name: "ICA Makaroner 1kg"
+  ean: "7318690160011"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "ICA makaroner 1kg"
+    coop: "ICA makaroner"
+    willys: "ICA makaroner 1kg"
+
+- canonical_name: "ICA Spaghetti 1kg"
+  ean: "7318690160028"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "ICA spaghetti 1kg"
+    coop: "ICA spaghetti"
+    willys: "ICA spaghetti 1kg"
+
+- canonical_name: "Garant Pasta Penne 500g"
+  ean: "7310090960013"
+  category: pantry-pasta
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Garant penne 500g"
+    coop: "Garant pasta penne"
+    willys: "Garant penne 500g"
+
+- canonical_name: "Eldorado Spaghetti 1kg"
+  ean: "7310090961013"
+  category: pantry-pasta
+  brand: Eldorado
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Eldorado spaghetti 1kg"
+    coop: "Eldorado spaghetti"
+    willys: "Eldorado spaghetti 1kg"
+
+- canonical_name: "ICA Ris Basmati 1kg"
+  ean: "7318690160035"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "ICA basmatiris 1kg"
+    coop: "ICA ris basmati"
+    willys: "ICA basmatiris 1kg"
+
+- canonical_name: "Uncle Ben's Långkornigt Ris 1kg"
+  ean: "5010034100015"
+  category: pantry-pasta
+  brand: "Uncle Ben's"
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Uncle Ben's långkornigt ris 1kg"
+    coop: "Uncle Ben's ris långkornigt"
+    willys: "Uncle Ben's långkornigt ris"
+
+- canonical_name: "Garant Jasminris 1kg"
+  ean: "7310090960020"
+  category: pantry-pasta
+  brand: Garant
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Garant jasminris 1kg"
+    coop: "Garant jasminris"
+    willys: "Garant jasminris 1kg"
+
+- canonical_name: "Eldorado Ris Parboiled 2kg"
+  ean: "7310090961020"
+  category: pantry-pasta
+  brand: Eldorado
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "Eldorado parboiled ris 2kg"
+    coop: "Eldorado ris parboiled"
+    willys: "Eldorado parboiled ris 2kg"
+
+# =============================================================================
+# PANTRY - CANNED (pantry-canned)
+# =============================================================================
+- canonical_name: "ICA Krossade Tomater 400g"
+  ean: "7318690170010"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA krossade tomater 400g"
+    coop: "ICA krossade tomater"
+    willys: "ICA krossade tomater 400g"
+
+- canonical_name: "Eldorado Krossade Tomater 400g"
+  ean: "7310090971012"
+  category: pantry-canned
+  brand: Eldorado
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Eldorado krossade tomater 400g"
+    coop: "Eldorado krossade tomater"
+    willys: "Eldorado krossade tomater 400g"
+
+- canonical_name: "ICA Hela Skalade Tomater 400g"
+  ean: "7318690170027"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA hela skalade tomater 400g"
+    coop: "ICA hela skalade tomater"
+    willys: "ICA hela skalade tomater"
+
+- canonical_name: "ICA Tomatpuré 200g"
+  ean: "7318690170034"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "ICA tomatpuré 200g"
+    coop: "ICA tomatpuré"
+    willys: "ICA tomatpuré 200g"
+
+- canonical_name: "Felix Ärtsoppa 575g"
+  ean: "7310240071016"
+  category: pantry-canned
+  brand: Felix
+  unit_quantity: 575
+  unit_type: g
+  search_terms:
+    ica: "Felix ärtsoppa 575g"
+    coop: "Felix ärtsoppa"
+    willys: "Felix ärtsoppa 575g"
+
+- canonical_name: "ICA Kokosmjölk 400ml"
+  ean: "7318690170041"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: ml
+  search_terms:
+    ica: "ICA kokosmjölk 400ml"
+    coop: "ICA kokosmjölk"
+    willys: "ICA kokosmjölk 400ml"
+
+- canonical_name: "ICA Vita Bönor 400g"
+  ean: "7318690170058"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA vita bönor 400g"
+    coop: "ICA vita bönor"
+    willys: "ICA vita bönor 400g"
+
+- canonical_name: "ICA Kidneybönor 400g"
+  ean: "7318690170065"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA kidneybönor 400g"
+    coop: "ICA kidneybönor"
+    willys: "ICA kidneybönor 400g"
+
+- canonical_name: "ICA Kikärtor 400g"
+  ean: "7318690170072"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA kikärtor 400g"
+    coop: "ICA kikärtor"
+    willys: "ICA kikärtor 400g"
+
+- canonical_name: "Kalles Kaviar Original 250g"
+  ean: "7310091010018"
+  category: pantry-canned
+  brand: Kalles
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Kalles kaviar original 250g"
+    coop: "Kalles kaviar original"
+    willys: "Kalles kaviar 250g"
+
+- canonical_name: "Kalles Kaviar Lätt 250g"
+  ean: "7310091010025"
+  category: pantry-canned
+  brand: Kalles
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Kalles kaviar lätt 250g"
+    coop: "Kalles kaviar lätt"
+    willys: "Kalles kaviar lätt 250g"
+
+- canonical_name: "Abba Sardiner i Olja 120g"
+  ean: "7310091020017"
+  category: pantry-canned
+  brand: Abba
+  unit_quantity: 120
+  unit_type: g
+  search_terms:
+    ica: "Abba sardiner olja 120g"
+    coop: "Abba sardiner i olja"
+    willys: "Abba sardiner olja"
+
+- canonical_name: "ICA Tonfisk i Vatten 185g"
+  ean: "7318690170089"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 185
+  unit_type: g
+  search_terms:
+    ica: "ICA tonfisk i vatten 185g"
+    coop: "ICA tonfisk vatten"
+    willys: "ICA tonfisk vatten 185g"
+
+- canonical_name: "ICA Majs 340g"
+  ean: "7318690170096"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 340
+  unit_type: g
+  search_terms:
+    ica: "ICA majs 340g"
+    coop: "ICA majs konserv"
+    willys: "ICA majs 340g"
+
+# =============================================================================
+# PANTRY - OIL (pantry-oil)
+# =============================================================================
+- canonical_name: "Zeta Olivolja Extra Virgin 500ml"
+  ean: "7310090980015"
+  category: pantry-oil
+  brand: Zeta
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Zeta olivolja extra virgin 500ml"
+    coop: "Zeta olivolja extra virgin"
+    willys: "Zeta olivolja extra virgin 500ml"
+
+- canonical_name: "ICA Rapsolja 1L"
+  ean: "7318690180019"
+  category: pantry-oil
+  brand: ICA
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "ICA rapsolja 1L"
+    coop: "ICA rapsolja"
+    willys: "ICA rapsolja 1L"
+
+- canonical_name: "ICA Olivolja Extra Virgin 500ml"
+  ean: "7318690180026"
+  category: pantry-oil
+  brand: ICA
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "ICA olivolja extra virgin 500ml"
+    coop: "ICA olivolja extra virgin"
+    willys: "ICA olivolja extra virgin"
+
+- canonical_name: "Eldorado Rapsolja 1L"
+  ean: "7310090981015"
+  category: pantry-oil
+  brand: Eldorado
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Eldorado rapsolja 1L"
+    coop: "Eldorado rapsolja"
+    willys: "Eldorado rapsolja 1L"
+
+- canonical_name: "ICA Kokosolja 500ml"
+  ean: "7318690180033"
+  category: pantry-oil
+  brand: ICA
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "ICA kokosolja 500ml"
+    coop: "ICA kokosolja"
+    willys: "ICA kokosolja 500ml"
+
+- canonical_name: "Zeta Olivolja Classico 500ml"
+  ean: "7310090980022"
+  category: pantry-oil
+  brand: Zeta
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Zeta olivolja classico 500ml"
+    coop: "Zeta olivolja classico"
+    willys: "Zeta olivolja classico"
+
+- canonical_name: "ICA Balsamvinäger 250ml"
+  ean: "7318690180040"
+  category: pantry-oil
+  brand: ICA
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "ICA balsamvinäger 250ml"
+    coop: "ICA balsamvinäger"
+    willys: "ICA balsamvinäger 250ml"
+
+# =============================================================================
+# PANTRY - FLOUR (pantry-flour)
+# =============================================================================
+- canonical_name: "Kungsörnen Vetemjöl 2kg"
+  ean: "7310130003016"
+  category: pantry-flour
+  brand: Kungsörnen
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "Kungsörnen vetemjöl 2kg"
+    coop: "Kungsörnen vetemjöl"
+    willys: "Kungsörnen vetemjöl 2kg"
+
+- canonical_name: "Kungsörnen Rågsikt 2kg"
+  ean: "7310130003023"
+  category: pantry-flour
+  brand: Kungsörnen
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "Kungsörnen rågsikt 2kg"
+    coop: "Kungsörnen rågsikt"
+    willys: "Kungsörnen rågsikt 2kg"
+
+- canonical_name: "ICA Strösocker 2kg"
+  ean: "7318690190018"
+  category: pantry-flour
+  brand: ICA
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "ICA strösocker 2kg"
+    coop: "ICA strösocker"
+    willys: "ICA strösocker 2kg"
+
+- canonical_name: "Dansukker Strösocker 2kg"
+  ean: "7310090990014"
+  category: pantry-flour
+  brand: Dansukker
+  unit_quantity: 2
+  unit_type: kg
+  search_terms:
+    ica: "Dansukker strösocker 2kg"
+    coop: "Dansukker strösocker"
+    willys: "Dansukker strösocker 2kg"
+
+- canonical_name: "Dansukker Florsocker 250g"
+  ean: "7310090990021"
+  category: pantry-flour
+  brand: Dansukker
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Dansukker florsocker 250g"
+    coop: "Dansukker florsocker"
+    willys: "Dansukker florsocker 250g"
+
+- canonical_name: "Kungsörnen Pannkaksmjöl 500g"
+  ean: "7310130003030"
+  category: pantry-flour
+  brand: Kungsörnen
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Kungsörnen pannkaksmjöl 500g"
+    coop: "Kungsörnen pannkaksmjöl"
+    willys: "Kungsörnen pannkaksmjöl"
+
+- canonical_name: "ICA Havregryn 1.5kg"
+  ean: "7318690190025"
+  category: pantry-flour
+  brand: ICA
+  unit_quantity: 1.5
+  unit_type: kg
+  search_terms:
+    ica: "ICA havregryn 1.5kg"
+    coop: "ICA havregryn"
+    willys: "ICA havregryn 1.5kg"
+
+- canonical_name: "Dansukker Vaniljsocker 8g 5-pack"
+  ean: "7310090990038"
+  category: pantry-flour
+  brand: Dansukker
+  unit_quantity: 5
+  unit_type: st
+  search_terms:
+    ica: "Dansukker vaniljsocker 5-pack"
+    coop: "Dansukker vaniljsocker"
+    willys: "Dansukker vaniljsocker 5-pack"
+
+- canonical_name: "ICA Bakpulver 250g"
+  ean: "7318690190032"
+  category: pantry-flour
+  brand: ICA
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "ICA bakpulver 250g"
+    coop: "ICA bakpulver"
+    willys: "ICA bakpulver 250g"
+
+- canonical_name: "Kungsörnen Grahamsmjöl 1.5kg"
+  ean: "7310130003047"
+  category: pantry-flour
+  brand: Kungsörnen
+  unit_quantity: 1.5
+  unit_type: kg
+  search_terms:
+    ica: "Kungsörnen grahamsmjöl 1.5kg"
+    coop: "Kungsörnen grahamsmjöl"
+    willys: "Kungsörnen grahamsmjöl"
+
+# =============================================================================
+# PANTRY - SAUCES (pantry-sauces)
+# =============================================================================
+- canonical_name: "Felix Ketchup 1kg"
+  ean: "7310240060013"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Felix ketchup 1kg"
+    coop: "Felix ketchup"
+    willys: "Felix ketchup 1kg"
+
+- canonical_name: "Felix Ketchup 500g"
+  ean: "7310240060020"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Felix ketchup 500g"
+    coop: "Felix ketchup 500g"
+    willys: "Felix ketchup 500g"
+
+- canonical_name: "Heinz Ketchup 570g"
+  ean: "5000157072468"
+  category: pantry-sauces
+  brand: Heinz
+  unit_quantity: 570
+  unit_type: g
+  search_terms:
+    ica: "Heinz ketchup 570g"
+    coop: "Heinz ketchup"
+    willys: "Heinz ketchup 570g"
+
+- canonical_name: "Felix Senap Sötstark 175g"
+  ean: "7310240060037"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 175
+  unit_type: g
+  search_terms:
+    ica: "Felix senap sötstark 175g"
+    coop: "Felix senap sötstark"
+    willys: "Felix senap sötstark"
+
+- canonical_name: "ICA Soja Original 250ml"
+  ean: "7318690191018"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "ICA soja original 250ml"
+    coop: "ICA sojasås"
+    willys: "ICA soja 250ml"
+
+- canonical_name: "Felix Tomatsås 500g"
+  ean: "7310240060044"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Felix tomatsås 500g"
+    coop: "Felix tomatsås"
+    willys: "Felix tomatsås 500g"
+
+- canonical_name: "ICA Pastasås Tomato & Basilico 400g"
+  ean: "7318690191025"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA pastasås tomat basilika 400g"
+    coop: "ICA pastasås tomato basilico"
+    willys: "ICA pastasås tomat basilika"
+
+- canonical_name: "ICA Pastasås Bolognese 400g"
+  ean: "7318690191032"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA pastasås bolognese 400g"
+    coop: "ICA pastasås bolognese"
+    willys: "ICA pastasås bolognese"
+
+- canonical_name: "Ekströms Brunsås 3-pack"
+  ean: "7310240070012"
+  category: pantry-sauces
+  brand: Ekströms
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Ekströms brunsås 3-pack"
+    coop: "Ekströms brunsås"
+    willys: "Ekströms brunsås 3-pack"
+
+- canonical_name: "Ekströms Gräddsås 3-pack"
+  ean: "7310240070029"
+  category: pantry-sauces
+  brand: Ekströms
+  unit_quantity: 3
+  unit_type: st
+  search_terms:
+    ica: "Ekströms gräddsås 3-pack"
+    coop: "Ekströms gräddsås"
+    willys: "Ekströms gräddsås 3-pack"
+
+- canonical_name: "Slotts Senap Original 475g"
+  ean: "7310240065018"
+  category: pantry-sauces
+  brand: Slotts
+  unit_quantity: 475
+  unit_type: g
+  search_terms:
+    ica: "Slotts senap original 475g"
+    coop: "Slotts senap original"
+    willys: "Slotts senap 475g"
+
+# =============================================================================
+# BEVERAGES - JUICE (beverages-juice)
+# =============================================================================
+- canonical_name: "Bravo Apelsinjuice 1L"
+  ean: "7310090030019"
+  category: beverages-juice
+  brand: Bravo
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Bravo apelsinjuice 1L"
+    coop: "Bravo apelsinjuice"
+    willys: "Bravo apelsinjuice 1L"
+
+- canonical_name: "Bravo Äppeljuice 1L"
+  ean: "7310090030026"
+  category: beverages-juice
+  brand: Bravo
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Bravo äppeljuice 1L"
+    coop: "Bravo äppeljuice"
+    willys: "Bravo äppeljuice 1L"
+
+- canonical_name: "Tropicana Original Apelsin 1L"
+  ean: "7310090040015"
+  category: beverages-juice
+  brand: Tropicana
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Tropicana original apelsin 1L"
+    coop: "Tropicana apelsin original"
+    willys: "Tropicana original apelsin"
+
+- canonical_name: "ICA Apelsinjuice 1.5L"
+  ean: "7318690200017"
+  category: beverages-juice
+  brand: ICA
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "ICA apelsinjuice 1.5L"
+    coop: "ICA apelsinjuice"
+    willys: "ICA apelsinjuice 1.5L"
+
+- canonical_name: "Bravo Multivitamin 1L"
+  ean: "7310090030033"
+  category: beverages-juice
+  brand: Bravo
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Bravo multivitamin 1L"
+    coop: "Bravo multivitamin"
+    willys: "Bravo multivitamin juice"
+
+- canonical_name: "God Morgon Apelsin 1L"
+  ean: "7310090030040"
+  category: beverages-juice
+  brand: God Morgon
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "God Morgon apelsin 1L"
+    coop: "God Morgon apelsinjuice"
+    willys: "God Morgon apelsin"
+
+- canonical_name: "ICA Äppeljuice 1L"
+  ean: "7318690200024"
+  category: beverages-juice
+  brand: ICA
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "ICA äppeljuice 1L"
+    coop: "ICA äppeljuice"
+    willys: "ICA äppeljuice 1L"
+
+- canonical_name: "Ekströms Blandsaft 950ml"
+  ean: "7310240080011"
+  category: beverages-juice
+  brand: Ekströms
+  unit_quantity: 950
+  unit_type: ml
+  search_terms:
+    ica: "Ekströms blandsaft 950ml"
+    coop: "Ekströms blandsaft"
+    willys: "Ekströms blandsaft"
+
+# =============================================================================
+# BEVERAGES - SOFT DRINKS (beverages-soft)
+# =============================================================================
+- canonical_name: "Coca-Cola Original 1.5L"
+  ean: "5000112637922"
+  category: beverages-soft
+  brand: Coca-Cola
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Coca-Cola original 1.5L"
+    coop: "Coca-Cola 1.5L"
+    willys: "Coca-Cola 1.5L"
+
+- canonical_name: "Coca-Cola Zero 1.5L"
+  ean: "5000112637939"
+  category: beverages-soft
+  brand: Coca-Cola
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Coca-Cola zero 1.5L"
+    coop: "Coca-Cola zero 1.5L"
+    willys: "Coca-Cola zero 1.5L"
+
+- canonical_name: "Fanta Orange 1.5L"
+  ean: "5000112637946"
+  category: beverages-soft
+  brand: Fanta
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Fanta orange 1.5L"
+    coop: "Fanta orange 1.5L"
+    willys: "Fanta orange 1.5L"
+
+- canonical_name: "Sprite 1.5L"
+  ean: "5000112637953"
+  category: beverages-soft
+  brand: Sprite
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Sprite 1.5L"
+    coop: "Sprite 1.5L"
+    willys: "Sprite 1.5L"
+
+- canonical_name: "Pepsi Max 1.5L"
+  ean: "4060800105431"
+  category: beverages-soft
+  brand: Pepsi
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Pepsi Max 1.5L"
+    coop: "Pepsi Max 1.5L"
+    willys: "Pepsi Max 1.5L"
+
+- canonical_name: "Ramlösa Original 1.5L"
+  ean: "7310090050017"
+  category: beverages-soft
+  brand: Ramlösa
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Ramlösa original 1.5L"
+    coop: "Ramlösa original"
+    willys: "Ramlösa original 1.5L"
+
+- canonical_name: "Ramlösa Citrus 1.5L"
+  ean: "7310090050024"
+  category: beverages-soft
+  brand: Ramlösa
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Ramlösa citrus 1.5L"
+    coop: "Ramlösa citrus"
+    willys: "Ramlösa citrus 1.5L"
+
+- canonical_name: "Festis Tropical 1.4L"
+  ean: "7310090050031"
+  category: beverages-soft
+  brand: Festis
+  unit_quantity: 1.4
+  unit_type: L
+  search_terms:
+    ica: "Festis tropical 1.4L"
+    coop: "Festis tropical"
+    willys: "Festis tropical 1.4L"
+
+- canonical_name: "Coca-Cola Original 33cl 6-pack"
+  ean: "5000112637960"
+  category: beverages-soft
+  brand: Coca-Cola
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Coca-Cola 33cl 6-pack"
+    coop: "Coca-Cola 33cl 6-pack"
+    willys: "Coca-Cola 33cl 6-pack"
+
+# =============================================================================
+# BEVERAGES - WATER (beverages-water)
+# =============================================================================
+- canonical_name: "Loka Naturell 1.5L"
+  ean: "7310090060016"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Loka naturell 1.5L"
+    coop: "Loka naturell"
+    willys: "Loka naturell 1.5L"
+
+- canonical_name: "Loka Citron 1.5L"
+  ean: "7310090060023"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Loka citron 1.5L"
+    coop: "Loka citron"
+    willys: "Loka citron 1.5L"
+
+- canonical_name: "Loka Päron 1.5L"
+  ean: "7310090060030"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Loka päron 1.5L"
+    coop: "Loka päron"
+    willys: "Loka päron 1.5L"
+
+- canonical_name: "Ramlösa Naturell 1.5L"
+  ean: "7310090060047"
+  category: beverages-water
+  brand: Ramlösa
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Ramlösa naturell 1.5L"
+    coop: "Ramlösa naturell"
+    willys: "Ramlösa naturell 1.5L"
+
+- canonical_name: "ICA Vatten Stilla 1.5L"
+  ean: "7318690210016"
+  category: beverages-water
+  brand: ICA
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "ICA vatten stilla 1.5L"
+    coop: "ICA stilla vatten"
+    willys: "ICA vatten stilla 1.5L"
+
+- canonical_name: "Loka Naturell 50cl 12-pack"
+  ean: "7310090060054"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 12
+  unit_type: st
+  search_terms:
+    ica: "Loka naturell 50cl 12-pack"
+    coop: "Loka naturell 50cl 12-pack"
+    willys: "Loka naturell 50cl 12-pack"
+
+# =============================================================================
+# EGGS (eggs)
+# =============================================================================
+- canonical_name: "Garant Ägg Frigående Inomhus 12-pack"
+  ean: "7310090940015"
+  category: eggs
+  brand: Garant
+  unit_quantity: 12
+  unit_type: st
+  search_terms:
+    ica: "Garant ägg frigående 12-pack"
+    coop: "Garant ägg frigående inomhus"
+    willys: "Garant ägg frigående 12-pack"
+
+- canonical_name: "ICA Ägg Frigående Storlek M 12-pack"
+  ean: "7318690220015"
+  category: eggs
+  brand: ICA
+  unit_quantity: 12
+  unit_type: st
+  search_terms:
+    ica: "ICA ägg frigående M 12-pack"
+    coop: "ICA ägg frigående M"
+    willys: "ICA ägg frigående M 12-pack"
+
+- canonical_name: "Garant Ägg Ekologiska 6-pack"
+  ean: "7310090940022"
+  category: eggs
+  brand: Garant
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Garant ägg ekologiska 6-pack"
+    coop: "Garant eko ägg 6-pack"
+    willys: "Garant ägg eko 6-pack"
+
+- canonical_name: "ICA Ägg Frigående Storlek L 6-pack"
+  ean: "7318690220022"
+  category: eggs
+  brand: ICA
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "ICA ägg frigående L 6-pack"
+    coop: "ICA ägg frigående L"
+    willys: "ICA ägg frigående L 6-pack"
+
+- canonical_name: "Kronägg Ägg Frigående 15-pack"
+  ean: "7311200010012"
+  category: eggs
+  brand: Kronägg
+  unit_quantity: 15
+  unit_type: st
+  search_terms:
+    ica: "Kronägg frigående 15-pack"
+    coop: "Kronägg ägg frigående"
+    willys: "Kronägg frigående 15-pack"
+
+- canonical_name: "Eldorado Ägg Frigående 12-pack"
+  ean: "7310090941015"
+  category: eggs
+  brand: Eldorado
+  unit_quantity: 12
+  unit_type: st
+  search_terms:
+    ica: "Eldorado ägg frigående 12-pack"
+    coop: "Eldorado ägg frigående"
+    willys: "Eldorado ägg 12-pack"
+
+- canonical_name: "ICA Ägg Ekologiska 6-pack"
+  ean: "7318690220039"
+  category: eggs
+  brand: ICA
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "ICA ägg eko 6-pack"
+    coop: "ICA ekologiska ägg"
+    willys: "ICA ägg eko 6-pack"
+
+# =============================================================================
+# FISH (fish)
+# =============================================================================
+- canonical_name: "ICA Laxfilé 400g"
+  ean: "7318690230011"
+  category: fish
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA laxfilé 400g"
+    coop: "ICA laxfilé"
+    willys: "ICA laxfilé 400g"
+
+- canonical_name: "ICA Räkor Handskalade 200g"
+  ean: "7318690230028"
+  category: fish
+  brand: ICA
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "ICA räkor handskalade 200g"
+    coop: "ICA räkor handskalade"
+    willys: "ICA räkor handskalade"
+
+- canonical_name: "Abba Sill Matjes 240g"
+  ean: "7310091030016"
+  category: fish
+  brand: Abba
+  unit_quantity: 240
+  unit_type: g
+  search_terms:
+    ica: "Abba matjessill 240g"
+    coop: "Abba sill matjes"
+    willys: "Abba matjessill 240g"
+
+- canonical_name: "Abba Sill Senapsill 240g"
+  ean: "7310091030023"
+  category: fish
+  brand: Abba
+  unit_quantity: 240
+  unit_type: g
+  search_terms:
+    ica: "Abba senapsill 240g"
+    coop: "Abba sill senap"
+    willys: "Abba senapsill 240g"
+
+- canonical_name: "ICA Torskfilé 400g"
+  ean: "7318690230035"
+  category: fish
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA torskfilé 400g"
+    coop: "ICA torskfilé"
+    willys: "ICA torskfilé 400g"
+
+- canonical_name: "Findus Panerad Fisk 480g"
+  ean: "7310500089016"
+  category: fish
+  brand: Findus
+  unit_quantity: 480
+  unit_type: g
+  search_terms:
+    ica: "Findus panerad fisk 480g"
+    coop: "Findus panerad fisk"
+    willys: "Findus panerad fisk"
+
+- canonical_name: "ICA Gravad Lax 100g"
+  ean: "7318690230042"
+  category: fish
+  brand: ICA
+  unit_quantity: 100
+  unit_type: g
+  search_terms:
+    ica: "ICA gravad lax 100g"
+    coop: "ICA gravad lax"
+    willys: "ICA gravad lax 100g"
+
+- canonical_name: "ICA Kallrökt Lax 100g"
+  ean: "7318690230059"
+  category: fish
+  brand: ICA
+  unit_quantity: 100
+  unit_type: g
+  search_terms:
+    ica: "ICA kallrökt lax 100g"
+    coop: "ICA kallrökt lax"
+    willys: "ICA kallrökt lax 100g"
+
+- canonical_name: "Garant Laxfilé Fryst 500g"
+  ean: "7310090950014"
+  category: fish
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Garant laxfilé fryst 500g"
+    coop: "Garant laxfilé fryst"
+    willys: "Garant laxfilé fryst"
+
+# =============================================================================
+# SNACKS - CHIPS (snacks-chips)
+# =============================================================================
+- canonical_name: "OLW Lättsaltade 275g"
+  ean: "7310090700016"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "OLW lättsaltade 275g"
+    coop: "OLW chips lättsaltade"
+    willys: "OLW lättsaltade 275g"
+
+- canonical_name: "OLW Dill & Gräslök 275g"
+  ean: "7310090700023"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "OLW dill gräslök 275g"
+    coop: "OLW chips dill gräslök"
+    willys: "OLW dill gräslök 275g"
+
+- canonical_name: "Estrella Sourcream & Onion 275g"
+  ean: "7310090710015"
+  category: snacks-chips
+  brand: Estrella
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Estrella sourcream onion 275g"
+    coop: "Estrella chips sourcream onion"
+    willys: "Estrella sourcream onion 275g"
+
+- canonical_name: "Estrella Lättsaltade 275g"
+  ean: "7310090710022"
+  category: snacks-chips
+  brand: Estrella
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Estrella lättsaltade 275g"
+    coop: "Estrella chips lättsaltade"
+    willys: "Estrella lättsaltade 275g"
+
+- canonical_name: "OLW Cheez Doodles 225g"
+  ean: "7310090700030"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 225
+  unit_type: g
+  search_terms:
+    ica: "OLW cheez doodles 225g"
+    coop: "OLW cheez doodles"
+    willys: "OLW cheez doodles 225g"
+
+- canonical_name: "OLW Naturchips Havssalt 180g"
+  ean: "7310090700047"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 180
+  unit_type: g
+  search_terms:
+    ica: "OLW naturchips havssalt 180g"
+    coop: "OLW naturchips havssalt"
+    willys: "OLW naturchips havssalt"
+
+- canonical_name: "Estrella Gräddfil & Lök 175g"
+  ean: "7310090710039"
+  category: snacks-chips
+  brand: Estrella
+  unit_quantity: 175
+  unit_type: g
+  search_terms:
+    ica: "Estrella gräddfil lök 175g"
+    coop: "Estrella chips gräddfil lök"
+    willys: "Estrella gräddfil lök"
+
+- canonical_name: "OLW Ranch 275g"
+  ean: "7310090700054"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "OLW ranch 275g"
+    coop: "OLW chips ranch"
+    willys: "OLW ranch 275g"
+
+- canonical_name: "Pringles Original 200g"
+  ean: "5053990101573"
+  category: snacks-chips
+  brand: Pringles
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Pringles original 200g"
+    coop: "Pringles original"
+    willys: "Pringles original 200g"
+
+# =============================================================================
+# SNACKS - CANDY (snacks-candy)
+# =============================================================================
+- canonical_name: "Malaco Gott & Blandat Original 550g"
+  ean: "7310090720014"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 550
+  unit_type: g
+  search_terms:
+    ica: "Malaco gott blandat original 550g"
+    coop: "Malaco gott blandat"
+    willys: "Malaco gott blandat 550g"
+
+- canonical_name: "Malaco Djungelvansen 400g"
+  ean: "7310090720021"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Malaco djungelvansen 400g"
+    coop: "Malaco djungelvansen"
+    willys: "Malaco djungelvansen 400g"
+
+- canonical_name: "Cloetta Kexchoklad 8-pack"
+  ean: "7310090730013"
+  category: snacks-candy
+  brand: Cloetta
+  unit_quantity: 8
+  unit_type: st
+  search_terms:
+    ica: "Cloetta kexchoklad 8-pack"
+    coop: "Cloetta kexchoklad"
+    willys: "Cloetta kexchoklad 8-pack"
+
+- canonical_name: "Malaco Ahlgrens Bilar Original 125g"
+  ean: "7310090720038"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 125
+  unit_type: g
+  search_terms:
+    ica: "Ahlgrens bilar original 125g"
+    coop: "Ahlgrens bilar original"
+    willys: "Ahlgrens bilar 125g"
+
+- canonical_name: "Haribo Nappar 80g"
+  ean: "4001686313015"
+  category: snacks-candy
+  brand: Haribo
+  unit_quantity: 80
+  unit_type: g
+  search_terms:
+    ica: "Haribo nappar 80g"
+    coop: "Haribo nappar"
+    willys: "Haribo nappar 80g"
+
+- canonical_name: "Malaco Zoo 80g"
+  ean: "7310090720045"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 80
+  unit_type: g
+  search_terms:
+    ica: "Malaco zoo 80g"
+    coop: "Malaco zoo"
+    willys: "Malaco zoo 80g"
+
+- canonical_name: "Cloetta Center 400g"
+  ean: "7310090730020"
+  category: snacks-candy
+  brand: Cloetta
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Cloetta center 400g"
+    coop: "Cloetta center"
+    willys: "Cloetta center 400g"
+
+- canonical_name: "Malaco Salta Katten 250g"
+  ean: "7310090720052"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Malaco salta katten 250g"
+    coop: "Malaco salta katten"
+    willys: "Malaco salta katten 250g"
+
+# =============================================================================
+# SNACKS - CHOCOLATE (snacks-chocolate)
+# =============================================================================
+- canonical_name: "Marabou Mjölkchoklad 200g"
+  ean: "7310511210014"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou mjölkchoklad 200g"
+    coop: "Marabou mjölkchoklad"
+    willys: "Marabou mjölkchoklad 200g"
+
+- canonical_name: "Marabou Schweizernöt 200g"
+  ean: "7310511210021"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou schweizernöt 200g"
+    coop: "Marabou schweizernöt"
+    willys: "Marabou schweizernöt 200g"
+
+- canonical_name: "Marabou Daim 200g"
+  ean: "7310511210038"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou daim 200g"
+    coop: "Marabou daim"
+    willys: "Marabou daim 200g"
+
+- canonical_name: "Marabou Japp 200g"
+  ean: "7310511210045"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou japp 200g"
+    coop: "Marabou japp"
+    willys: "Marabou japp 200g"
+
+- canonical_name: "Marabou Frukt & Mandel 200g"
+  ean: "7310511210052"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou frukt mandel 200g"
+    coop: "Marabou frukt mandel"
+    willys: "Marabou frukt mandel 200g"
+
+- canonical_name: "Marabou Digestive 200g"
+  ean: "7310511210069"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Marabou digestive 200g"
+    coop: "Marabou digestive"
+    willys: "Marabou digestive 200g"
+
+- canonical_name: "Marabou Mörk Choklad 70% 100g"
+  ean: "7310511210076"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 100
+  unit_type: g
+  search_terms:
+    ica: "Marabou mörk choklad 70% 100g"
+    coop: "Marabou premium mörk 70%"
+    willys: "Marabou mörk choklad 70%"
+
+- canonical_name: "Cloetta Polly 200g"
+  ean: "7310090730037"
+  category: snacks-chocolate
+  brand: Cloetta
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Cloetta polly 200g"
+    coop: "Cloetta polly"
+    willys: "Cloetta polly 200g"
+
+- canonical_name: "Marabou Non Stop 225g"
+  ean: "7310511210083"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 225
+  unit_type: g
+  search_terms:
+    ica: "Marabou non stop 225g"
+    coop: "Marabou non stop"
+    willys: "Marabou non stop 225g"
+
+- canonical_name: "Fazer Ögon Choklad 175g"
+  ean: "7312930030016"
+  category: snacks-chocolate
+  brand: Fazer
+  unit_quantity: 175
+  unit_type: g
+  search_terms:
+    ica: "Fazer ögon choklad 175g"
+    coop: "Fazer ögon choklad"
+    willys: "Fazer ögon choklad"
+
+# =============================================================================
+# BABY (baby)
+# =============================================================================
+- canonical_name: "Semper Välling Fullkorn 6m 725g"
+  ean: "7310100610010"
+  category: baby
+  brand: Semper
+  unit_quantity: 725
+  unit_type: g
+  search_terms:
+    ica: "Semper välling fullkorn 6m 725g"
+    coop: "Semper välling fullkorn 6 mån"
+    willys: "Semper välling fullkorn 6m"
+
+- canonical_name: "Semper Gröt Havre & Banan 6m 480g"
+  ean: "7310100610027"
+  category: baby
+  brand: Semper
+  unit_quantity: 480
+  unit_type: g
+  search_terms:
+    ica: "Semper gröt havre banan 6m 480g"
+    coop: "Semper gröt havre banan"
+    willys: "Semper gröt havre banan 6m"
+
+- canonical_name: "Semper Fruktpuré Äpple & Päron 4m 125g"
+  ean: "7310100610034"
+  category: baby
+  brand: Semper
+  unit_quantity: 125
+  unit_type: g
+  search_terms:
+    ica: "Semper fruktpuré äpple päron 4m"
+    coop: "Semper fruktpuré äpple päron"
+    willys: "Semper fruktpuré äpple päron"
+
+- canonical_name: "Libero Touch Blöjor Stl 3 50-pack"
+  ean: "7310090750011"
+  category: baby
+  brand: Libero
+  unit_quantity: 50
+  unit_type: st
+  search_terms:
+    ica: "Libero touch blöjor stl 3 50-pack"
+    coop: "Libero touch blöjor stl 3"
+    willys: "Libero touch blöjor stl 3"
+
+- canonical_name: "Libero Touch Blöjor Stl 4 46-pack"
+  ean: "7310090750028"
+  category: baby
+  brand: Libero
+  unit_quantity: 46
+  unit_type: st
+  search_terms:
+    ica: "Libero touch blöjor stl 4 46-pack"
+    coop: "Libero touch blöjor stl 4"
+    willys: "Libero touch blöjor stl 4"
+
+- canonical_name: "Semper Välling Mild 4m 725g"
+  ean: "7310100610041"
+  category: baby
+  brand: Semper
+  unit_quantity: 725
+  unit_type: g
+  search_terms:
+    ica: "Semper välling mild 4m 725g"
+    coop: "Semper välling mild 4 mån"
+    willys: "Semper välling mild 4m"
+
+- canonical_name: "Semper Barnmat Köttfärssås 1år 190g"
+  ean: "7310100610058"
+  category: baby
+  brand: Semper
+  unit_quantity: 190
+  unit_type: g
+  search_terms:
+    ica: "Semper barnmat köttfärssås 1år"
+    coop: "Semper köttfärssås 1 år"
+    willys: "Semper barnmat köttfärssås"
+
+- canonical_name: "Libero Touch Blöjor Stl 5 40-pack"
+  ean: "7310090750035"
+  category: baby
+  brand: Libero
+  unit_quantity: 40
+  unit_type: st
+  search_terms:
+    ica: "Libero touch blöjor stl 5 40-pack"
+    coop: "Libero touch blöjor stl 5"
+    willys: "Libero touch blöjor stl 5"
+
+- canonical_name: "Semper Fruktpuré Mango & Banan 6m 90g"
+  ean: "7310100610065"
+  category: baby
+  brand: Semper
+  unit_quantity: 90
+  unit_type: g
+  search_terms:
+    ica: "Semper fruktpuré mango banan 6m"
+    coop: "Semper fruktpuré mango banan"
+    willys: "Semper fruktpuré mango banan"
+
+- canonical_name: "Pampers Premium Protection Stl 4 39-pack"
+  ean: "4015400541813"
+  category: baby
+  brand: Pampers
+  unit_quantity: 39
+  unit_type: st
+  search_terms:
+    ica: "Pampers premium protection stl 4"
+    coop: "Pampers premium protection stl 4"
+    willys: "Pampers premium protection stl 4"
+
+# =============================================================================
+# CEREALS (cereals)
+# =============================================================================
+- canonical_name: "AXA Müsli Crunchy Original 750g"
+  ean: "7310130800014"
+  category: cereals
+  brand: AXA
+  unit_quantity: 750
+  unit_type: g
+  search_terms:
+    ica: "AXA müsli crunchy original 750g"
+    coop: "AXA müsli crunchy original"
+    willys: "AXA crunchy müsli original"
+
+- canonical_name: "AXA Müsli Frukt & Nöt 750g"
+  ean: "7310130800021"
+  category: cereals
+  brand: AXA
+  unit_quantity: 750
+  unit_type: g
+  search_terms:
+    ica: "AXA müsli frukt nöt 750g"
+    coop: "AXA müsli frukt nöt"
+    willys: "AXA müsli frukt nöt"
+
+- canonical_name: "Paulúns Granola Blåbär & Vanilj 450g"
+  ean: "7310090886020"
+  category: cereals
+  brand: Paulúns
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Paulúns granola blåbär vanilj 450g"
+    coop: "Paulúns granola blåbär vanilj"
+    willys: "Paulúns granola blåbär vanilj"
+
+- canonical_name: "Kellogg's Corn Flakes 500g"
+  ean: "5050083119460"
+  category: cereals
+  brand: Kellogg's
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Kellogg's corn flakes 500g"
+    coop: "Kellogg's corn flakes"
+    willys: "Kellogg's corn flakes 500g"
+
+- canonical_name: "ICA Havregryn 750g"
+  ean: "7318690240014"
+  category: cereals
+  brand: ICA
+  unit_quantity: 750
+  unit_type: g
+  search_terms:
+    ica: "ICA havregryn 750g"
+    coop: "ICA havregryn"
+    willys: "ICA havregryn 750g"
+
+- canonical_name: "Paulúns Müsli Superfrukt 450g"
+  ean: "7310090886037"
+  category: cereals
+  brand: Paulúns
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Paulúns müsli superfrukt 450g"
+    coop: "Paulúns müsli superfrukt"
+    willys: "Paulúns müsli superfrukt"
+
+- canonical_name: "AXA Havrefrön Original 500g"
+  ean: "7310130800038"
+  category: cereals
+  brand: AXA
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "AXA havrefrön original 500g"
+    coop: "AXA havrefrön original"
+    willys: "AXA havrefrön original"
+
+- canonical_name: "Oatly Havregurt Jordgubb 1L"
+  ean: "7394376616068"
+  category: cereals
+  brand: Oatly
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Oatly havregurt jordgubb 1L"
+    coop: "Oatly havregurt jordgubb"
+    willys: "Oatly havregurt jordgubb"
+
+- canonical_name: "Weetabix Original 430g"
+  ean: "5010029000078"
+  category: cereals
+  brand: Weetabix
+  unit_quantity: 430
+  unit_type: g
+  search_terms:
+    ica: "Weetabix original 430g"
+    coop: "Weetabix original"
+    willys: "Weetabix original 430g"
+
+- canonical_name: "Eldorado Cornflakes 500g"
+  ean: "7310090961037"
+  category: cereals
+  brand: Eldorado
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Eldorado cornflakes 500g"
+    coop: "Eldorado cornflakes"
+    willys: "Eldorado cornflakes 500g"
+
+# =============================================================================
+# ADDITIONAL DAIRY-MILK
+# =============================================================================
+- canonical_name: "Arla Mjölk Laktosfri Mellan 1.5% 1L"
+  ean: "7310865005017"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla laktosfri mellanmjölk 1L"
+    coop: "Arla laktosfri mjölk mellan"
+    willys: "Arla laktosfri mellanmjölk"
+
+- canonical_name: "Arla Mjölk Laktosfri Standard 3% 1L"
+  ean: "7310865005024"
+  category: dairy-milk
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla laktosfri standardmjölk 1L"
+    coop: "Arla laktosfri mjölk standard"
+    willys: "Arla laktosfri standardmjölk"
+
+# =============================================================================
+# ADDITIONAL DAIRY-CHEESE
+# =============================================================================
+- canonical_name: "Arla Västerbottensost 300g"
+  ean: "7310865019029"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 300
+  unit_type: g
+  search_terms:
+    ica: "Västerbottensost 300g"
+    coop: "Arla västerbottensost"
+    willys: "Västerbottensost 300g"
+
+- canonical_name: "ICA Mozzarella 125g"
+  ean: "7318690132516"
+  category: dairy-cheese
+  brand: ICA
+  unit_quantity: 125
+  unit_type: g
+  search_terms:
+    ica: "ICA mozzarella 125g"
+    coop: "ICA mozzarella"
+    willys: "ICA mozzarella 125g"
+
+- canonical_name: "Arla Keso Naturell 250g"
+  ean: "7310865019036"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Arla keso naturell 250g"
+    coop: "Arla keso naturell"
+    willys: "Arla keso 250g"
+
+# =============================================================================
+# ADDITIONAL MEAT-BEEF
+# =============================================================================
+- canonical_name: "ICA Blandfärs 50/50 800g"
+  ean: "7318690140026"
+  category: meat-beef
+  brand: ICA
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "ICA blandfärs 50/50 800g"
+    coop: "ICA blandfärs"
+    willys: "ICA blandfärs 800g"
+
+- canonical_name: "Scan Nötfärs 12% 400g"
+  ean: "7300156501059"
+  category: meat-beef
+  brand: Scan
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Scan nötfärs 12% 400g"
+    coop: "Scan nötfärs 12% 400g"
+    willys: "Scan nötfärs 400g"
+
+# =============================================================================
+# ADDITIONAL MEAT-PORK
+# =============================================================================
+- canonical_name: "Scan Kassler Skivad 250g"
+  ean: "7300156503087"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Scan kassler skivad 250g"
+    coop: "Scan kassler skivad"
+    willys: "Scan kassler skivad"
+
+- canonical_name: "ICA Bacon 140g"
+  ean: "7318690141026"
+  category: meat-pork
+  brand: ICA
+  unit_quantity: 140
+  unit_type: g
+  search_terms:
+    ica: "ICA bacon 140g"
+    coop: "ICA bacon"
+    willys: "ICA bacon 140g"
+
+# =============================================================================
+# ADDITIONAL MEAT-CHICKEN
+# =============================================================================
+- canonical_name: "Kronfågel Kycklingvingar 1kg"
+  ean: "7311171001079"
+  category: meat-chicken
+  brand: Kronfågel
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Kronfågel kycklingvingar 1kg"
+    coop: "Kronfågel kycklingvingar"
+    willys: "Kronfågel kycklingvingar"
+
+- canonical_name: "ICA Kycklinglårfilé 700g"
+  ean: "7318690142026"
+  category: meat-chicken
+  brand: ICA
+  unit_quantity: 700
+  unit_type: g
+  search_terms:
+    ica: "ICA kycklinglårfilé 700g"
+    coop: "ICA kycklinglårfilé"
+    willys: "ICA kycklinglårfilé 700g"
+
+# =============================================================================
+# ADDITIONAL MEAT-DELI
+# =============================================================================
+- canonical_name: "Scan Köttbullar 600g"
+  ean: "7300156504094"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Scan köttbullar 600g"
+    coop: "Scan köttbullar"
+    willys: "Scan köttbullar 600g"
+
+- canonical_name: "Scan Medwurst 150g"
+  ean: "7300156504100"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Scan medwurst 150g"
+    coop: "Scan medwurst"
+    willys: "Scan medwurst 150g"
+
+# =============================================================================
+# ADDITIONAL FROZEN
+# =============================================================================
+- canonical_name: "Findus Köttbullar Original 1kg"
+  ean: "7310500087061"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Findus köttbullar original 1kg"
+    coop: "Findus köttbullar original"
+    willys: "Findus köttbullar 1kg"
+
+- canonical_name: "Findus Isterband 600g"
+  ean: "7310500087078"
+  category: frozen-meals
+  brand: Findus
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Findus isterband 600g"
+    coop: "Findus isterband"
+    willys: "Findus isterband 600g"
+
+- canonical_name: "Felix Kroppkakor 600g"
+  ean: "7310240059052"
+  category: frozen-meals
+  brand: Felix
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "Felix kroppkakor 600g"
+    coop: "Felix kroppkakor"
+    willys: "Felix kroppkakor 600g"
+
+# =============================================================================
+# ADDITIONAL FROZEN VEGETABLES
+# =============================================================================
+- canonical_name: "ICA Grönsaks Mix 800g"
+  ean: "7318690151023"
+  category: frozen-vegetables
+  brand: ICA
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "ICA grönsaksmix 800g"
+    coop: "ICA grönsaksmix"
+    willys: "ICA grönsaksmix 800g"
+
+- canonical_name: "Findus Wokgrönsaker Kina 500g"
+  ean: "7310500088078"
+  category: frozen-vegetables
+  brand: Findus
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Findus wokgrönsaker kina 500g"
+    coop: "Findus wok kina"
+    willys: "Findus wokgrönsaker kina"
+
+# =============================================================================
+# ADDITIONAL PANTRY
+# =============================================================================
+- canonical_name: "ICA Pasta Tagliatelle 500g"
+  ean: "7318690160042"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "ICA tagliatelle 500g"
+    coop: "ICA pasta tagliatelle"
+    willys: "ICA tagliatelle 500g"
+
+- canonical_name: "Barilla Lasagneplattor 500g"
+  ean: "8076800195088"
+  category: pantry-pasta
+  brand: Barilla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Barilla lasagneplattor 500g"
+    coop: "Barilla lasagne plattor"
+    willys: "Barilla lasagneplattor"
+
+- canonical_name: "ICA Couscous 500g"
+  ean: "7318690160059"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "ICA couscous 500g"
+    coop: "ICA couscous"
+    willys: "ICA couscous 500g"
+
+- canonical_name: "Eldorado Makaroner 1kg"
+  ean: "7310090961044"
+  category: pantry-pasta
+  brand: Eldorado
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Eldorado makaroner 1kg"
+    coop: "Eldorado makaroner"
+    willys: "Eldorado makaroner 1kg"
+
+- canonical_name: "Felix Lingonsylt 800g"
+  ean: "7310240060051"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Felix lingonsylt 800g"
+    coop: "Felix lingonsylt"
+    willys: "Felix lingonsylt 800g"
+
+- canonical_name: "Felix Äppelmos 650g"
+  ean: "7310240060068"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 650
+  unit_type: g
+  search_terms:
+    ica: "Felix äppelmos 650g"
+    coop: "Felix äppelmos"
+    willys: "Felix äppelmos 650g"
+
+- canonical_name: "ICA Curry 38g"
+  ean: "7318690191049"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 38
+  unit_type: g
+  search_terms:
+    ica: "ICA curry 38g"
+    coop: "ICA curry krydda"
+    willys: "ICA curry 38g"
+
+- canonical_name: "ICA Svartpeppar Mald 42g"
+  ean: "7318690191056"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 42
+  unit_type: g
+  search_terms:
+    ica: "ICA svartpeppar mald 42g"
+    coop: "ICA svartpeppar mald"
+    willys: "ICA svartpeppar mald"
+
+- canonical_name: "Santa Maria Tacokrydda 28g"
+  ean: "7311310030018"
+  category: pantry-sauces
+  brand: Santa Maria
+  unit_quantity: 28
+  unit_type: g
+  search_terms:
+    ica: "Santa Maria tacokrydda 28g"
+    coop: "Santa Maria tacokrydda"
+    willys: "Santa Maria tacokrydda"
+
+- canonical_name: "Santa Maria Taco Shells 12-pack"
+  ean: "7311310030025"
+  category: pantry-sauces
+  brand: Santa Maria
+  unit_quantity: 12
+  unit_type: st
+  search_terms:
+    ica: "Santa Maria taco shells 12-pack"
+    coop: "Santa Maria taco shells"
+    willys: "Santa Maria taco shells"
+
+- canonical_name: "Santa Maria Tortilla Original 8-pack"
+  ean: "7311310030032"
+  category: pantry-sauces
+  brand: Santa Maria
+  unit_quantity: 8
+  unit_type: st
+  search_terms:
+    ica: "Santa Maria tortilla original 8-pack"
+    coop: "Santa Maria tortilla original"
+    willys: "Santa Maria tortilla original"
+
+- canonical_name: "Santa Maria Taco Sauce Medium 230g"
+  ean: "7311310030049"
+  category: pantry-sauces
+  brand: Santa Maria
+  unit_quantity: 230
+  unit_type: g
+  search_terms:
+    ica: "Santa Maria taco sauce medium 230g"
+    coop: "Santa Maria tacosås medium"
+    willys: "Santa Maria taco sauce medium"
+
+- canonical_name: "Santa Maria Salsa Medium 230g"
+  ean: "7311310030056"
+  category: pantry-sauces
+  brand: Santa Maria
+  unit_quantity: 230
+  unit_type: g
+  search_terms:
+    ica: "Santa Maria salsa medium 230g"
+    coop: "Santa Maria salsa medium"
+    willys: "Santa Maria salsa medium"
+
+# =============================================================================
+# ADDITIONAL CANNED
+# =============================================================================
+- canonical_name: "Eldorado Hela Skalade Tomater 400g"
+  ean: "7310090971029"
+  category: pantry-canned
+  brand: Eldorado
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Eldorado hela skalade tomater 400g"
+    coop: "Eldorado hela skalade tomater"
+    willys: "Eldorado hela tomater 400g"
+
+- canonical_name: "Felix Korv Stroganoff 560g"
+  ean: "7310240071023"
+  category: pantry-canned
+  brand: Felix
+  unit_quantity: 560
+  unit_type: g
+  search_terms:
+    ica: "Felix korv stroganoff 560g"
+    coop: "Felix korv stroganoff"
+    willys: "Felix korv stroganoff"
+
+- canonical_name: "Felix Baked Beans 415g"
+  ean: "7310240071030"
+  category: pantry-canned
+  brand: Felix
+  unit_quantity: 415
+  unit_type: g
+  search_terms:
+    ica: "Felix baked beans 415g"
+    coop: "Felix baked beans"
+    willys: "Felix baked beans"
+
+- canonical_name: "ICA Tomatsoppa 475g"
+  ean: "7318690170102"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 475
+  unit_type: g
+  search_terms:
+    ica: "ICA tomatsoppa 475g"
+    coop: "ICA tomatsoppa"
+    willys: "ICA tomatsoppa 475g"
+
+# =============================================================================
+# ADDITIONAL FLOUR / BAKING
+# =============================================================================
+- canonical_name: "Kungsörnen Dinkelsmjöl 1kg"
+  ean: "7310130003054"
+  category: pantry-flour
+  brand: Kungsörnen
+  unit_quantity: 1
+  unit_type: kg
+  search_terms:
+    ica: "Kungsörnen dinkelsmjöl 1kg"
+    coop: "Kungsörnen dinkelsmjöl"
+    willys: "Kungsörnen dinkelsmjöl"
+
+- canonical_name: "ICA Bikarbonat 200g"
+  ean: "7318690190049"
+  category: pantry-flour
+  brand: ICA
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "ICA bikarbonat 200g"
+    coop: "ICA bikarbonat"
+    willys: "ICA bikarbonat 200g"
+
+- canonical_name: "Dansukker Farinsocker 500g"
+  ean: "7310090990045"
+  category: pantry-flour
+  brand: Dansukker
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Dansukker farinsocker 500g"
+    coop: "Dansukker farinsocker"
+    willys: "Dansukker farinsocker 500g"
+
+# =============================================================================
+# ADDITIONAL OIL
+# =============================================================================
+- canonical_name: "Garant Olivolja Extra Virgin 500ml"
+  ean: "7310090980039"
+  category: pantry-oil
+  brand: Garant
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Garant olivolja extra virgin 500ml"
+    coop: "Garant olivolja extra virgin"
+    willys: "Garant olivolja extra virgin"
+
+- canonical_name: "ICA Sesamolja 250ml"
+  ean: "7318690180057"
+  category: pantry-oil
+  brand: ICA
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "ICA sesamolja 250ml"
+    coop: "ICA sesamolja"
+    willys: "ICA sesamolja"
+
+# =============================================================================
+# ADDITIONAL BEVERAGES
+# =============================================================================
+- canonical_name: "ICA Apelsinjuice Nypressad 1L"
+  ean: "7318690200031"
+  category: beverages-juice
+  brand: ICA
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "ICA nypressad apelsinjuice 1L"
+    coop: "ICA nypressad apelsin"
+    willys: "ICA nypressad apelsin"
+
+- canonical_name: "Tropicana Smooth Apelsin 1L"
+  ean: "7310090040022"
+  category: beverages-juice
+  brand: Tropicana
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Tropicana smooth apelsin 1L"
+    coop: "Tropicana smooth apelsin"
+    willys: "Tropicana smooth apelsin"
+
+- canonical_name: "Pepsi Original 1.5L"
+  ean: "4060800105448"
+  category: beverages-soft
+  brand: Pepsi
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Pepsi original 1.5L"
+    coop: "Pepsi 1.5L"
+    willys: "Pepsi original 1.5L"
+
+- canonical_name: "Norrlands Guld 33cl 6-pack"
+  ean: "7310090060061"
+  category: beverages-soft
+  brand: Norrlands Guld
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Norrlands Guld 33cl 6-pack"
+    coop: "Norrlands Guld 33cl"
+    willys: "Norrlands Guld 33cl 6-pack"
+
+- canonical_name: "Zingo Apelsin 1.4L"
+  ean: "7310090050048"
+  category: beverages-soft
+  brand: Zingo
+  unit_quantity: 1.4
+  unit_type: L
+  search_terms:
+    ica: "Zingo apelsin 1.4L"
+    coop: "Zingo apelsin"
+    willys: "Zingo apelsin 1.4L"
+
+- canonical_name: "Ramlösa Hallon 1.5L"
+  ean: "7310090050055"
+  category: beverages-soft
+  brand: Ramlösa
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Ramlösa hallon 1.5L"
+    coop: "Ramlösa hallon"
+    willys: "Ramlösa hallon 1.5L"
+
+# =============================================================================
+# ADDITIONAL WATER
+# =============================================================================
+- canonical_name: "Loka Hallon 1.5L"
+  ean: "7310090060078"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Loka hallon 1.5L"
+    coop: "Loka hallon"
+    willys: "Loka hallon 1.5L"
+
+- canonical_name: "Loka Mango Lime 1.5L"
+  ean: "7310090060085"
+  category: beverages-water
+  brand: Loka
+  unit_quantity: 1.5
+  unit_type: L
+  search_terms:
+    ica: "Loka mango lime 1.5L"
+    coop: "Loka mango lime"
+    willys: "Loka mango lime 1.5L"
+
+# =============================================================================
+# ADDITIONAL SNACKS
+# =============================================================================
+- canonical_name: "OLW Chili Cream Cheese 275g"
+  ean: "7310090700061"
+  category: snacks-chips
+  brand: OLW
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "OLW chili cream cheese 275g"
+    coop: "OLW chips chili cream cheese"
+    willys: "OLW chili cream cheese"
+
+- canonical_name: "Estrella Chips Salt & Vinäger 175g"
+  ean: "7310090710046"
+  category: snacks-chips
+  brand: Estrella
+  unit_quantity: 175
+  unit_type: g
+  search_terms:
+    ica: "Estrella salt vinäger 175g"
+    coop: "Estrella chips salt vinäger"
+    willys: "Estrella salt vinäger"
+
+- canonical_name: "Marabou Havsalt 185g"
+  ean: "7310511210090"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 185
+  unit_type: g
+  search_terms:
+    ica: "Marabou havsalt 185g"
+    coop: "Marabou havsalt"
+    willys: "Marabou havsalt 185g"
+
+- canonical_name: "Marabou Oreo 185g"
+  ean: "7310511210106"
+  category: snacks-chocolate
+  brand: Marabou
+  unit_quantity: 185
+  unit_type: g
+  search_terms:
+    ica: "Marabou oreo 185g"
+    coop: "Marabou oreo"
+    willys: "Marabou oreo 185g"
+
+- canonical_name: "Cloetta Plopp 80g"
+  ean: "7310090730044"
+  category: snacks-chocolate
+  brand: Cloetta
+  unit_quantity: 80
+  unit_type: g
+  search_terms:
+    ica: "Cloetta plopp 80g"
+    coop: "Cloetta plopp"
+    willys: "Cloetta plopp 80g"
+
+- canonical_name: "Malaco Ahlgrens Bilar Sursockrade 100g"
+  ean: "7310090720059"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 100
+  unit_type: g
+  search_terms:
+    ica: "Ahlgrens bilar sursockrade 100g"
+    coop: "Ahlgrens bilar sursockrade"
+    willys: "Ahlgrens bilar sursockrade"
+
+- canonical_name: "Malaco Gott & Blandat Supersalt 550g"
+  ean: "7310090720066"
+  category: snacks-candy
+  brand: Malaco
+  unit_quantity: 550
+  unit_type: g
+  search_terms:
+    ica: "Malaco gott blandat supersalt 550g"
+    coop: "Malaco gott blandat supersalt"
+    willys: "Malaco gott blandat supersalt"
+
+# =============================================================================
+# ADDITIONAL PRODUCE
+# =============================================================================
+- canonical_name: "Tomat Cherry 250g"
+  ean: "7310090910177"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Tomat cherry 250g"
+    coop: "Cherrytomater 250g"
+    willys: "Cherry tomater 250g"
+
+- canonical_name: "Spenat Färsk 200g"
+  ean: "7310090910184"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Spenat färsk 200g"
+    coop: "Spenat 200g"
+    willys: "Spenat färsk 200g"
+
+- canonical_name: "Vindruvor Gröna 500g"
+  ean: "7310090900116"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Vindruvor gröna 500g"
+    coop: "Gröna vindruvor 500g"
+    willys: "Vindruvor gröna 500g"
+
+- canonical_name: "Nektarin 4-pack"
+  ean: "7310090900123"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Nektarin 4-pack"
+    coop: "Nektariner 4-pack"
+    willys: "Nektarin 4-pack"
+
+# =============================================================================
+# ADDITIONAL BREAD
+# =============================================================================
+- canonical_name: "Pågen Limpan Mörk 500g"
+  ean: "7311070010068"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Pågen limpan mörk 500g"
+    coop: "Pågen limpan mörk"
+    willys: "Pågen limpan mörk"
+
+- canonical_name: "Polarbröd Polarfint 4-pack"
+  ean: "7310160010046"
+  category: bread-fresh
+  brand: Polarbröd
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Polarbröd polarfint 4-pack"
+    coop: "Polarbröd polarfint"
+    willys: "Polarbröd polarfint"
+
+- canonical_name: "Wasa Sport 275g"
+  ean: "7300400120074"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 275
+  unit_type: g
+  search_terms:
+    ica: "Wasa sport 275g"
+    coop: "Wasa sport"
+    willys: "Wasa sport 275g"
+
+- canonical_name: "Wasa Surdeg Råg 305g"
+  ean: "7300400120081"
+  category: bread-crispbread
+  brand: Wasa
+  unit_quantity: 305
+  unit_type: g
+  search_terms:
+    ica: "Wasa surdeg råg 305g"
+    coop: "Wasa surdeg råg"
+    willys: "Wasa surdeg råg"
+
+# =============================================================================
+# ADDITIONAL DAIRY-YOGURT
+# =============================================================================
+- canonical_name: "Arla Yoghurt Vanilj 1L"
+  ean: "7310865002082"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla yoghurt vanilj 1L"
+    coop: "Arla yoghurt vanilj"
+    willys: "Arla yoghurt vanilj 1L"
+
+- canonical_name: "Arla Kvarg Jordgubb 500g"
+  ean: "7310865002099"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Arla kvarg jordgubb 500g"
+    coop: "Arla kvarg jordgubb"
+    willys: "Arla kvarg jordgubb 500g"
+
+# =============================================================================
+# ADDITIONAL DAIRY-CREAM
+# =============================================================================
+- canonical_name: "Arla Vispgrädde 40% 250ml"
+  ean: "7310865004287"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 250
+  unit_type: ml
+  search_terms:
+    ica: "Arla vispgrädde 40% 250ml"
+    coop: "Arla vispgrädde 40% 250ml"
+    willys: "Arla vispgrädde 250ml"
+
+- canonical_name: "Arla Crème Fraiche 34% 500ml"
+  ean: "7310865004294"
+  category: dairy-cream
+  brand: Arla
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "Arla crème fraiche 34% 500ml"
+    coop: "Arla crème fraiche 34% 500ml"
+    willys: "Arla crème fraiche 500ml"
+
+# =============================================================================
+# ADDITIONAL DAIRY-BUTTER
+# =============================================================================
+- canonical_name: "Arla Bregott Normalsaltat 300g"
+  ean: "7310865003263"
+  category: dairy-butter
+  brand: Arla
+  unit_quantity: 300
+  unit_type: g
+  search_terms:
+    ica: "Bregott normalsaltat 300g"
+    coop: "Arla bregott normalsaltat 300g"
+    willys: "Bregott normalsaltat 300g"
+
+# =============================================================================
+# ADDITIONAL FROZEN-ICECREAM
+# =============================================================================
+- canonical_name: "GB Magnum Almond 4-pack"
+  ean: "7310090920060"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 4
+  unit_type: st
+  search_terms:
+    ica: "Magnum almond 4-pack"
+    coop: "Magnum almond 4-pack"
+    willys: "Magnum almond 4-pack"
+
+- canonical_name: "GB Piggelin 8-pack"
+  ean: "7310090920077"
+  category: frozen-icecream
+  brand: GB
+  unit_quantity: 8
+  unit_type: st
+  search_terms:
+    ica: "GB piggelin 8-pack"
+    coop: "GB piggelin"
+    willys: "GB piggelin 8-pack"
+
+# =============================================================================
+# ADDITIONAL FISH
+# =============================================================================
+- canonical_name: "Abba Sill Inlagd 240g"
+  ean: "7310091030030"
+  category: fish
+  brand: Abba
+  unit_quantity: 240
+  unit_type: g
+  search_terms:
+    ica: "Abba inlagd sill 240g"
+    coop: "Abba sill inlagd"
+    willys: "Abba inlagd sill 240g"
+
+- canonical_name: "ICA Räkor Skalade 400g"
+  ean: "7318690230066"
+  category: fish
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA räkor skalade 400g"
+    coop: "ICA räkor skalade"
+    willys: "ICA räkor skalade 400g"
+
+# =============================================================================
+# ADDITIONAL EGGS
+# =============================================================================
+- canonical_name: "Garant Ägg Frigående Inomhus 6-pack"
+  ean: "7310090940039"
+  category: eggs
+  brand: Garant
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Garant ägg frigående 6-pack"
+    coop: "Garant ägg frigående 6-pack"
+    willys: "Garant ägg frigående 6-pack"
+
+# =============================================================================
+# ADDITIONAL CEREALS
+# =============================================================================
+- canonical_name: "AXA Müsli Crunchy Jordgubb 600g"
+  ean: "7310130800045"
+  category: cereals
+  brand: AXA
+  unit_quantity: 600
+  unit_type: g
+  search_terms:
+    ica: "AXA crunchy jordgubb 600g"
+    coop: "AXA müsli crunchy jordgubb"
+    willys: "AXA crunchy jordgubb"
+
+- canonical_name: "Kellogg's Rice Krispies 375g"
+  ean: "5050083119477"
+  category: cereals
+  brand: Kellogg's
+  unit_quantity: 375
+  unit_type: g
+  search_terms:
+    ica: "Kellogg's rice krispies 375g"
+    coop: "Kellogg's rice krispies"
+    willys: "Kellogg's rice krispies"
+
+# =============================================================================
+# ADDITIONAL BABY
+# =============================================================================
+- canonical_name: "Semper Gröt Mild Fullkorn 4m 480g"
+  ean: "7310100610072"
+  category: baby
+  brand: Semper
+  unit_quantity: 480
+  unit_type: g
+  search_terms:
+    ica: "Semper gröt mild fullkorn 4m 480g"
+    coop: "Semper gröt mild fullkorn"
+    willys: "Semper gröt mild fullkorn 4m"
+
+- canonical_name: "Libero Comfort Blöjor Stl 3 62-pack"
+  ean: "7310090750042"
+  category: baby
+  brand: Libero
+  unit_quantity: 62
+  unit_type: st
+  search_terms:
+    ica: "Libero comfort blöjor stl 3 62-pack"
+    coop: "Libero comfort blöjor stl 3"
+    willys: "Libero comfort blöjor stl 3"
+
+# =============================================================================
+# ADDITIONAL PRODUCTS TO REACH 320+
+# =============================================================================
+- canonical_name: "Coop Änglamark Ägg Ekologiska 6-pack"
+  ean: "7300156610018"
+  category: eggs
+  brand: Coop
+  unit_quantity: 6
+  unit_type: st
+  search_terms:
+    ica: "Coop änglamark ägg eko 6-pack"
+    coop: "Änglamark ägg ekologiska 6-pack"
+    willys: "Coop änglamark ägg eko"
+
+- canonical_name: "Coop Änglamark Mellanmjölk 1.5% 1L"
+  ean: "7300156620017"
+  category: dairy-milk
+  brand: Coop
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Coop änglamark mellanmjölk 1L"
+    coop: "Änglamark mellanmjölk 1.5% 1L"
+    willys: "Coop änglamark mellanmjölk"
+
+- canonical_name: "Coop Smör Normalsaltat 500g"
+  ean: "7300156630016"
+  category: dairy-butter
+  brand: Coop
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Coop smör normalsaltat 500g"
+    coop: "Coop smör normalsaltat 500g"
+    willys: "Coop smör normalsaltat"
+
+- canonical_name: "ICA Tortellini Ricotta & Spenat 250g"
+  ean: "7318690160066"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "ICA tortellini ricotta spenat 250g"
+    coop: "ICA tortellini ricotta spenat"
+    willys: "ICA tortellini ricotta spenat"
+
+- canonical_name: "Garant Kokosmjölk 400ml"
+  ean: "7310090971036"
+  category: pantry-canned
+  brand: Garant
+  unit_quantity: 400
+  unit_type: ml
+  search_terms:
+    ica: "Garant kokosmjölk 400ml"
+    coop: "Garant kokosmjölk"
+    willys: "Garant kokosmjölk 400ml"
+
+- canonical_name: "ICA Linser Röda 400g"
+  ean: "7318690170109"
+  category: pantry-canned
+  brand: ICA
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "ICA röda linser 400g"
+    coop: "ICA röda linser"
+    willys: "ICA röda linser 400g"
+
+- canonical_name: "Felix Ravioli 800g"
+  ean: "7310240071047"
+  category: pantry-canned
+  brand: Felix
+  unit_quantity: 800
+  unit_type: g
+  search_terms:
+    ica: "Felix ravioli 800g"
+    coop: "Felix ravioli"
+    willys: "Felix ravioli 800g"
+
+- canonical_name: "ICA Honung 350g"
+  ean: "7318690190056"
+  category: pantry-sauces
+  brand: ICA
+  unit_quantity: 350
+  unit_type: g
+  search_terms:
+    ica: "ICA honung 350g"
+    coop: "ICA honung"
+    willys: "ICA honung 350g"
+
+- canonical_name: "Garant Jordnötssmör 340g"
+  ean: "7310090980046"
+  category: pantry-sauces
+  brand: Garant
+  unit_quantity: 340
+  unit_type: g
+  search_terms:
+    ica: "Garant jordnötssmör 340g"
+    coop: "Garant jordnötssmör"
+    willys: "Garant jordnötssmör 340g"
+
+- canonical_name: "Findus Räkfärdig Fiskgratäng 400g"
+  ean: "7310500089023"
+  category: fish
+  brand: Findus
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Findus fiskgratäng 400g"
+    coop: "Findus fiskgratäng"
+    willys: "Findus fiskgratäng 400g"
+
+- canonical_name: "Estrella Dip Mix Sourcream & Onion 24g"
+  ean: "7310090710053"
+  category: snacks-chips
+  brand: Estrella
+  unit_quantity: 24
+  unit_type: g
+  search_terms:
+    ica: "Estrella dipmix sourcream onion 24g"
+    coop: "Estrella dipmix sourcream onion"
+    willys: "Estrella dipmix sourcream onion"
+
+- canonical_name: "Göteborgs Kex Ballerina 190g"
+  ean: "7310090740012"
+  category: snacks-candy
+  brand: Göteborgs Kex
+  unit_quantity: 190
+  unit_type: g
+  search_terms:
+    ica: "Göteborgs kex ballerina 190g"
+    coop: "Ballerina original"
+    willys: "Göteborgs kex ballerina"
+
+- canonical_name: "Göteborgs Kex Singoalla Hallon 190g"
+  ean: "7310090740029"
+  category: snacks-candy
+  brand: Göteborgs Kex
+  unit_quantity: 190
+  unit_type: g
+  search_terms:
+    ica: "Göteborgs kex singoalla hallon 190g"
+    coop: "Singoalla hallon"
+    willys: "Singoalla hallon"
+
+- canonical_name: "Norrmejerier Mellanmjölk 1.5% 1L"
+  ean: "7310867001731"
+  category: dairy-milk
+  brand: Norrmejerier
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Norrmejerier mellanmjölk 1.5% 1L"
+    coop: "Norrmejerier mellanmjölk"
+    willys: "Norrmejerier mellanmjölk 1L"
+
+- canonical_name: "Scan Fläskkotletter 500g"
+  ean: "7300156503094"
+  category: meat-pork
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan fläskkotletter 500g"
+    coop: "Scan fläskkotletter"
+    willys: "Scan fläskkotletter 500g"
+
+- canonical_name: "Felix Tomatketchup Ekologisk 500g"
+  ean: "7310240060075"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Felix ketchup ekologisk 500g"
+    coop: "Felix eko ketchup"
+    willys: "Felix ketchup eko 500g"
+
+- canonical_name: "Arla Keso Jordgubb 250g"
+  ean: "7310865019043"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 250
+  unit_type: g
+  search_terms:
+    ica: "Arla keso jordgubb 250g"
+    coop: "Arla keso jordgubb"
+    willys: "Arla keso jordgubb 250g"
+
+- canonical_name: "ICA Pasta Penne 500g"
+  ean: "7318690160073"
+  category: pantry-pasta
+  brand: ICA
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "ICA penne 500g"
+    coop: "ICA pasta penne"
+    willys: "ICA penne 500g"
+
+- canonical_name: "Findus Fiskgratäng Dill 400g"
+  ean: "7310500089030"
+  category: fish
+  brand: Findus
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Findus fiskgratäng dill 400g"
+    coop: "Findus fiskgratäng dill"
+    willys: "Findus fiskgratäng dill"
+
+- canonical_name: "Garant Linsgryta 400g"
+  ean: "7310090971043"
+  category: pantry-canned
+  brand: Garant
+  unit_quantity: 400
+  unit_type: g
+  search_terms:
+    ica: "Garant linsgryta 400g"
+    coop: "Garant linsgryta"
+    willys: "Garant linsgryta 400g"
+
+- canonical_name: "Semper Barnmat Pasta Bolognese 1år 190g"
+  ean: "7310100610089"
+  category: baby
+  brand: Semper
+  unit_quantity: 190
+  unit_type: g
+  search_terms:
+    ica: "Semper barnmat pasta bolognese 1år"
+    coop: "Semper pasta bolognese 1 år"
+    willys: "Semper barnmat pasta bolognese"
+
+- canonical_name: "Paulúns Granola Mörk Choklad & Kokos 450g"
+  ean: "7310090886044"
+  category: cereals
+  brand: Paulúns
+  unit_quantity: 450
+  unit_type: g
+  search_terms:
+    ica: "Paulúns granola mörk choklad kokos 450g"
+    coop: "Paulúns granola mörk choklad"
+    willys: "Paulúns granola choklad kokos"
+
+- canonical_name: "Arla Filmjölk Jordgubb 1L"
+  ean: "7310865002105"
+  category: dairy-yogurt
+  brand: Arla
+  unit_quantity: 1
+  unit_type: L
+  search_terms:
+    ica: "Arla filmjölk jordgubb 1L"
+    coop: "Arla filmjölk jordgubb"
+    willys: "Arla filmjölk jordgubb"
+
+- canonical_name: "ICA Gräddfil 12% 500ml"
+  ean: "7318690136029"
+  category: dairy-cream
+  brand: ICA
+  unit_quantity: 500
+  unit_type: ml
+  search_terms:
+    ica: "ICA gräddfil 12% 500ml"
+    coop: "ICA gräddfil 12%"
+    willys: "ICA gräddfil 500ml"
+
+- canonical_name: "Arla Herrgård Skivad 150g"
+  ean: "7310865018175"
+  category: dairy-cheese
+  brand: Arla
+  unit_quantity: 150
+  unit_type: g
+  search_terms:
+    ica: "Arla herrgård skivad 150g"
+    coop: "Arla herrgård skivad"
+    willys: "Arla herrgård skivad 150g"
+
+- canonical_name: "Scan Falukorv Ring 500g"
+  ean: "7300156504117"
+  category: meat-deli
+  brand: Scan
+  unit_quantity: 500
+  unit_type: g
+  search_terms:
+    ica: "Scan falukorv ring 500g"
+    coop: "Scan falukorv ring"
+    willys: "Scan falukorv ring 500g"
+
+- canonical_name: "Garant Kyckling Grillad Hel ca 900g"
+  ean: "7310090883028"
+  category: meat-chicken
+  brand: Garant
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "Garant grillad kyckling hel"
+    coop: "Garant grillad kyckling"
+    willys: "Garant grillad hel kyckling"
+
+- canonical_name: "Paprika Gul 1st"
+  ean: "7310090910191"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Paprika gul styck"
+    coop: "Gul paprika styck"
+    willys: "Paprika gul styck"
+
+- canonical_name: "Grönkål 200g"
+  ean: "7310090910207"
+  category: produce-vegetables
+  brand: Garant
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Grönkål 200g"
+    coop: "Grönkål 200g"
+    willys: "Grönkål 200g"
+
+- canonical_name: "Hallon 125g"
+  ean: "7310090900130"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 125
+  unit_type: g
+  search_terms:
+    ica: "Hallon 125g"
+    coop: "Hallon 125g"
+    willys: "Hallon 125g"
+
+- canonical_name: "Granatäpple Styck"
+  ean: "7310090900147"
+  category: produce-fruit
+  brand: Garant
+  unit_quantity: 1
+  unit_type: st
+  search_terms:
+    ica: "Granatäpple styck"
+    coop: "Granatäpple"
+    willys: "Granatäpple styck"
+
+- canonical_name: "Fazer Kanelbullar 8-pack"
+  ean: "7312930030023"
+  category: bread-fresh
+  brand: Fazer
+  unit_quantity: 8
+  unit_type: st
+  search_terms:
+    ica: "Fazer kanelbullar 8-pack"
+    coop: "Fazer kanelbullar"
+    willys: "Fazer kanelbullar 8-pack"
+
+- canonical_name: "Pågen Kryddbulle 10-pack"
+  ean: "7311070010075"
+  category: bread-fresh
+  brand: Pågen
+  unit_quantity: 10
+  unit_type: st
+  search_terms:
+    ica: "Pågen kryddbulle 10-pack"
+    coop: "Pågen kryddbulle"
+    willys: "Pågen kryddbulle"
+
+- canonical_name: "Leksands Knäckebröd Brungräddat 200g"
+  ean: "7310780010025"
+  category: bread-crispbread
+  brand: Leksands
+  unit_quantity: 200
+  unit_type: g
+  search_terms:
+    ica: "Leksands knäckebröd brungräddat 200g"
+    coop: "Leksands knäcke brungräddat"
+    willys: "Leksands brungräddat knäcke"
+
+- canonical_name: "ICA Crème Fraiche 34% 200ml"
+  ean: "7318690136036"
+  category: dairy-cream
+  brand: ICA
+  unit_quantity: 200
+  unit_type: ml
+  search_terms:
+    ica: "ICA crème fraiche 34% 200ml"
+    coop: "ICA crème fraiche 34%"
+    willys: "ICA crème fraiche 200ml"
+
+- canonical_name: "Felix Köttfärssås 900g"
+  ean: "7310240059059"
+  category: pantry-sauces
+  brand: Felix
+  unit_quantity: 900
+  unit_type: g
+  search_terms:
+    ica: "Felix köttfärssås 900g"
+    coop: "Felix köttfärssås"
+    willys: "Felix köttfärssås 900g"

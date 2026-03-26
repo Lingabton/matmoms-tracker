@@ -1,0 +1,136 @@
+- id: dairy
+  name_sv: Mejeri
+  name_en: Dairy
+  children:
+    - id: dairy-milk
+      name_sv: Mjölk
+      name_en: Milk
+    - id: dairy-cheese
+      name_sv: Ost
+      name_en: Cheese
+    - id: dairy-yogurt
+      name_sv: Yoghurt
+      name_en: Yogurt
+    - id: dairy-butter
+      name_sv: Smör & Margarin
+      name_en: Butter & Margarine
+    - id: dairy-cream
+      name_sv: Grädde
+      name_en: Cream
+
+- id: meat
+  name_sv: Kött & Chark
+  name_en: Meat & Deli
+  children:
+    - id: meat-beef
+      name_sv: Nötkött
+      name_en: Beef
+    - id: meat-pork
+      name_sv: Fläskkött
+      name_en: Pork
+    - id: meat-chicken
+      name_sv: Kyckling
+      name_en: Chicken
+    - id: meat-deli
+      name_sv: Chark & Pålägg
+      name_en: Deli Meats
+
+- id: bread
+  name_sv: Bröd
+  name_en: Bread
+  children:
+    - id: bread-fresh
+      name_sv: Färskt bröd
+      name_en: Fresh Bread
+    - id: bread-crispbread
+      name_sv: Knäckebröd
+      name_en: Crispbread
+
+- id: produce
+  name_sv: Frukt & Grönt
+  name_en: Produce
+  children:
+    - id: produce-fruit
+      name_sv: Frukt
+      name_en: Fruit
+    - id: produce-vegetables
+      name_sv: Grönsaker
+      name_en: Vegetables
+
+- id: frozen
+  name_sv: Fryst
+  name_en: Frozen
+  children:
+    - id: frozen-meals
+      name_sv: Färdigrätter
+      name_en: Ready Meals
+    - id: frozen-vegetables
+      name_sv: Frysta grönsaker
+      name_en: Frozen Vegetables
+    - id: frozen-icecream
+      name_sv: Glass
+      name_en: Ice Cream
+
+- id: pantry
+  name_sv: Skafferi
+  name_en: Pantry Staples
+  children:
+    - id: pantry-pasta
+      name_sv: Pasta & Ris
+      name_en: Pasta & Rice
+    - id: pantry-canned
+      name_sv: Konserver
+      name_en: Canned Goods
+    - id: pantry-oil
+      name_sv: Olja & Vinäger
+      name_en: Oil & Vinegar
+    - id: pantry-flour
+      name_sv: Mjöl & Socker
+      name_en: Flour & Sugar
+    - id: pantry-sauces
+      name_sv: Såser & Kryddor
+      name_en: Sauces & Spices
+
+- id: beverages
+  name_sv: Drycker
+  name_en: Beverages
+  children:
+    - id: beverages-juice
+      name_sv: Juice
+      name_en: Juice
+    - id: beverages-soft
+      name_sv: Läsk
+      name_en: Soft Drinks
+    - id: beverages-water
+      name_sv: Vatten
+      name_en: Water
+
+- id: eggs
+  name_sv: Ägg
+  name_en: Eggs
+
+- id: fish
+  name_sv: Fisk & Skaldjur
+  name_en: Fish & Seafood
+
+- id: snacks
+  name_sv: Snacks & Godis
+  name_en: Snacks & Candy
+  children:
+    - id: snacks-chips
+      name_sv: Chips
+      name_en: Chips
+    - id: snacks-candy
+      name_sv: Godis
+      name_en: Candy
+    - id: snacks-chocolate
+      name_sv: Choklad
+      name_en: Chocolate
+
+- id: baby
+  name_sv: Barnmat
+  name_en: Baby Food
+
+- id: cereals
+  name_sv: Frukost & Flingor
+  name_en: Breakfast & Cereals

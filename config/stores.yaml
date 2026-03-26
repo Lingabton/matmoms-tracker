@@ -1,0 +1,230 @@
+ica:
+  # Stockholm — stor + liten format
+  - id: ica-maxi-lindhagen
+    name: ICA Maxi Lindhagen
+    city: Stockholm
+    store_type: maxi
+    external_id: "14850"
+    zip: "11247"
+  - id: ica-nara-sodermalm
+    name: ICA Nära Södermalm
+    city: Stockholm
+    store_type: nara
+    external_id: "10240"
+    zip: "11645"
+  # Göteborg — stor + liten format
+  - id: ica-maxi-goteborg-angered
+    name: ICA Maxi Angered
+    city: Göteborg
+    store_type: maxi
+    external_id: "1780"
+    zip: "42442"
+  - id: ica-nara-goteborg-linne
+    name: ICA Nära Linnégatan
+    city: Göteborg
+    store_type: nara
+    external_id: "1830"
+    zip: "41304"
+  # Malmö — stor format
+  - id: ica-maxi-malmo
+    name: ICA Maxi Malmö
+    city: Malmö
+    store_type: maxi
+    external_id: "2640"
+    zip: "21575"
+  # Örebro — stor format
+  - id: ica-maxi-orebro
+    name: ICA Maxi Örebro
+    city: Örebro
+    store_type: maxi
+    external_id: "3200"
+    zip: "70225"
+  # Uppsala — stor format
+  - id: ica-maxi-uppsala
+    name: ICA Maxi Uppsala
+    city: Uppsala
+    store_type: maxi
+    external_id: "9050"
+    zip: "75450"
+  # Linköping — stor format
+  - id: ica-maxi-linkoping
+    name: ICA Maxi Tornby Linköping
+    city: Linköping
+    store_type: maxi
+    external_id: "4560"
+    zip: "58278"
+  # Sundsvall — stor format
+  - id: ica-maxi-sundsvall
+    name: ICA Maxi Birsta Sundsvall
+    city: Sundsvall
+    store_type: maxi
+    external_id: "7800"
+    zip: "86336"
+  # Umeå — stor format
+  - id: ica-maxi-umea
+    name: ICA Maxi Umeå
+    city: Umeå
+    store_type: maxi
+    external_id: "8300"
+    zip: "90354"
+  # Luleå — stor format
+  - id: ica-maxi-lulea
+    name: ICA Maxi Luleå
+    city: Luleå
+    store_type: maxi
+    external_id: "8500"
+    zip: "97334"
+
+coop:
+  # Stockholm — stor + liten format
+  - id: coop-stor-kungsholmen
+    name: Coop Kungsholmen
+    city: Stockholm
+    store_type: stor
+    zip: "11220"
+    external_id: "065520"
+  - id: coop-liten-sodermalm
+    name: Coop Liten Södermalm
+    city: Stockholm
+    store_type: liten
+    zip: "11646"
+    external_id: "065540"
+  # Göteborg — stor + liten format
+  - id: coop-stor-goteborg-nordstan
+    name: Coop Nordstan
+    city: Göteborg
+    store_type: stor
+    zip: "41102"
+    external_id: "066200"
+  - id: coop-liten-goteborg-majorna
+    name: Coop Liten Majorna
+    city: Göteborg
+    store_type: liten
+    zip: "41465"
+    external_id: "066250"
+  # Malmö — stor format
+  - id: coop-stor-malmo-triangeln
+    name: Coop Malmö Triangeln
+    city: Malmö
+    store_type: stor
+    zip: "21146"
+    external_id: "067100"
+  # Örebro — stor format
+  - id: coop-stor-orebro
+    name: Coop Örebro Marieberg
+    city: Örebro
+    store_type: stor
+    zip: "70215"
+    external_id: "066500"
+  # Uppsala — stor format
+  - id: coop-stor-uppsala
+    name: Coop Uppsala Boländerna
+    city: Uppsala
+    store_type: stor
+    zip: "75328"
+    external_id: "065900"
+  # Linköping — stor format
+  - id: coop-stor-linkoping
+    name: Coop Tornby Linköping
+    city: Linköping
+    store_type: stor
+    zip: "58278"
+    external_id: "066800"
+  # Sundsvall — stor format
+  - id: coop-stor-sundsvall
+    name: Coop Sundsvall Birsta
+    city: Sundsvall
+    store_type: stor
+    zip: "86336"
+    external_id: "067800"
+  # Umeå — stor format
+  - id: coop-stor-umea
+    name: Coop Umeå
+    city: Umeå
+    store_type: stor
+    zip: "90326"
+    external_id: "068100"
+  # Luleå — stor format
+  - id: coop-stor-lulea
+    name: Coop Luleå Storheden
+    city: Luleå
+    store_type: stor
+    zip: "97345"
+    external_id: "068300"
+
+willys:
+  # Stockholm — Willys + Willys Hemma
+  - id: willys-hogdalen
+    name: Willys Högdalen
+    city: Stockholm
+    store_type: willys
+    zip: "12454"
+    external_id: "2180"
+  - id: willys-hemma-liljeholmen
+    name: Willys Hemma Liljeholmen
+    city: Stockholm
+    store_type: hemma
+    zip: "11743"
+    external_id: "2185"
+  # Göteborg — Willys + Willys Hemma
+  - id: willys-goteborg-backaplan
+    name: Willys Göteborg Backaplan
+    city: Göteborg
+    store_type: willys
+    zip: "41705"
+    external_id: "2126"
+  - id: willys-hemma-goteborg-redbergsvagen
+    name: Willys Hemma Redbergsvägen
+    city: Göteborg
+    store_type: hemma
+    zip: "41667"
+    external_id: "2130"
+  # Malmö — stor format
+  - id: willys-malmo-jagersro
+    name: Willys Malmö Jägersro
+    city: Malmö
+    store_type: willys
+    zip: "21275"
+    external_id: "2370"
+  # Örebro — stor format
+  - id: willys-orebro
+    name: Willys Örebro Marieberg
+    city: Örebro
+    store_type: willys
+    zip: "70215"
+    external_id: "2310"
+  # Uppsala — stor format
+  - id: willys-uppsala
+    name: Willys Uppsala Boländerna
+    city: Uppsala
+    store_type: willys
+    zip: "75328"
+    external_id: "2560"
+  # Linköping — stor format
+  - id: willys-linkoping
+    name: Willys Linköping Tornby
+    city: Linköping
+    store_type: willys
+    zip: "58278"
+    external_id: "2406"
+  # Sundsvall — stor format
+  - id: willys-sundsvall
+    name: Willys Sundsvall Norra Vägen
+    city: Sundsvall
+    store_type: willys
+    zip: "85653"
+    external_id: "2476"
+  # Umeå — stor format
+  - id: willys-umea
+    name: Willys Umeå Strömpilen
+    city: Umeå
+    store_type: willys
+    zip: "90443"
+    external_id: "2520"
+  # Luleå — stor format
+  - id: willys-lulea
+    name: Willys Luleå
+    city: Luleå
+    store_type: willys
+    zip: "97334"
+    external_id: "2540"

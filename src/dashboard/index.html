@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matmoms-tracker — VAT Pass-Through Dashboard</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --border: #2a2d3a;
+            --text: #e4e4e7;
+            --text-muted: #9ca3af;
+            --green: #22c55e;
+            --red: #ef4444;
+            --yellow: #eab308;
+            --blue: #3b82f6;
+            --ica-red: #e13205;
+            --coop-green: #00aa46;
+            --willys-red: #d4232a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .meta-bar {
+            display: flex;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .meta-bar span { display: flex; align-items: center; gap: 4px; }
+
+        /* KPI cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .kpi-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .kpi-card .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .kpi-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .kpi-card .sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .positive { color: var(--green); }
+        .negative { color: var(--red); }
+        .neutral { color: var(--yellow); }
+
+        /* Chain comparison */
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .chain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .chain-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            border-top: 3px solid var(--border);
+        }
+
+        .chain-card.ica { border-top-color: var(--ica-red); }
+        .chain-card.coop { border-top-color: var(--coop-green); }
+        .chain-card.willys { border-top-color: var(--willys-red); }
+
+        .chain-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .chain-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chain-stat:last-child { border-bottom: none; }
+        .chain-stat .stat-label { color: var(--text-muted); }
+
+        /* Bar chart */
+        .bar-chart {
+            margin-bottom: 32px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .bar-label {
+            width: 120px;
+            flex-shrink: 0;
+            color: var(--text-muted);
+        }
+
+        .bar-container {
+            flex: 1;
+            display: flex;
+            height: 28px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--border);
+        }
+
+        .bar-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 0;
+            transition: width 0.5s ease;
+        }
+
+        .bar-segment.lowered { background: var(--green); color: #000; }
+        .bar-segment.unchanged { background: var(--yellow); color: #000; }
+        .bar-segment.increased { background: var(--red); color: #fff; }
+
+        .bar-value {
+            width: 60px;
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .data-table .num { text-align: right; }
+
+        /* Pass-through gauge */
+        .gauge-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .gauge {
+            width: 100%;
+            height: 32px;
+            background: var(--border);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            border-radius: 16px;
+            transition: width 0.8s ease;
+            background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
+        }
+
+        .gauge-marker {
+            position: absolute;
+            top: -6px;
+            width: 2px;
+            height: 44px;
+            background: white;
+            transform: translateX(-50%);
+        }
+
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Loading/error states */
+        .loading {
+            text-align: center;
+            padding: 48px;
+            color: var(--text-muted);
+        }
+
+        .error {
+            text-align: center;
+            padding: 24px;
+            color: var(--red);
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: 32px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .chain-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Matmoms-tracker</h1>
+            <p>Mäter hur momssänkningen på mat (12% &rarr; 6%) den 1 april 2026 slår igenom i butikspriserna</p>
+            <div class="meta-bar" id="meta-bar">
+                <span>Laddar...</span>
+            </div>
+        </header>
+
+        <div id="content">
+            <div class="loading">Hämtar data...</div>
+        </div>
+
+        <footer>
+            Matmoms-tracker &mdash; Öppen analys av matpriser. Teoretisk maximal prissänkning: 5,36%.
+            Data uppdateras två gånger per dag.
+        </footer>
+    </div>
+
+    <script>
+    const API = '/api';
+    const THEORETICAL = 5.36;
+
+    function fmt(n, decimals = 1) {
+        if (n === null || n === undefined) return '—';
+        return n.toFixed(decimals).replace('.', ',');
+    }
+
+    function fmtPct(n) {
+        if (n === null || n === undefined) return '—';
+        const sign = n > 0 ? '+' : '';
+        return sign + n.toFixed(2).replace('.', ',') + '%';
+    }
+
+    function cls(n) {
+        if (n < -0.5) return 'positive';  // price went down = good
+        if (n > 0.5) return 'negative';   // price went up = bad
+        return 'neutral';
+    }
+
+    async function fetchData() {
+        try {
+            const [overviewRes, categoriesRes, storesRes] = await Promise.all([
+                fetch(`${API}/overview`),
+                fetch(`${API}/categories`),
+                fetch(`${API}/stores`),
+            ]);
+
+            if (!overviewRes.ok) throw new Error('Could not load data');
+
+            const overview = await overviewRes.json();
+            const categories = await categoriesRes.json();
+            const stores = await storesRes.json();
+
+            render(overview, categories, stores);
+        } catch (e) {
+            document.getElementById('content').innerHTML =
+                `<div class="error">Kunde inte hämta data: ${e.message}<br>
+                 <small>Kontrollera att API-servern körs (matmoms serve)</small></div>`;
+        }
+    }
+
+    function render(overview, categories, stores) {
+        const n = overview.national;
+        const days = overview.days_since_vat_cut;
+
+        // Meta bar
+        document.getElementById('meta-bar').innerHTML = `
+            <span>Jämförelsedatum: ${overview.comparison_date}</span>
+            <span>Baslinje: ${overview.baseline_date}</span>
+            <span>Dagar sedan momssänkning: ${days >= 0 ? days : 'Ej genomförd ännu'}</span>
+            <span>Produkter: ${n.n_products}</span>
+        `;
+
+        let html = '';
+
+        // KPI cards
+        html += `<div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="label">Genomslagskraft</div>
+                <div class="value ${n.passthrough_pct >= 80 ? 'positive' : n.passthrough_pct >= 40 ? 'neutral' : 'negative'}">${fmt(n.passthrough_pct)}%</div>
+                <div class="sub">av teoretisk sänkning (${THEORETICAL}%)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Genomsnittlig prisändring</div>
+                <div class="value ${cls(n.avg_change_pct)}">${fmtPct(n.avg_change_pct)}</div>
+                <div class="sub">Median: ${fmtPct(n.median_change_pct)}</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Priser sänkta</div>
+                <div class="value positive">${n.share_lowered_pct ? fmt(n.share_lowered_pct) : fmt(n.n_products > 0 ? n.n_lowered/n.n_products*100 : 0)}%</div>
+                <div class="sub">${n.n_lowered} av ${n.n_products} produkter</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Priser höjda</div>
+                <div class="value negative">${fmt(n.n_products > 0 ? n.n_increased/n.n_products*100 : 0)}%</div>
+                <div class="sub">${n.n_increased} av ${n.n_products} produkter</div>
+            </div>
+        </div>`;
+
+        // Pass-through gauge
+        const gaugeWidth = Math.min(Math.max(n.passthrough_pct, 0), 120);
+        html += `
+        <div class="section-title">Genomslagskraft nationellt</div>
+        <div class="gauge-container">
+            <div style="flex:1">
+                <div class="gauge">
+                    <div class="gauge-fill" style="width:${gaugeWidth}%"></div>
+                    <div class="gauge-marker" style="left:100%"></div>
+                </div>
+                <div class="gauge-labels">
+                    <span>0% — Ingen sänkning</span>
+                    <span>100% — Full genomslagskraft</span>
+                </div>
+            </div>
+        </div>`;
+
+        // Chain comparison
+        html += `<div class="section-title">Per kedja</div><div class="chain-grid">`;
+        for (const [chainId, label] of [['ica', 'ICA'], ['coop', 'Coop'], ['willys', 'Willys']]) {
+            const c = overview.chains[chainId];
+            if (!c) continue;
+            const total = c.n_lowered + c.n_unchanged + c.n_increased || 1;
+            html += `
+            <div class="chain-card ${chainId}">
+                <h3>${label}</h3>
+                <div class="chain-stat"><span class="stat-label">Genomslagskraft</span><span class="${c.passthrough_pct >= 80 ? 'positive' : c.passthrough_pct >= 40 ? 'neutral' : 'negative'}">${fmt(c.passthrough_pct)}%</span></div>
+                <div class="chain-stat"><span class="stat-label">Snittändring</span><span class="${cls(c.avg_change_pct)}">${fmtPct(c.avg_change_pct)}</span></div>
+                <div class="chain-stat"><span class="stat-label">Medianändring</span><span>${fmtPct(c.median_change_pct)}</span></div>
+                <div class="chain-stat"><span class="stat-label">Sänkta</span><span class="positive">${c.n_lowered} (${fmt(c.n_lowered/total*100)}%)</span></div>
+                <div class="chain-stat"><span class="stat-label">Oförändrade</span><span>${c.n_unchanged}</span></div>
+                <div class="chain-stat"><span class="stat-label">Höjda</span><span class="negative">${c.n_increased}</span></div>
+                <div class="chain-stat"><span class="stat-label">Produkter</span><span>${c.n_products}</span></div>
+            </div>`;
+        }
+        html += `</div>`;
+
+        // Distribution bars per chain
+        html += `<div class="section-title">Prisändringsfördelning</div><div class="bar-chart">`;
+        for (const [chainId, label] of [['national', 'Nationellt'], ['ica', 'ICA'], ['coop', 'Coop'], ['willys', 'Willys']]) {
+            const c = chainId === 'national' ? n : overview.chains[chainId];
+            if (!c) continue;
+            const total = c.n_lowered + c.n_unchanged + c.n_increased || 1;
+            const pLow = c.n_lowered / total * 100;
+            const pUnch = c.n_unchanged / total * 100;
+            const pInc = c.n_increased / total * 100;
+            html += `
+            <div class="bar-row">
+                <span class="bar-label">${label}</span>
+                <div class="bar-container">
+                    <div class="bar-segment lowered" style="width:${pLow}%">${pLow > 8 ? Math.round(pLow) + '%' : ''}</div>
+                    <div class="bar-segment unchanged" style="width:${pUnch}%">${pUnch > 8 ? Math.round(pUnch) + '%' : ''}</div>
+                    <div class="bar-segment increased" style="width:${pInc}%">${pInc > 8 ? Math.round(pInc) + '%' : ''}</div>
+                </div>
+                <span class="bar-value">${c.n_products}</span>
+            </div>`;
+        }
+        html += `</div>`;
+
+        // Format comparison (stor vs liten)
+        if (overview.formats && Object.keys(overview.formats).length > 0) {
+            html += `<div class="section-title">Storformat vs Närformat</div>
+            <div class="chain-grid" style="grid-template-columns: repeat(2, 1fr);">`;
+            const formatLabels = {large: 'Storformat (Maxi/Stor/Willys)', small: 'Närformat (Nära/Liten/Hemma)'};
+            for (const [fmtId, label] of [['large', formatLabels.large], ['small', formatLabels.small]]) {
+                const f = overview.formats[fmtId];
+                if (!f) continue;
+                const total = f.n_lowered + f.n_unchanged + f.n_increased || 1;
+                html += `
+                <div class="chain-card" style="border-top-color: ${fmtId === 'large' ? 'var(--blue)' : 'var(--yellow)'}">
+                    <h3>${label}</h3>
+                    <div class="chain-stat"><span class="stat-label">Genomslagskraft</span><span class="${f.passthrough_pct >= 80 ? 'positive' : f.passthrough_pct >= 40 ? 'neutral' : 'negative'}">${fmt(f.passthrough_pct)}%</span></div>
+                    <div class="chain-stat"><span class="stat-label">Snittändring</span><span class="${cls(f.avg_change_pct)}">${fmtPct(f.avg_change_pct)}</span></div>
+                    <div class="chain-stat"><span class="stat-label">Medianändring</span><span>${fmtPct(f.median_change_pct)}</span></div>
+                    <div class="chain-stat"><span class="stat-label">Sänkta</span><span class="positive">${f.n_lowered} (${fmt(f.n_lowered/total*100)}%)</span></div>
+                    <div class="chain-stat"><span class="stat-label">Butiker</span><span>${f.n_stores}</span></div>
+                    <div class="chain-stat"><span class="stat-label">Produkter</span><span>${f.n_products}</span></div>
+                </div>`;
+            }
+            html += `</div>`;
+        }
+
+        // Category table
+        if (categories && categories.categories) {
+            const cats = categories.categories.filter(c => c.n_products > 0);
+            cats.sort((a, b) => a.passthrough_pct - b.passthrough_pct);
+
+            html += `<div class="section-title">Per kategori</div>
+            <table class="data-table">
+                <thead><tr>
+                    <th>Kategori</th>
+                    <th class="num">Produkter</th>
+                    <th class="num">Snittändring</th>
+                    <th class="num">Median</th>
+                    <th class="num">Genomslag</th>
+                    <th class="num">Sänkta</th>
+                    <th class="num">Höjda</th>
+                </tr></thead><tbody>`;
+
+            for (const cat of cats) {
+                const total = cat.n_lowered + cat.n_unchanged + cat.n_increased || 1;
+                html += `<tr>
+                    <td>${cat.name_sv || cat.name_en}</td>
+                    <td class="num">${cat.n_products}</td>
+                    <td class="num ${cls(cat.avg_change_pct)}">${fmtPct(cat.avg_change_pct)}</td>
+                    <td class="num">${fmtPct(cat.median_change_pct)}</td>
+                    <td class="num ${cat.passthrough_pct >= 80 ? 'positive' : cat.passthrough_pct >= 40 ? 'neutral' : 'negative'}">${fmt(cat.passthrough_pct)}%</td>
+                    <td class="num positive">${fmt(cat.n_lowered/total*100)}%</td>
+                    <td class="num negative">${fmt(cat.n_increased/total*100)}%</td>
+                </tr>`;
+            }
+            html += `</tbody></table>`;
+        }
+
+        // Store table
+        if (stores && stores.stores) {
+            const storeList = stores.stores.filter(s => s.n_products > 0);
+            storeList.sort((a, b) => a.passthrough_pct - b.passthrough_pct);
+
+            html += `<div class="section-title">Per butik</div>
+            <table class="data-table">
+                <thead><tr>
+                    <th>Butik</th>
+                    <th>Kedja</th>
+                    <th>Stad</th>
+                    <th class="num">Produkter</th>
+                    <th class="num">Snittändring</th>
+                    <th class="num">Genomslag</th>
+                    <th class="num">Sänkta</th>
+                </tr></thead><tbody>`;
+
+            for (const store of storeList) {
+                const total = store.n_lowered + store.n_unchanged + store.n_increased || 1;
+                html += `<tr>
+                    <td>${store.name}</td>
+                    <td>${store.chain_id.toUpperCase()}</td>
+                    <td>${store.city}</td>
+                    <td class="num">${store.n_products}</td>
+                    <td class="num ${cls(store.avg_change_pct)}">${fmtPct(store.avg_change_pct)}</td>
+                    <td class="num ${store.passthrough_pct >= 80 ? 'positive' : store.passthrough_pct >= 40 ? 'neutral' : 'negative'}">${fmt(store.passthrough_pct)}%</td>
+                    <td class="num positive">${fmt(store.n_lowered/total*100)}%</td>
+                </tr>`;
+            }
+            html += `</tbody></table>`;
+        }
+
+        // Export links
+        html += `<div class="section-title">Export</div>
+        <p style="color: var(--text-muted); font-size: 14px;">
+            <a href="${API}/export/csv" style="color: var(--blue);">Ladda ner CSV</a> &mdash;
+            <a href="${API}/export/observations?limit=10000" style="color: var(--blue);">Rå JSON-data</a> &mdash;
+            <a href="${API}/health" style="color: var(--blue);">System-status</a>
+        </p>`;
+
+        document.getElementById('content').innerHTML = html;
+    }
+
+    // Load on page ready
+    fetchData();
+    // Auto-refresh every 5 minutes
+    setInterval(fetchData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
