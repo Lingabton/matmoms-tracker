@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingabton.github.io/matmoms-tracker/sitemap.xml
+Sitemap: https://matmoms.se/sitemap.xml
