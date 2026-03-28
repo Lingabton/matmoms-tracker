@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useData } from "./hooks/useData";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
@@ -9,6 +10,14 @@ import { JournalistCTA } from "./components/JournalistCTA";
 
 function App() {
   const { data, loading, error } = useData();
+
+  // Dynamic title update with live data
+  useEffect(() => {
+    if (!data) return;
+    if (data.isPostCut && data.summary.passThroughPercent != null) {
+      document.title = `${data.summary.passThroughPercent.toFixed(0)}% genomslag — Matmoms 2026: Blev maten billigare?`;
+    }
+  }, [data]);
 
   if (loading) {
     return (
@@ -31,20 +40,37 @@ function App() {
   return (
     <>
       <Nav />
-      <main className="container">
-        <Hero data={data} />
+      <main className="container" role="main">
+        <article>
+          <Hero data={data} />
 
-        {!data.isPostCut && <BaselineProgress data={data} />}
+          {!data.isPostCut && (
+            <section aria-label="Baslinjeinsamling">
+              <BaselineProgress data={data} />
+            </section>
+          )}
 
-        <ChainComparison data={data} />
-        <CategoryTable data={data} />
-        <JournalistCTA data={data} />
-        <Methodology />
+          <section aria-label="Jämförelse per kedja">
+            <ChainComparison data={data} />
+          </section>
+
+          <section aria-label="Per kategori">
+            <CategoryTable data={data} />
+          </section>
+        </article>
+
+        <aside aria-label="För journalister">
+          <JournalistCTA data={data} />
+        </aside>
+
+        <section aria-label="Metod">
+          <Methodology />
+        </section>
       </main>
       <footer>
         <div className="container">
           <p>
-            matmoms.se &mdash; Oberoende bevakning av matmomssankningen 2026.
+            Matmoms &mdash; Oberoende bevakning av matmomssänkningen 2026.
           </p>
           <p style={{ marginTop: "0.25rem" }}>
             Data uppdateras dagligen. Senast uppdaterad:{" "}
