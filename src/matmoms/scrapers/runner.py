@@ -125,7 +125,10 @@ class ScrapeRunner:
         runs: list[ScrapeRun] = []
 
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=self.headless)
+            browser = await p.chromium.launch(
+                headless=self.headless,
+                args=["--disable-blink-features=AutomationControlled"],
+            )
 
             try:
                 scraper_cls = CHAIN_SCRAPERS[chain_id]

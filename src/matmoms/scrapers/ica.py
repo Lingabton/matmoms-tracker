@@ -1,18 +1,29 @@
-"""ICA scraper — handla.ica.se"""
+"""ICA scraper — handlaprivatkund.ica.se
+
+Strategy: API-first via ICA's internal product search API.
+The shopping SPA lives on handlaprivatkund.ica.se (not handla.ica.se).
+Each store has an accountId used in the URL path.
+We first resolve external_id -> accountId via the store API on handla.ica.se,
+then call the search API on handlaprivatkund.ica.se directly.
+Falls back to DOM scraping with data-test="fop-*" selectors.
+"""
 
 from __future__ import annotations
 
+import json
 import logging
 import re
 
-from playwright.async_api import Browser, Page
+from playwright.async_api import Browser, Page, Response
 
 from matmoms.db.models import Product, Store
-from matmoms.scrapers.base import BaseScraper, RawPriceResult
+from matmoms.scrapers.base import BaseScraper, RawPriceResult, best_match
 
 logger = logging.getLogger(__name__)
 
-ICA_BASE_URL = "https://handla.ica.se"
+ICA_LANDING_URL = "https://handla.ica.se"
+ICA_STORE_API = "https://handla.ica.se/api/store/v1"
+ICA_SHOP_BASE = "https://handlaprivatkund.ica.se"
 
 
 class IcaScraper(BaseScraper):
@@ -20,166 +31,301 @@ class IcaScraper(BaseScraper):
 
     def __init__(self, store: Store, products: list[Product], browser: Browser):
         super().__init__(store, products, browser)
+        self._account_id: str | None = None
 
     async def select_store(self, page: Page) -> None:
-        """Navigate to ICA and select the store via the store picker."""
-        await page.goto(ICA_BASE_URL, wait_until="domcontentloaded")
-        await page.wait_for_timeout(2000)
+        """Resolve store accountId and navigate to the store page."""
+        # First go to landing page to get cookies
+        await page.goto(ICA_LANDING_URL, wait_until="domcontentloaded", timeout=30000)
+        await page.wait_for_timeout(1000)
 
-        # Accept cookies if dialog appears
+        # Accept cookies
         try:
-            cookie_btn = page.locator("button:has-text('Acceptera')")
+            cookie_btn = page.locator("#onetrust-accept-btn-handler")
             if await cookie_btn.is_visible(timeout=3000):
                 await cookie_btn.click()
                 await page.wait_for_timeout(500)
         except Exception:
             pass
 
-        # Click on store selector / "Välj butik" button
+        # Resolve external_id -> accountId via store API
+        zip_code = self.store.zip_code or "11247"
+        await self._resolve_account_id(page, zip_code)
+
+        if not self._account_id:
+            logger.warning(
+                f"ICA: could not resolve accountId for {self.store.name} "
+                f"(ext_id={self.store.external_id}), will try external_id as accountId"
+            )
+            self._account_id = self.store.external_id
+
+        # Navigate to the store page on handlaprivatkund
+        store_url = f"{ICA_SHOP_BASE}/stores/{self._account_id}"
+        await page.goto(store_url, wait_until="domcontentloaded", timeout=30000)
+        await page.wait_for_timeout(2000)
+
+        logger.info(f"ICA store selected: {self.store.name} (accountId={self._account_id})")
+
+    async def _resolve_account_id(self, page: Page, zip_code: str) -> None:
+        """Call ICA's store API to map store name to accountId."""
         try:
-            store_btn = page.locator(
-                "[data-testid='store-selector'], "
-                "button:has-text('Välj butik'), "
-                "button:has-text('Byt butik')"
+            api_url = f"{ICA_STORE_API}?zip={zip_code}&customerType=B2C"
+            data = await page.evaluate(
+                """async (url) => {
+                    try {
+                        const resp = await fetch(url);
+                        if (resp.ok) return await resp.json();
+                    } catch(e) {}
+                    return null;
+                }""",
+                api_url,
             )
-            await store_btn.first.click(timeout=5000)
-            await page.wait_for_timeout(1000)
 
-            # Search for our store by name
-            search_input = page.locator(
-                "input[placeholder*='butik'], input[placeholder*='Sök']"
-            )
-            await search_input.first.fill(self.store.name)
-            await page.wait_for_timeout(1500)
+            if not data:
+                return
 
-            # Click the matching store result
-            store_result = page.locator(
-                f"text=/{re.escape(self.store.name)}/i"
+            # Search in both delivery and pickup stores
+            all_stores = (
+                (data.get("forHomeDelivery") or [])
+                + (data.get("forPickup") or [])
             )
-            await store_result.first.click(timeout=5000)
-            await page.wait_for_timeout(2000)
+
+            # Try exact ID match first
+            ext_id = self.store.external_id
+            for store in all_stores:
+                if store.get("id") == ext_id or str(store.get("id")) == str(ext_id):
+                    self._account_id = str(store["accountId"])
+                    logger.debug(
+                        f"ICA store resolved by ID: {ext_id} -> accountId {self._account_id}"
+                    )
+                    return
+
+            # Fallback: match by name (our DB name may not match ICA's exactly)
+            store_name_lower = self.store.name.lower()
+            # Extract key words: strip "ICA", "Maxi", "Nära", "Kvantum", "Supermarket"
+            name_keywords = [
+                w for w in store_name_lower.split()
+                if w not in ("ica", "maxi", "nära", "kvantum", "supermarket", "stormarknad")
+            ]
+
+            best_match = None
+            best_score = 0
+            for store in all_stores:
+                api_name = store.get("name", "").lower()
+                score = sum(1 for kw in name_keywords if kw in api_name)
+                if score > best_score:
+                    best_score = score
+                    best_match = store
+
+            if best_match and best_score >= 1:
+                self._account_id = str(best_match["accountId"])
+                logger.debug(
+                    f"ICA store resolved by name: '{self.store.name}' -> "
+                    f"'{best_match['name']}' (accountId={self._account_id})"
+                )
+                return
+
+            logger.debug(f"ICA store '{self.store.name}' not found in API response for zip {zip_code}")
 
         except Exception as e:
-            # Fallback: try setting store via URL parameter or zip code
-            logger.warning(f"Store selection UI failed, trying zip fallback: {e}")
-            if self.store.zip_code:
-                await page.goto(
-                    f"{ICA_BASE_URL}/sok?q=&s={self.store.external_id}",
-                    wait_until="domcontentloaded",
-                )
-                await page.wait_for_timeout(2000)
+            logger.debug(f"ICA store API call failed: {e}")
+
+    def get_search_term(self, product: Product) -> str:
+        """Get search term, stripping pack size suffixes that break ICA search."""
+        term = super().get_search_term(product)
+        # ICA's search chokes on pack sizes like "1.5L", "1L", "500g" at end
+        term = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", term)
+        return term
 
     async def search_product(self, page: Page, product: Product) -> RawPriceResult:
-        """Search for a product on ICA and extract price data."""
+        """Search for a product — API first, DOM fallback."""
         result = RawPriceResult(
             product_id=product.id,
             store_id=self.store.id,
         )
 
         search_term = self.get_search_term(product)
-        search_url = f"{ICA_BASE_URL}/sok?q={search_term.replace(' ', '+')}"
-        await page.goto(search_url, wait_until="domcontentloaded")
+
+        # Try direct API call
+        api_result = await self._search_via_api(page, search_term, result, product)
+        if api_result and api_result.found:
+            return api_result
+
+        # Fallback: navigate to search page and parse DOM
+        search_url = (
+            f"{ICA_SHOP_BASE}/stores/{self._account_id}"
+            f"/search?q={search_term.replace(' ', '+')}"
+        )
+        await page.goto(search_url, wait_until="domcontentloaded", timeout=20000)
         await page.wait_for_timeout(2000)
 
+        return await self._search_dom(page, result, search_term)
+
+    async def _search_via_api(
+        self, page: Page, search_term: str, result: RawPriceResult, product: Product
+    ) -> RawPriceResult | None:
+        """Call ICA's product search API directly."""
         try:
-            # Look for product cards in search results
-            product_cards = page.locator(
-                "[data-testid='product-card'], "
-                ".product-card, "
-                "[class*='ProductCard'], "
-                "article[class*='product']"
+            from urllib.parse import quote
+            encoded_term = quote(search_term, safe="")
+
+            api_url = (
+                f"{ICA_SHOP_BASE}/stores/{self._account_id}"
+                f"/api/webproductpagews/v6/product-pages/search"
+                f"?includeAdditionalPageInfo=true"
+                f"&maxPageSize=10"
+                f"&maxProductsToDecorate=5"
+                f"&q={encoded_term}"
+                f"&tag=web"
             )
+
+            data = await page.evaluate(
+                """async (url) => {
+                    try {
+                        const resp = await fetch(url, { credentials: 'include' });
+                        if (resp.ok) return await resp.json();
+                        return { error: resp.status };
+                    } catch(e) {
+                        return { error: e.message };
+                    }
+                }""",
+                api_url,
+            )
+
+            if data and "error" not in data:
+                return self._parse_api_response(data, result, api_url, product)
+
+        except Exception as e:
+            logger.debug(f"ICA API call failed: {e}")
+
+        return None
+
+    def _parse_api_response(
+        self, data: dict, result: RawPriceResult, source_url: str, product: Product
+    ) -> RawPriceResult | None:
+        """Parse ICA API response — products in productGroups[].decoratedProducts[]."""
+        try:
+            product_groups = data.get("productGroups", [])
+            if not product_groups:
+                return None
+
+            # Collect all products from all groups
+            all_items = []
+            for group in product_groups:
+                all_items.extend(group.get("decoratedProducts", []))
+
+            if not all_items:
+                return None
+
+            item = best_match(
+                all_items, product,
+                name_key="name",
+                brand_key="brand",
+                size_key="packSizeDescription",
+            )
+            if not item:
+                return None
+
+            # Price at price.amount (string)
+            price_obj = item.get("price", {})
+            price_str = price_obj.get("amount")
+            if price_str is None:
+                return None
+
+            result.price = float(price_str)
+            result.found = True
+            result.raw_data = {"api_url": source_url, "api_item": item}
+
+            # Unit/comparison price
+            unit_price_obj = item.get("unitPrice", {})
+            unit_price_inner = unit_price_obj.get("price", {})
+            unit_amount = unit_price_inner.get("amount")
+            if unit_amount is not None:
+                result.unit_price = float(unit_amount)
+
+            # Promotions
+            promos = item.get("promotions", [])
+            if promos:
+                result.is_campaign = True
+                promo = promos[0]
+                result.campaign_label = promo.get("description", "")
+
+            # Availability
+            result.is_available = item.get("available", True)
+
+            return result
+
+        except (KeyError, TypeError, ValueError) as e:
+            logger.debug(f"ICA API parse failed: {e}")
+
+        return None
+
+    async def _search_dom(
+        self, page: Page, result: RawPriceResult, search_term: str
+    ) -> RawPriceResult:
+        """Fallback: Extract price from DOM using data-test='fop-*' selectors."""
+        try:
+            # ICA uses data-test="fop-wrapper:{productId}" for product cards
+            product_cards = page.locator("[data-test^='fop-wrapper:']")
 
             count = await product_cards.count()
             if count == 0:
                 result.found = False
                 return result
 
-            # Take the first matching result
             card = product_cards.first
 
-            # Extract price — ICA typically shows "XX:XX kr" or "XX kr"
-            price_el = card.locator(
-                "[data-testid='price'], "
-                "[class*='price'], [class*='Price'], "
-                ".product-price"
-            ).first
+            # Price from data-test="fop-price"
+            price_el = card.locator("[data-test='fop-price']")
+            if await price_el.count() > 0:
+                price_text = await price_el.first.text_content(timeout=3000)
+                result.raw_data["price_text"] = price_text
+                price = self._parse_price(price_text)
+                if price is not None:
+                    result.price = price
+                    result.found = True
 
-            price_text = await price_el.text_content(timeout=3000)
-            result.raw_data["price_text"] = price_text
+            # Campaign detection via data-ica-class attribute
+            ica_class = await card.get_attribute("data-ica-class")
+            if ica_class and ica_class in ("offer-single", "offer-multi"):
+                result.is_campaign = True
 
-            price = self._parse_price(price_text)
-            if price is not None:
-                result.price = price
-                result.found = True
+            # Campaign text
+            offer_text_el = card.locator("[data-test='fop-offer-text']")
+            if await offer_text_el.count() > 0:
+                result.campaign_label = await offer_text_el.first.text_content(timeout=2000)
+                result.is_campaign = True
 
-            # Check for campaign/offer indicators
-            try:
-                campaign_el = card.locator(
-                    "[class*='campaign'], [class*='Campaign'], "
-                    "[class*='offer'], [class*='Offer'], "
-                    "[class*='splash'], [class*='badge'], "
-                    ".promotion, .erbjudande"
-                )
-                if await campaign_el.count() > 0:
-                    result.is_campaign = True
-                    result.campaign_label = await campaign_el.first.text_content(timeout=2000)
-            except Exception:
-                pass
+            # Reference/original price
+            ref_price_el = card.locator("[data-test='fop-reference-price']")
+            if await ref_price_el.count() > 0:
+                ref_text = await ref_price_el.first.text_content(timeout=2000)
+                result.original_price = self._parse_price(ref_text)
+                result.is_campaign = True
 
-            # Check for original/struck-through price
-            try:
-                orig_price_el = card.locator(
-                    "[class*='original'], [class*='strikethrough'], "
-                    "[class*='was-price'], s, del"
-                )
-                if await orig_price_el.count() > 0:
-                    orig_text = await orig_price_el.first.text_content(timeout=2000)
-                    result.original_price = self._parse_price(orig_text)
-                    result.is_campaign = True
-            except Exception:
-                pass
+            # Unit price from fop-size or fop-price-per-unit
+            unit_el = card.locator("[data-test='fop-price-per-unit'], [data-test='fop-size']")
+            if await unit_el.count() > 0:
+                unit_text = await unit_el.first.text_content(timeout=2000)
+                result.raw_data["unit_price_text"] = unit_text
+                # Extract price from text like "0.7kg (71,24 kr/kg)"
+                match = re.search(r"(\d+[,:]\d+)\s*kr", unit_text)
+                if match:
+                    result.unit_price = self._parse_price(match.group(1))
 
-            # Check for comparison/unit price
-            try:
-                unit_price_el = card.locator(
-                    "[class*='unit-price'], [class*='UnitPrice'], "
-                    "[class*='comparison-price'], [class*='jmfpris']"
-                )
-                if await unit_price_el.count() > 0:
-                    unit_text = await unit_price_el.first.text_content(timeout=2000)
-                    result.unit_price = self._parse_price(unit_text)
-                    result.raw_data["unit_price_text"] = unit_text
-            except Exception:
-                pass
-
-            # Check for member price
-            try:
-                member_el = card.locator(
-                    "[class*='member'], [class*='Member'], "
-                    "[class*='stammis'], [class*='Stammis']"
-                )
-                if await member_el.count() > 0:
-                    member_text = await member_el.first.text_content(timeout=2000)
-                    result.member_price = self._parse_price(member_text)
-            except Exception:
-                pass
-
-            # Store full card text for traceability
-            try:
-                result.raw_data["card_text"] = await card.text_content(timeout=2000)
-            except Exception:
-                pass
+            # Product name for traceability
+            title_el = card.locator("[data-test='fop-title']")
+            if await title_el.count() > 0:
+                result.raw_data["product_name"] = await title_el.first.text_content(timeout=2000)
 
         except Exception as e:
-            logger.error(f"Error parsing ICA result for {search_term}: {e}")
+            logger.debug(f"ICA DOM parse failed for {search_term}: {e}")
             result.found = False
             result.error = str(e)
 
         return result
 
     def detect_campaign(self, raw: RawPriceResult) -> bool:
-        """Detect if an ICA price is a campaign/promo."""
         if raw.is_campaign:
             return True
         if raw.original_price and raw.price and raw.original_price > raw.price:
@@ -192,15 +338,16 @@ class IcaScraper(BaseScraper):
 
     @staticmethod
     def _parse_price(text: str | None) -> float | None:
-        """Parse price from Swedish formatted text like '23:90 kr' or '23,90'."""
+        """Parse price from Swedish format: '23:90 kr', '23,90', '24 kr'."""
         if not text:
             return None
-        # Remove non-numeric except : , .
         cleaned = re.sub(r"[^\d:,.]", "", text.strip())
         if not cleaned:
             return None
-        # Swedish format: 23:90 or 23,90
         cleaned = cleaned.replace(":", ".").replace(",", ".")
+        parts = cleaned.split(".")
+        if len(parts) > 2:
+            cleaned = parts[0] + "." + parts[1]
         try:
             return float(cleaned)
         except ValueError:

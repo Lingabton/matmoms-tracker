@@ -12,3 +12,7 @@ build/
 .pytest_cache/
 htmlcov/
 raw_snapshots/
+*.db-shm
+logs/
+site/node_modules/
+site/dist/

@@ -1,0 +1,235 @@
+{
+  "generatedAt": "2026-03-29T00:13:25.530460",
+  "vatCutDate": "2026-04-01",
+  "isPostCut": false,
+  "expectedDropPercent": 5.36,
+  "summary": {
+    "totalObservations": 9,
+    "foundObservations": 9,
+    "totalProducts": 419,
+    "totalStores": 33,
+    "totalChains": 3,
+    "daysOfData": 1
+  },
+  "baseline": {
+    "daily": [
+      {
+        "date": "2026-03-28",
+        "total": 9,
+        "found": 9
+      }
+    ],
+    "coveragePercent": 0.1,
+    "uniqueProductStores": 9,
+    "totalProductStores": 13827
+  },
+  "byChain": [
+    {
+      "chain": "coop",
+      "chainName": "Coop",
+      "observations": 3,
+      "found": 3,
+      "hitRate": 100.0,
+      "avgPrice": 22.47,
+      "stores": 1
+    },
+    {
+      "chain": "ica",
+      "chainName": "ICA",
+      "observations": 3,
+      "found": 3,
+      "hitRate": 100.0,
+      "avgPrice": 16.95,
+      "stores": 1
+    },
+    {
+      "chain": "willys",
+      "chainName": "Willys",
+      "observations": 3,
+      "found": 3,
+      "hitRate": 100.0,
+      "avgPrice": 20.97,
+      "stores": 1
+    }
+  ],
+  "byCategory": [
+    {
+      "category": "Mjölk",
+      "categoryId": "dairy-milk",
+      "observations": 9,
+      "found": 9,
+      "hitRate": 100.0,
+      "avgPrice": 20.13
+    }
+  ],
+  "byCity": [
+    {
+      "city": "Stockholm",
+      "observations": 9,
+      "found": 9,
+      "hitRate": 100.0,
+      "avgPrice": 20.13,
+      "stores": 3
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-03-28",
+      "chain": "coop",
+      "observations": 3,
+      "found": 3,
+      "avgPrice": 22.47
+    },
+    {
+      "date": "2026-03-28",
+      "chain": "ica",
+      "observations": 3,
+      "found": 3,
+      "avgPrice": 16.95
+    },
+    {
+      "date": "2026-03-28",
+      "chain": "willys",
+      "observations": 3,
+      "found": 3,
+      "avgPrice": 20.97
+    }
+  ],
+  "products": [
+    {
+      "productId": 3,
+      "name": "Arla Lättmjölk 0.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "coop",
+      "store": "Coop Kungsholmen",
+      "city": "Stockholm",
+      "price": 18.95,
+      "unitPrice": 37.9,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:54.464770"
+    },
+    {
+      "productId": 3,
+      "name": "Arla Lättmjölk 0.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "ica",
+      "store": "ICA Maxi Lindhagen",
+      "city": "Stockholm",
+      "price": 17.95,
+      "unitPrice": 11.97,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:52:04.023351"
+    },
+    {
+      "productId": 3,
+      "name": "Arla Lättmjölk 0.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "willys",
+      "store": "Willys Högdalen",
+      "city": "Stockholm",
+      "price": 21.9,
+      "unitPrice": null,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:41.828137"
+    },
+    {
+      "productId": 2,
+      "name": "Arla Mellanmjölk 1.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "coop",
+      "store": "Coop Kungsholmen",
+      "city": "Stockholm",
+      "price": 24.5,
+      "unitPrice": 16.33,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:50.650299"
+    },
+    {
+      "productId": 2,
+      "name": "Arla Mellanmjölk 1.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "ica",
+      "store": "ICA Maxi Lindhagen",
+      "city": "Stockholm",
+      "price": 18.95,
+      "unitPrice": 12.63,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:52:02.311413"
+    },
+    {
+      "productId": 2,
+      "name": "Arla Mellanmjölk 1.5% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "willys",
+      "store": "Willys Högdalen",
+      "city": "Stockholm",
+      "price": 22.5,
+      "unitPrice": 15.0,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:37.190316"
+    },
+    {
+      "productId": 1,
+      "name": "Arla Standardmjölk 3% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "coop",
+      "store": "Coop Kungsholmen",
+      "city": "Stockholm",
+      "price": 23.95,
+      "unitPrice": 15.97,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:46.925643"
+    },
+    {
+      "productId": 1,
+      "name": "Arla Standardmjölk 3% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "ica",
+      "store": "ICA Maxi Lindhagen",
+      "city": "Stockholm",
+      "price": 13.95,
+      "unitPrice": 13.95,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:52:00.609854"
+    },
+    {
+      "productId": 1,
+      "name": "Arla Standardmjölk 3% 1.5L",
+      "brand": "Arla",
+      "category": "Mjölk",
+      "quantity": 1.5,
+      "unit": "L",
+      "chain": "willys",
+      "store": "Willys Högdalen",
+      "city": "Stockholm",
+      "price": 18.5,
+      "unitPrice": null,
+      "isCampaign": false,
+      "observedAt": "2026-03-28 23:51:35.528426"
+    }
+  ]
+}

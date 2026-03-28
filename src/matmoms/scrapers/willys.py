@@ -1,8 +1,9 @@
 """Willys scraper — willys.se
 
-Willys is part of the Axfood group (same platform as Hemköp).
-The SPA often has an underlying API at /search/... or /api/...
-We attempt to intercept that, falling back to DOM scraping.
+Willys is part of the Axfood group.
+Strategy: Navigate to search page, intercept the /search?q= API response.
+Fallback to DOM scraping with data-testid selectors.
+Store selection via POST /axfood/rest/store/activate.
 """
 
 from __future__ import annotations
@@ -11,10 +12,10 @@ import json
 import logging
 import re
 
-from playwright.async_api import Browser, Page, Response
+from playwright.async_api import Browser, Page
 
 from matmoms.db.models import Product, Store
-from matmoms.scrapers.base import BaseScraper, RawPriceResult
+from matmoms.scrapers.base import BaseScraper, RawPriceResult, best_match
 
 logger = logging.getLogger(__name__)
 
@@ -24,75 +25,43 @@ WILLYS_BASE_URL = "https://www.willys.se"
 class WillysScraper(BaseScraper):
     chain_id = "willys"
 
-    def __init__(self, store: Store, products: list[Product], browser: Browser):
-        super().__init__(store, products, browser)
-        self._api_responses: dict[str, dict] = {}
-
     async def select_store(self, page: Page) -> None:
-        """Navigate to Willys and select the store."""
-        # Intercept API responses
-        async def capture_api(response: Response):
-            if "/search/" in response.url or "/api/" in response.url:
-                try:
-                    if "application/json" in (response.headers.get("content-type", "")):
-                        data = await response.json()
-                        self._api_responses[response.url] = data
-                except Exception:
-                    pass
-
-        page.on("response", capture_api)
-
+        """Navigate to Willys and activate the store via API."""
         await page.goto(WILLYS_BASE_URL, wait_until="domcontentloaded")
         await page.wait_for_timeout(2000)
 
         # Accept cookies
         try:
-            cookie_btn = page.locator(
-                "button:has-text('Acceptera'), "
-                "button:has-text('Godkänn'), "
-                "#onetrust-accept-btn-handler"
-            )
-            if await cookie_btn.first.is_visible(timeout=3000):
-                await cookie_btn.first.click()
+            cookie_btn = page.locator("#onetrust-accept-btn-handler")
+            if await cookie_btn.is_visible(timeout=3000):
+                await cookie_btn.click()
                 await page.wait_for_timeout(500)
         except Exception:
             pass
 
-        # Select store
-        try:
-            store_btn = page.locator(
-                "button:has-text('Välj butik'), "
-                "button:has-text('Byt butik'), "
-                "[data-testid='store-selector'], "
-                "[class*='store-selector']"
-            )
-            await store_btn.first.click(timeout=5000)
-            await page.wait_for_timeout(1000)
-
-            # Search for store
-            search_input = page.locator(
-                "input[placeholder*='butik'], input[placeholder*='Sök']"
-            )
-            await search_input.first.fill(self.store.name.replace("Willys ", ""))
-            await page.wait_for_timeout(1500)
-
-            # Click the matching store
-            store_result = page.locator(
-                f"text=/{re.escape(self.store.name)}/i"
-            )
-            if await store_result.first.is_visible(timeout=5000):
-                await store_result.first.click()
-                await page.wait_for_timeout(2000)
-
-        except Exception as e:
-            logger.warning(f"Willys store selection failed: {e}")
-            # Try setting via cookie/URL
-            if self.store.external_id:
-                await page.goto(
-                    f"{WILLYS_BASE_URL}/sok?q=&avd=&store={self.store.external_id}",
-                    wait_until="domcontentloaded",
+        # Activate store via API
+        if self.store.external_id:
+            try:
+                result = await page.evaluate(
+                    """async (storeId) => {
+                        try {
+                            const resp = await fetch(
+                                '/axfood/rest/store/activate?storeId=' + storeId
+                                + '&activelySelected=true&forceAsPickingStore=false',
+                                { method: 'POST', credentials: 'include' }
+                            );
+                            if (resp.ok) return await resp.json();
+                        } catch(e) {}
+                        return null;
+                    }""",
+                    self.store.external_id,
                 )
-                await page.wait_for_timeout(2000)
+                if result and result.get("storeId"):
+                    logger.info(f"Willys store activated: {result.get('name', self.store.name)}")
+                else:
+                    logger.warning(f"Willys store activation returned unexpected result for {self.store.name}")
+            except Exception as e:
+                logger.warning(f"Willys store activation failed: {e}")
 
     async def search_product(self, page: Page, product: Product) -> RawPriceResult:
         """Search for a product on Willys."""
@@ -103,27 +72,113 @@ class WillysScraper(BaseScraper):
 
         search_term = self.get_search_term(product)
 
-        # Clear previous API responses to capture fresh ones
-        self._api_responses.clear()
+        # Try direct API call first (most reliable)
+        api_result = await self._search_via_api(page, search_term, result, product)
+        if api_result and api_result.found:
+            return api_result
 
+        # Fallback: navigate to search page and parse DOM
         search_url = f"{WILLYS_BASE_URL}/sok?q={search_term.replace(' ', '+')}"
         await page.goto(search_url, wait_until="domcontentloaded")
         await page.wait_for_timeout(2500)
 
-        # Try to use captured API response first
-        api_result = self._try_parse_api_response(result)
-        if api_result and api_result.found:
-            return api_result
+        return await self._search_dom(page, result, search_term)
 
-        # DOM-based fallback
+    async def _search_via_api(
+        self, page: Page, search_term: str, result: RawPriceResult, product: Product
+    ) -> RawPriceResult | None:
+        """Call Willys search API directly."""
         try:
-            product_cards = page.locator(
-                "[data-testid='product'], "
-                ".product-card, "
-                "[class*='ProductCard'], "
-                "[class*='productCard'], "
-                "article[class*='product']"
+            from urllib.parse import quote
+            encoded = quote(search_term, safe="")
+            api_url = f"{WILLYS_BASE_URL}/search?q={encoded}&size=10"
+
+            response = await page.evaluate(
+                """async (url) => {
+                    try {
+                        const resp = await fetch(url, { credentials: 'include' });
+                        if (resp.ok) return await resp.json();
+                        return { error: resp.status };
+                    } catch(e) {
+                        return { error: e.message };
+                    }
+                }""",
+                api_url,
             )
+
+            if response and "error" not in response:
+                return self._parse_api_data(response, result, api_url, product)
+
+        except Exception as e:
+            logger.debug(f"Willys direct API call failed: {e}")
+
+        return None
+
+    def _parse_api_data(
+        self, data: dict, result: RawPriceResult, source_url: str, product: Product
+    ) -> RawPriceResult | None:
+        """Parse Willys search API response with smart matching."""
+        try:
+            products = data.get("results", [])
+            if not products or not isinstance(products, list):
+                return None
+
+            item = best_match(
+                products, product,
+                name_key="name",
+                brand_key="manufacturer",
+                size_key="displayVolume",
+            )
+            if not item:
+                return None
+
+            price = item.get("priceValue")
+            if price is None:
+                price_str = item.get("priceNoUnit")
+                if price_str:
+                    price = float(price_str.replace(",", "."))
+
+            if price is not None:
+                result.price = float(price)
+                result.found = True
+                result.raw_data = {"api_url": source_url, "api_item": item}
+
+                # Comparison price
+                comp = item.get("comparePrice")
+                if comp and isinstance(comp, str):
+                    result.unit_price = self._parse_price(comp)
+
+                # Campaign via potentialPromotions
+                promos = item.get("potentialPromotions", [])
+                if promos:
+                    result.is_campaign = True
+                    promo = promos[0]
+                    result.campaign_label = (
+                        promo.get("conditionLabel")
+                        or promo.get("rewardLabel")
+                        or promo.get("splashTitleText")
+                        or ""
+                    )
+                    savings = item.get("savingsAmount")
+                    if savings and result.price:
+                        result.original_price = round(result.price + float(savings), 2)
+
+                if item.get("bargainProduct"):
+                    result.is_campaign = True
+
+                return result
+
+        except (KeyError, TypeError, ValueError) as e:
+            logger.debug(f"Could not parse Willys API response: {e}")
+
+        return None
+
+    async def _search_dom(
+        self, page: Page, result: RawPriceResult, search_term: str
+    ) -> RawPriceResult:
+        """Fallback: Extract price from DOM using data-testid selectors."""
+        try:
+            product_cards = page.locator("[data-testid='product']")
 
             count = await product_cards.count()
             if count == 0:
@@ -132,60 +187,36 @@ class WillysScraper(BaseScraper):
 
             card = product_cards.first
 
-            # Extract price
+            # Price — try both DEFAULT (regular) and GENERAL (campaign)
             price_el = card.locator(
-                "[class*='price'], [class*='Price'], "
-                "[data-testid='price']"
+                "[data-testid='product-price-DEFAULT'], "
+                "[data-testid='product-price-GENERAL']"
             ).first
 
             price_text = await price_el.text_content(timeout=3000)
             result.raw_data["price_text"] = price_text
 
-            price = self._parse_price(price_text)
+            # Willys splits price into separate spans: "1850/st" means 18 kr 50 öre
+            # The two spans contain kr digits and öre digits with no separator
+            price = self._parse_willys_price(price_text)
             if price is not None:
                 result.price = price
                 result.found = True
 
-            # Campaign indicators
+            # Campaign: GENERAL price testid means it's a campaign
+            campaign_price = card.locator("[data-testid='product-price-GENERAL']")
+            if await campaign_price.count() > 0:
+                result.is_campaign = True
+
+            # Product name
             try:
-                campaign_el = card.locator(
-                    "[class*='campaign'], [class*='Campaign'], "
-                    "[class*='offer'], [class*='splash'], "
-                    "[class*='badge'], [class*='Promotion'], "
-                    ".promotion"
-                )
-                if await campaign_el.count() > 0:
-                    result.is_campaign = True
-                    result.campaign_label = await campaign_el.first.text_content(timeout=2000)
+                name_el = card.locator("[itemprop='name']")
+                if await name_el.count() > 0:
+                    result.raw_data["product_name"] = await name_el.first.text_content(timeout=2000)
             except Exception:
                 pass
 
-            # Original price
-            try:
-                orig_el = card.locator(
-                    "s, del, [class*='original'], [class*='was'], "
-                    "[class*='strikethrough']"
-                )
-                if await orig_el.count() > 0:
-                    orig_text = await orig_el.first.text_content(timeout=2000)
-                    result.original_price = self._parse_price(orig_text)
-                    result.is_campaign = True
-            except Exception:
-                pass
-
-            # Unit price
-            try:
-                unit_el = card.locator(
-                    "[class*='unit'], [class*='comparison'], [class*='jmf']"
-                )
-                if await unit_el.count() > 0:
-                    unit_text = await unit_el.first.text_content(timeout=2000)
-                    result.unit_price = self._parse_price(unit_text)
-                    result.raw_data["unit_price_text"] = unit_text
-            except Exception:
-                pass
-
-            # Full card text
+            # Full card text for traceability
             try:
                 result.raw_data["card_text"] = await card.text_content(timeout=2000)
             except Exception:
@@ -198,51 +229,7 @@ class WillysScraper(BaseScraper):
 
         return result
 
-    def _try_parse_api_response(self, result: RawPriceResult) -> RawPriceResult | None:
-        """Try to extract product data from intercepted API responses."""
-        for url, data in self._api_responses.items():
-            if "/search/" not in url:
-                continue
-
-            try:
-                products = data.get("results", data.get("products", []))
-                if not products:
-                    continue
-
-                item = products[0]
-                price = item.get("price", item.get("currentPrice"))
-                if price is not None:
-                    result.price = float(price)
-                    result.found = True
-                    result.raw_data = {"api_url": url, "api_item": item}
-
-                    # Original price from API
-                    orig = item.get("originalPrice", item.get("savingsPrice"))
-                    if orig:
-                        result.original_price = float(orig)
-
-                    # Unit price
-                    unit = item.get("comparisonPrice", item.get("pricePerUnit"))
-                    if unit:
-                        result.unit_price = float(unit)
-
-                    # Campaign from API
-                    if item.get("potpiece") or item.get("promotion") or item.get("campaign"):
-                        result.is_campaign = True
-                        result.campaign_label = (
-                            item.get("promotionText", "")
-                            or item.get("campaignText", "")
-                        )
-
-                    return result
-
-            except (KeyError, TypeError, ValueError) as e:
-                logger.debug(f"Could not parse Willys API response: {e}")
-
-        return None
-
     def detect_campaign(self, raw: RawPriceResult) -> bool:
-        """Detect if a Willys price is a campaign/promo."""
         if raw.is_campaign:
             return True
         if raw.original_price and raw.price and raw.original_price > raw.price:
@@ -252,6 +239,25 @@ class WillysScraper(BaseScraper):
         return False
 
     @staticmethod
+    def _parse_willys_price(text: str | None) -> float | None:
+        """Parse Willys DOM price: spans concatenate to e.g. '1850/st' = 18.50 kr."""
+        if not text:
+            return None
+        # Strip unit suffix like "/st", "/kg"
+        cleaned = re.sub(r"/\w+", "", text).strip()
+        # Remove non-digits
+        digits = re.sub(r"[^\d]", "", cleaned)
+        if not digits:
+            return None
+        if len(digits) <= 2:
+            # Just öre or just kr
+            return float(digits)
+        # Last 2 digits are öre, rest is kr
+        kr = int(digits[:-2])
+        ore = int(digits[-2:])
+        return kr + ore / 100.0
+
+    @staticmethod
     def _parse_price(text: str | None) -> float | None:
         if not text:
             return None
@@ -259,6 +265,9 @@ class WillysScraper(BaseScraper):
         if not cleaned:
             return None
         cleaned = cleaned.replace(":", ".").replace(",", ".")
+        parts = cleaned.split(".")
+        if len(parts) > 2:
+            cleaned = parts[0] + "." + parts[1]
         try:
             return float(cleaned)
         except ValueError:
