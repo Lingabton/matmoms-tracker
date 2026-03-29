@@ -72,17 +72,14 @@ class WillysScraper(BaseScraper):
 
         search_term = self.get_search_term(product)
 
-        # Try direct API call first (most reliable)
+        # API-only — no DOM fallback to avoid mismatches
         api_result = await self._search_via_api(page, search_term, result, product)
         if api_result and api_result.found:
             return api_result
 
-        # Fallback: navigate to search page and parse DOM
-        search_url = f"{WILLYS_BASE_URL}/sok?q={search_term.replace(' ', '+')}"
-        await page.goto(search_url, wait_until="domcontentloaded")
-        await page.wait_for_timeout(2500)
-
-        return await self._search_dom(page, result, search_term)
+        # Not found via API — report as not found rather than risk mismatch
+        result.found = False
+        return result
 
     async def _search_via_api(
         self, page: Page, search_term: str, result: RawPriceResult, product: Product

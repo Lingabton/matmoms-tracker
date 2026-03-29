@@ -187,16 +187,9 @@ class IcaScraper(BaseScraper):
             if api_result and api_result.found:
                 return api_result
 
-        # Final fallback: navigate to search page with shortest term and parse DOM
-        fallback_term = search_terms[-1] if search_terms else product.canonical_name
-        search_url = (
-            f"{ICA_SHOP_BASE}/stores/{self._account_id}"
-            f"/search?q={fallback_term.replace(' ', '+')}"
-        )
-        await page.goto(search_url, wait_until="domcontentloaded", timeout=20000)
-        await page.wait_for_timeout(2000)
-
-        return await self._search_dom(page, result, fallback_term)
+        # Not found via API — report as not found rather than risk mismatch
+        result.found = False
+        return result
 
     async def _search_via_api(
         self, page: Page, search_term: str, result: RawPriceResult, product: Product
