@@ -74,6 +74,29 @@ def normalize_volume(text: str | None) -> float | None:
     return value * multipliers[unit]
 
 
+def _extract_brand(canonical_name: str) -> str:
+    """Extract brand from canonical product name (first word(s) before product type)."""
+    product_type_words = {
+        "mjölk", "smör", "ost", "ägg", "bröd", "socker", "pasta", "ris",
+        "standardmjölk", "mellanmjölk", "lättmjölk", "minimjölk",
+        "filmjölk", "yoghurt", "grädde", "gräddfil", "crème", "cream",
+        "sill", "sardiner", "korv", "skinka", "färs", "filé", "bitar",
+        "knäckebröd", "müsli", "havrefrön", "flingor",
+        "ketchup", "senap", "majonäs", "tacokrydda", "tacosås",
+        "chips", "dip", "godis", "choklad", "glass",
+        "juice", "läsk", "vatten", "dryck", "havredryck",
+        "blöjor", "kikärtor", "kidneybönor", "tomater", "potatis",
+        "äpplen", "bananer", "apelsiner", "vitlök", "tomat",
+        "riven", "skivad", "kokt", "rökt", "strimlad",
+    }
+    words = []
+    for w in canonical_name.split():
+        if w.lower() in product_type_words:
+            break
+        words.append(w)
+    return " ".join(words).lower() if words else ""
+
+
 def best_match(
     items: list[dict],
     product: "Product",
@@ -81,102 +104,126 @@ def best_match(
     brand_key: str | None = None,
     size_key: str | None = None,
 ) -> dict | None:
-    """Pick the best API result for a product based on size, brand, and name.
+    """Pick the best API result with strict triple-check validation.
 
-    Args:
-        items: List of API result dicts.
-        product: The target Product.
-        name_key: Key for product name in the API item.
-        brand_key: Key for brand/manufacturer (optional).
-        size_key: Key for pack size description (optional).
+    Three mandatory checks (any failure = reject):
+    1. SIZE: Must match within ±15% (mandatory if size available)
+    2. BRAND: Must match (mandatory for branded products)
+    3. VARIANT: Eko/Laktosfri must match exactly
 
-    Returns the best matching item, or None if no acceptable match.
+    Scoring for ranking among passing candidates:
+    - Name keyword overlap
+    - Position preference (earlier = better)
     """
     if not items:
         return None
 
-    # Parse target size from canonical name
-    target_vol = normalize_volume(product.canonical_name)
+    # Parse target attributes from canonical name
+    canonical = product.canonical_name
+    canonical_lower = canonical.lower()
+    target_vol = normalize_volume(canonical)
+    target_brand = _extract_brand(canonical)
 
-    # Extract brand from canonical name (first word, typically)
-    canonical_lower = product.canonical_name.lower()
-    canonical_words = set(canonical_lower.split())
+    # Strip size/percentage from canonical for keyword matching
+    canonical_clean = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", canonical_lower)
+    canonical_clean = re.sub(r"\s+\d+(?:[.,]\d+)?%", "", canonical_clean)
+    canonical_keywords = {w for w in canonical_clean.split() if len(w) > 1}
 
-    # Flags from canonical name
-    target_is_eko = "eko" in canonical_words or "ekologisk" in canonical_words
+    # Variant flags
+    target_is_eko = any(w in canonical_lower.split() for w in ("eko", "ekologisk", "ekologiska"))
     target_is_laktosfri = "laktosfri" in canonical_lower
+    target_is_light = any(w in canonical_lower for w in ("lätt", "light", "0.5%", "0.1%"))
 
-    scored: list[tuple[float, int, dict]] = []
+    candidates: list[tuple[float, int, dict, str]] = []
 
     for idx, item in enumerate(items):
-        score = 0.0
         item_name = (item.get(name_key) or "").lower()
+        item_brand_raw = (item.get(brand_key) or "") if brand_key else ""
+        item_brand = item_brand_raw.lower()
+        item_size_raw = item.get(size_key) if size_key else None
 
-        # --- Size match (most important) ---
-        if size_key and target_vol:
-            item_size = item.get(size_key)
-            item_vol = normalize_volume(item_size)
-            if item_vol and target_vol:
+        reject_reason = ""
+
+        # === CHECK 1: SIZE (mandatory if both sides have size info) ===
+        if target_vol and size_key:
+            item_vol = normalize_volume(item_size_raw)
+            if item_vol:
                 ratio = item_vol / target_vol
-                if 0.9 <= ratio <= 1.1:
-                    score += 50  # Size matches
-                elif 0.5 <= ratio <= 2.0:
-                    score -= 20  # Close but wrong size
-                else:
-                    score -= 100  # Way off
+                if not (0.85 <= ratio <= 1.15):
+                    reject_reason = f"size mismatch: target={target_vol}, got={item_vol} ({ratio:.2f}x)"
+            # If item has no size info, we can't verify — still risky but allow with penalty
 
-        # --- Brand match ---
-        if brand_key:
-            item_brand = (item.get(brand_key) or "").lower()
-            # Check if target brand appears in API brand
-            # Extract brand from canonical: first word(s) before product type
-            brand_words = []
-            for w in product.canonical_name.split():
-                if w.lower() in ("mjölk", "smör", "ost", "ägg", "bröd", "socker",
-                                  "standardmjölk", "mellanmjölk", "lättmjölk",
-                                  "filmjölk", "yoghurt", "grädde", "gräddfil"):
-                    break
-                brand_words.append(w.lower())
+        # === CHECK 2: BRAND (mandatory for branded products) ===
+        if not reject_reason and target_brand:
+            brand_found = False
+            # Check in dedicated brand field
+            if item_brand:
+                brand_found = (
+                    target_brand in item_brand
+                    or any(bw in item_brand for bw in target_brand.split() if len(bw) > 2)
+                )
+            # Also check in product name
+            if not brand_found:
+                brand_found = any(
+                    bw in item_name for bw in target_brand.split() if len(bw) > 2
+                )
+            if not brand_found:
+                reject_reason = f"brand mismatch: target='{target_brand}', got='{item_brand}' / '{item_name[:40]}'"
 
-            if brand_words:
-                brand_str = " ".join(brand_words)
-                if brand_str in item_brand or any(w in item_brand for w in brand_words):
-                    score += 30
+        # === CHECK 3: VARIANT (eko, laktosfri, light must match exactly) ===
+        if not reject_reason:
+            item_is_eko = any(w in item_name.split() for w in ("eko", "ekologisk", "ekologiska"))
+            item_is_laktosfri = "laktosfri" in item_name
+            item_is_light = any(w in item_name for w in ("lätt", "light"))
 
-        # --- Eko/Laktosfri penalty ---
-        item_is_eko = "eko" in item_name or "ekologisk" in item_name
-        item_is_laktosfri = "laktosfri" in item_name
+            if item_is_eko != target_is_eko:
+                reject_reason = f"eko mismatch: target={target_is_eko}, got={item_is_eko}"
+            elif item_is_laktosfri != target_is_laktosfri:
+                reject_reason = f"laktosfri mismatch: target={target_is_laktosfri}, got={item_is_laktosfri}"
+            # Only check light for dairy products
+            elif target_is_light != item_is_light and any(
+                w in canonical_lower for w in ("mjölk", "fil", "yoghurt", "grädde")
+            ):
+                reject_reason = f"light mismatch: target={target_is_light}, got={item_is_light}"
 
-        if item_is_eko != target_is_eko:
-            score -= 40  # Organic mismatch
-        if item_is_laktosfri != target_is_laktosfri:
-            score -= 40  # Lactose-free mismatch
+        if reject_reason:
+            logger.debug(
+                f"Rejected '{item_name[:50]}' for '{canonical}': {reject_reason}"
+            )
+            continue
 
-        # --- Name keyword overlap ---
-        item_words = set(item_name.split())
-        overlap = len(canonical_words & item_words)
-        score += overlap * 5
+        # === SCORING (only for candidates that passed all checks) ===
+        score = 0.0
 
-        # --- Position penalty (prefer earlier results) ---
+        # Size match bonus (exact match)
+        if target_vol and size_key:
+            item_vol = normalize_volume(item_size_raw)
+            if item_vol:
+                ratio = item_vol / target_vol
+                score += 50 * (1 - abs(1 - ratio) * 10)  # Perfect=50, edge=42.5
+
+        # Name keyword overlap
+        item_keywords = {w for w in item_name.split() if len(w) > 1}
+        overlap = len(canonical_keywords & item_keywords)
+        score += overlap * 10
+
+        # Position preference (earlier results are usually more relevant)
         score -= idx * 0.5
 
-        scored.append((score, idx, item))
+        candidates.append((score, idx, item, item_name))
 
-    if not scored:
+    if not candidates:
+        logger.debug(f"No valid match for '{canonical}' among {len(items)} results")
         return None
 
     # Sort by score descending
-    scored.sort(key=lambda x: (-x[0], x[1]))
-    best_score, best_idx, best_item = scored[0]
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+    best_score, _, best_item, best_name = candidates[0]
 
-    # Reject if score is very negative (terrible match)
-    if best_score < -50:
-        best_name = best_item.get(name_key, "?")
-        logger.debug(
-            f"Rejected best match '{best_name}' (score={best_score:.0f}) "
-            f"for '{product.canonical_name}'"
-        )
-        return None
+    logger.debug(
+        f"Matched '{canonical}' -> '{best_name}' (score={best_score:.0f}, "
+        f"{len(candidates)}/{len(items)} candidates passed checks)"
+    )
 
     return best_item
 
