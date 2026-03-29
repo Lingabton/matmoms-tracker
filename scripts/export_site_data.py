@@ -269,12 +269,13 @@ def build_price_preview(c) -> list:
         if chain not in by_product[name]["prices"]:
             by_product[name]["prices"][chain] = r[4]
 
-    # Filter to products with 2+ chains, take top 12
-    multi_chain = [
-        p for p in by_product.values() if len(p["prices"]) >= 2
+    # Only include products with prices from ALL three chains
+    all_chains = [
+        p for p in by_product.values()
+        if all(c in p["prices"] for c in ("ica", "coop", "willys"))
     ]
-    multi_chain.sort(key=lambda p: p["name"])
-    return multi_chain[:12]
+    all_chains.sort(key=lambda p: p["name"])
+    return all_chains[:12]
 
 
 def build_timeline(c) -> list:
