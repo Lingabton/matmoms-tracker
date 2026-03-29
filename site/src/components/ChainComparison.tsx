@@ -4,88 +4,56 @@ interface Props {
   data: SiteData;
 }
 
-const CHAIN_COLORS: Record<string, string> = {
-  ica: "var(--color-ica)",
-  coop: "var(--color-coop)",
-  willys: "var(--color-willys)",
+const COLORS: Record<string, string> = {
+  ica: "var(--ica)", coop: "var(--coop)", willys: "var(--willys)",
 };
 
 export function ChainComparison({ data }: Props) {
   const { byChain, isPostCut, expectedDropPercent } = data;
 
-  if (isPostCut) {
-    const maxPt = Math.max(
-      ...byChain.map((c) => Math.abs(c.passThroughPercent ?? 0)),
-      100
-    );
-
-    return (
-      <div className="card" id="kedja">
-        <h2>
-          Genomslag per kedja
-          <span className="subtitle">
-            Andel av {expectedDropPercent}%-sänkningen som nått konsumenterna
-          </span>
-        </h2>
-        {byChain.map((chain) => {
-          const pt = chain.passThroughPercent ?? 0;
-          const width = Math.max(5, (Math.abs(pt) / maxPt) * 100);
-          return (
-            <div className="chain-bar" key={chain.chain}>
-              <span className="chain-name">{chain.chainName}</span>
-              <div className="bar-container">
-                <div
-                  className="bar-fill"
-                  style={{
-                    width: `${width}%`,
-                    background: CHAIN_COLORS[chain.chain] ?? "var(--color-accent)",
-                  }}
-                />
-              </div>
-              <span className="bar-value">{pt.toFixed(0)}%</span>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
-  // Pre-cut: show observations and stores per chain
-  const maxObs = Math.max(...byChain.map((c) => c.found), 1);
+  const maxVal = isPostCut
+    ? Math.max(...byChain.map((c) => Math.abs(c.passThroughPercent ?? 0)), 100)
+    : Math.max(...byChain.map((c) => c.found), 1);
 
   return (
-    <div className="card" id="kedja">
-      <h2>
-        Insamlad data per kedja
-        <span className="subtitle">
-          Antal insamlade prisobservationer hittills i baslinjeperioden
-        </span>
-      </h2>
+    <div className="section-block reveal" id="kedja">
+      <div className="section-header">
+        <h2>{isPostCut ? "Genomslag per kedja" : "Insamlad data per kedja"}</h2>
+        <p>
+          {isPostCut
+            ? `Andel av ${expectedDropPercent}%-sänkningen som nått konsumenterna`
+            : "Antal verifierade prisobservationer hittills i baslinjeperioden"}
+        </p>
+      </div>
+
       {byChain.map((chain) => {
-        const width = Math.max(5, (chain.found / maxObs) * 100);
+        if (isPostCut) {
+          const pt = chain.passThroughPercent ?? 0;
+          const w = Math.max(3, (Math.abs(pt) / maxVal) * 100);
+          return (
+            <div className="chain-row" key={chain.chain}>
+              <div className="chain-name">{chain.chainName}</div>
+              <div className="chain-track">
+                <div className="chain-fill" style={{ width: `${w}%`, background: COLORS[chain.chain] }} />
+              </div>
+              <div className="chain-value">{pt.toFixed(0)}%</div>
+            </div>
+          );
+        }
+
+        const w = Math.max(3, (chain.found / maxVal) * 100);
         return (
-          <div className="chain-bar" key={chain.chain}>
-            <span className="chain-name" style={{ width: "80px" }}>{chain.chainName}</span>
-            <div className="bar-container">
-              <div
-                className="bar-fill"
-                style={{
-                  width: `${width}%`,
-                  background: CHAIN_COLORS[chain.chain] ?? "var(--color-accent)",
-                }}
-              >
-                {chain.found > 20 && chain.found}
+          <div className="chain-row" key={chain.chain}>
+            <div className="chain-name">{chain.chainName}</div>
+            <div className="chain-track">
+              <div className="chain-fill" style={{ width: `${w}%`, background: COLORS[chain.chain] }}>
+                {chain.found > 50 && chain.found}
               </div>
             </div>
-            <span className="bar-value">
-              {chain.found} priser
-            </span>
+            <div className="chain-value">{chain.found} priser</div>
           </div>
         );
       })}
-      <p className="card-footnote">
-        Stapeln visar antal prisobservationer. Från 1 april visas genomslaget av momssänkningen per kedja.
-      </p>
     </div>
   );
 }

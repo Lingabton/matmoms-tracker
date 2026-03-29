@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useData } from "./hooks/useData";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
@@ -9,93 +9,92 @@ import { CategoryTable } from "./components/CategoryTable";
 import { Methodology } from "./components/Methodology";
 import { JournalistCTA } from "./components/JournalistCTA";
 
-function App() {
-  const { data, loading, error } = useData();
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Smooth scroll for anchor links
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    const el = ref.current;
+    if (el) {
+      el.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+    }
+
+    return () => observer.disconnect();
   }, []);
 
-  // Dynamic title update with live data
+  return ref;
+}
+
+function App() {
+  const { data, loading, error } = useData();
+  const contentRef = useScrollReveal();
+
   useEffect(() => {
     if (!data) return;
     if (data.isPostCut && data.summary.passThroughPercent != null) {
-      document.title = `${data.summary.passThroughPercent.toFixed(0)}% genomslag — Matmoms 2026: Blev maten billigare?`;
+      document.title = `${data.summary.passThroughPercent.toFixed(0)}% genomslag — Matmoms 2026`;
     }
   }, [data]);
 
   if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <p style={{ color: "var(--color-text-secondary)" }}>Laddar data...</p>
+      <div style={{ textAlign: "center", padding: "40vh 2rem 0", fontFamily: "var(--font-display)" }}>
+        <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Laddar data...</p>
       </div>
     );
   }
 
   if (error || !data) {
     return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <p style={{ color: "var(--color-red)" }}>
-          Kunde inte ladda data: {error}
-        </p>
+      <div style={{ textAlign: "center", padding: "40vh 2rem 0", fontFamily: "var(--font-display)" }}>
+        <p style={{ color: "var(--accent)" }}>Kunde inte ladda data: {error}</p>
       </div>
     );
   }
 
   return (
-    <>
+    <div ref={contentRef}>
       <Nav />
-      <main className="container" role="main">
-        <article>
-          <Hero data={data} />
 
-          {!data.isPostCut && (
-            <section aria-label="Baslinjeinsamling">
-              <BaselineProgress data={data} />
-            </section>
-          )}
+      <Hero data={data} />
 
-          <section aria-label="Prisexempel">
-            <PricePreview data={data} />
-          </section>
+      <div className="section">
+        {!data.isPostCut && <BaselineProgress data={data} />}
+        <PricePreview data={data} />
+        <ChainComparison data={data} />
+        <CategoryTable data={data} />
+      </div>
 
-          <section aria-label="Jämförelse per kedja">
-            <ChainComparison data={data} />
-          </section>
+      <JournalistCTA data={data} />
 
-          <section aria-label="Per kategori">
-            <CategoryTable data={data} />
-          </section>
-        </article>
+      <div className="section">
+        <Methodology />
+      </div>
 
-        <aside aria-label="För journalister och forskare">
-          <JournalistCTA data={data} />
-        </aside>
-
-        <section aria-label="Metod">
-          <Methodology />
-        </section>
-      </main>
       <footer>
-        <div className="container">
-          <p>
-            <strong>Matmoms</strong> — Oberoende bevakning av matmomssänkningen 2026
-          </p>
-          <p style={{ marginTop: "0.5rem" }}>
-            Data uppdateras dagligen kl. 06:00. Senast uppdaterad:{" "}
-            {new Date(data.generatedAt).toLocaleDateString("sv-SE")}.
+        <div className="section">
+          <p><strong>Matmoms</strong> &mdash; Oberoende bevakning av matmomssänkningen 2026</p>
+          <p style={{ marginTop: "0.3rem" }}>
+            Senast uppdaterad: {new Date(data.generatedAt).toLocaleDateString("sv-SE")}
           </p>
           <div className="footer-links">
             <a href="https://github.com/Lingabton/matmoms-tracker">GitHub</a>
-            <span>·</span>
+            <span>&middot;</span>
             <a href="mailto:gabriel.linton@gmail.com">Kontakt</a>
-            <span>·</span>
-            <span>Byggt med öppen data</span>
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

@@ -13,40 +13,29 @@ export function CategoryTable({ data }: Props) {
     );
 
     return (
-      <div className="card" id="kategori">
-        <h2>
-          Per produktkategori
-          <span className="subtitle">
-            Genomslag av momssänkningen per kategori
-          </span>
-        </h2>
-        <table className="data-table">
+      <div className="section-block reveal" id="kategori">
+        <div className="section-header">
+          <h2>Per produktkategori</h2>
+          <p>Genomslag av momssänkningen per kategori</p>
+        </div>
+        <table className="price-table">
           <thead>
             <tr>
               <th>Kategori</th>
-              <th style={{ textAlign: "right" }}>Produkter</th>
-              <th style={{ textAlign: "right" }}>Genomslag</th>
+              <th className="right">Produkter</th>
+              <th className="right">Genomslag</th>
             </tr>
           </thead>
           <tbody>
             {sorted.map((cat) => (
               <tr key={cat.categoryId}>
                 <td>{cat.category}</td>
-                <td className="number">{cat.found}</td>
-                <td
-                  className="number"
-                  style={{
-                    color:
-                      (cat.passThroughPercent ?? 0) >= 80
-                        ? "var(--color-green)"
-                        : (cat.passThroughPercent ?? 0) >= 40
-                          ? "var(--color-yellow)"
-                          : "var(--color-red)",
-                  }}
-                >
-                  {cat.passThroughPercent != null
-                    ? `${cat.passThroughPercent.toFixed(0)}%`
-                    : "—"}
+                <td className="price-cell">{cat.found}</td>
+                <td className="price-cell" style={{
+                  color: (cat.passThroughPercent ?? 0) >= 80 ? "var(--green)"
+                    : (cat.passThroughPercent ?? 0) >= 40 ? "var(--blue)" : "var(--accent)"
+                }}>
+                  {cat.passThroughPercent != null ? `${cat.passThroughPercent.toFixed(0)}%` : "—"}
                 </td>
               </tr>
             ))}
@@ -56,36 +45,28 @@ export function CategoryTable({ data }: Props) {
     );
   }
 
-  // Pre-cut: show only categories with data
   const withData = byCategory.filter((c) => c.found > 0);
-  const withoutData = byCategory.length > 0 ? byCategory.filter((c) => c.found === 0) : [];
+  const withoutCount = byCategory.filter((c) => c.found === 0).length;
 
   if (withData.length === 0) return null;
 
   return (
-    <div className="card" id="kategori">
-      <h2>
-        Bevakade kategorier
-        <span className="subtitle">
-          Kategorier med insamlad prisdata. Från 1 april visas genomslaget per kategori.
-        </span>
-      </h2>
-      <div className="category-grid">
+    <div className="section-block reveal" id="kategori">
+      <div className="section-header">
+        <h2>Bevakade kategorier</h2>
+        <p>Kategorier med insamlad prisdata. Från 1 april visas genomslaget.</p>
+      </div>
+      <div className="chip-grid">
         {withData
           .sort((a, b) => b.found - a.found)
           .map((cat) => (
-            <div key={cat.categoryId} className="category-chip active">
+            <div key={cat.categoryId} className="chip active">
               {cat.category}
-              <span className="category-count">{cat.found}</span>
+              <span className="count">{cat.found}</span>
             </div>
           ))}
-        {withoutData.length > 0 && (
-          <div
-            className="category-chip"
-            style={{ fontStyle: "italic" }}
-          >
-            +{withoutData.length} kategorier väntar på data
-          </div>
+        {withoutCount > 0 && (
+          <div className="chip">+{withoutCount} väntar på data</div>
         )}
       </div>
     </div>
