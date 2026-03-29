@@ -5,15 +5,44 @@ interface Props {
 }
 
 export function JournalistCTA({ data }: Props) {
+  const shareText = "Matmomsen sänks från 12% till 6%. Blev maten billigare? Kolla matmoms.se";
+  const shareUrl = "https://matmoms.se";
+
   return (
     <div id="data">
+      {/* Social sharing */}
+      <div className="share-bar">
+        <span>Dela:</span>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          X / Twitter
+        </a>
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+      </div>
+
       <div className="cta-box">
-        <h3>Datajournalist?</h3>
+        <h3>Journalist eller forskare?</h3>
         <p>
           Vi erbjuder fullständig produktdata med{" "}
           {data.summary.totalProducts} varor, {data.summary.totalStores} butiker
-          och dagliga prisobservationer. Perfekt för redaktioner som vill gräva i
-          momssänkningen.
+          och dagliga prisobservationer. Perfekt för redaktioner och forskare som
+          vill analysera momssänkningens effekt.
         </p>
         <a className="btn" href="mailto:gabriel.linton@gmail.com?subject=Matmoms%20-%20datatillg%C3%A5ng">
           Kontakta oss för datatillgång

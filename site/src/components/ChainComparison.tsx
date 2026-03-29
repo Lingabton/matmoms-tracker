@@ -50,35 +50,42 @@ export function ChainComparison({ data }: Props) {
     );
   }
 
-  // Pre-cut: show chain overview with store counts and avg prices
+  // Pre-cut: show observations and stores per chain
+  const maxObs = Math.max(...byChain.map((c) => c.found), 1);
+
   return (
     <div className="card" id="kedja">
       <h2>
-        Bevakade kedjor
+        Insamlad data per kedja
         <span className="subtitle">
-          Från 1 april visas hur stor del av momssänkningen varje kedja
-          för vidare till konsumenterna
+          Antal insamlade prisobservationer hittills i baslinjeperioden
         </span>
       </h2>
-      {byChain.map((chain) => (
-        <div className="chain-bar" key={chain.chain}>
-          <span className="chain-name" style={{ width: "80px" }}>{chain.chainName}</span>
-          <div className="bar-container">
-            <div
-              className="bar-fill"
-              style={{
-                width: "0%",
-                background: CHAIN_COLORS[chain.chain] ?? "var(--color-accent)",
-                opacity: 0.3,
-              }}
-            />
-            <span className="bar-pending">Väntar på momssänkningen...</span>
+      {byChain.map((chain) => {
+        const width = Math.max(5, (chain.found / maxObs) * 100);
+        return (
+          <div className="chain-bar" key={chain.chain}>
+            <span className="chain-name" style={{ width: "80px" }}>{chain.chainName}</span>
+            <div className="bar-container">
+              <div
+                className="bar-fill"
+                style={{
+                  width: `${width}%`,
+                  background: CHAIN_COLORS[chain.chain] ?? "var(--color-accent)",
+                }}
+              >
+                {chain.found > 20 && chain.found}
+              </div>
+            </div>
+            <span className="bar-value">
+              {chain.found} priser
+            </span>
           </div>
-          <span className="bar-value" style={{ color: "var(--color-text-secondary)" }}>
-            {chain.stores} {chain.stores === 1 ? "butik" : "butiker"}
-          </span>
-        </div>
-      ))}
+        );
+      })}
+      <p className="card-footnote">
+        Stapeln visar antal prisobservationer. Från 1 april visas genomslaget av momssänkningen per kedja.
+      </p>
     </div>
   );
 }

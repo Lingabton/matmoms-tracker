@@ -38,6 +38,9 @@ def export():
     is_post_cut = today >= VAT_CUT_DATE
 
     with engine.connect() as c:
+        products = build_products(c, is_post_cut)
+        price_preview = build_price_preview(c)
+
         data = {
             "generatedAt": datetime.now().isoformat(),
             "vatCutDate": VAT_CUT_DATE.isoformat(),
@@ -49,15 +52,22 @@ def export():
             "byCategory": build_by_category(c, is_post_cut),
             "byCity": build_by_city(c, is_post_cut),
             "timeline": build_timeline(c),
-            "products": build_products(c, is_post_cut),
+            "pricePreview": price_preview,
         }
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Main file: lightweight for public dashboard
     out_path = OUTPUT_DIR / "latest.json"
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False)
+    print(f"Exported {out_path.name} ({out_path.stat().st_size:,} bytes)")
 
-    print(f"Exported to {out_path} ({out_path.stat().st_size:,} bytes)")
+    # Products file: heavy, loaded on demand for journalists
+    products_path = OUTPUT_DIR / "products.json"
+    with open(products_path, "w", encoding="utf-8") as f:
+        json.dump(products, f, ensure_ascii=False)
+    print(f"Exported {products_path.name} ({products_path.stat().st_size:,} bytes)")
 
 
 def build_summary(c, is_post_cut: bool) -> dict:
@@ -225,6 +235,46 @@ def build_by_city(c, is_post_cut: bool) -> list:
         }
         for r in rows
     ]
+
+
+def build_price_preview(c) -> list:
+    """Pick common products that have prices from multiple chains for preview."""
+    rows = c.execute(
+        text("""
+            SELECT p.canonical_name, p.brand, cat.name_sv,
+                   s.chain_id, o.price
+            FROM price_observations o
+            JOIN products p ON o.product_id = p.id
+            JOIN stores s ON o.store_id = s.id
+            JOIN categories cat ON p.category_id = cat.id
+            WHERE o.price IS NOT NULL AND o.price <= 500
+              AND o.id IN (
+                  SELECT max(id) FROM price_observations
+                  WHERE price IS NOT NULL AND price <= 500
+                  GROUP BY product_id, store_id
+              )
+            ORDER BY p.canonical_name, s.chain_id
+        """)
+    ).fetchall()
+
+    # Group by product, pick those with 2+ chains
+    by_product: dict[str, dict] = {}
+    for r in rows:
+        name = r[0]
+        if name not in by_product:
+            by_product[name] = {
+                "name": name, "brand": r[1], "category": r[2], "prices": {}
+            }
+        chain = r[3]
+        if chain not in by_product[name]["prices"]:
+            by_product[name]["prices"][chain] = r[4]
+
+    # Filter to products with 2+ chains, take top 12
+    multi_chain = [
+        p for p in by_product.values() if len(p["prices"]) >= 2
+    ]
+    multi_chain.sort(key=lambda p: p["name"])
+    return multi_chain[:12]
 
 
 def build_timeline(c) -> list:
