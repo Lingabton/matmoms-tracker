@@ -10,31 +10,31 @@ export function JournalistCTA({ data }: Props) {
       <div className="cta-box">
         <h3>Datajournalist?</h3>
         <p>
-          Vi erbjuder fullstandig produktdata med{" "}
+          Vi erbjuder fullständig produktdata med{" "}
           {data.summary.totalProducts} varor, {data.summary.totalStores} butiker
-          och dagliga prisobservationer. Perfekt for redaktioner som vill grava i
-          momssankningen.
+          och dagliga prisobservationer. Perfekt för redaktioner som vill gräva i
+          momssänkningen.
         </p>
-        <a className="btn" href="mailto:gabriel.linton@gmail.com?subject=Matmoms%20data">
-          Kontakta oss for datatillgang
+        <a className="btn" href="mailto:gabriel.linton@gmail.com?subject=Matmoms%20-%20datatillg%C3%A5ng">
+          Kontakta oss för datatillgång
         </a>
       </div>
 
       <div className="card">
-        <h2>Vad ingar?</h2>
+        <h2>Vad ingår i datasetet?</h2>
         <table className="data-table">
           <tbody>
             <tr>
-              <td>Produktniva-data</td>
-              <td>{data.summary.totalProducts} varor med pris, varumarke, kategori</td>
+              <td>Produktnivå</td>
+              <td>{data.summary.totalProducts} varor med pris, varumärke, kategori</td>
             </tr>
             <tr>
-              <td>Butiksniva</td>
-              <td>{data.summary.totalStores} butiker i {data.byCity?.length ?? 0} stader</td>
+              <td>Butiksnivå</td>
+              <td>{data.summary.totalStores} butiker i {data.byCity?.length ?? 0} städer</td>
             </tr>
             <tr>
               <td>Historik</td>
-              <td>Dagliga observationer fran baslinje till idag</td>
+              <td>Dagliga observationer från baslinje till idag</td>
             </tr>
             <tr>
               <td>Format</td>
@@ -42,7 +42,7 @@ export function JournalistCTA({ data }: Props) {
             </tr>
             <tr>
               <td>Kampanjfilter</td>
-              <td>Flaggade kampanjpriser separerade fran ordinarie</td>
+              <td>Flaggade kampanjpriser separerade från ordinarie</td>
             </tr>
             <tr>
               <td>Uppdatering</td>

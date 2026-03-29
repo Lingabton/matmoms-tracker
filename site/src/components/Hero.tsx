@@ -4,8 +4,15 @@ interface Props {
   data: SiteData;
 }
 
+function daysUntil(dateStr: string): number {
+  const target = new Date(dateStr + "T00:00:00");
+  const now = new Date();
+  const diff = target.getTime() - now.getTime();
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+}
+
 export function Hero({ data }: Props) {
-  const { summary, isPostCut, expectedDropPercent } = data;
+  const { summary, isPostCut, expectedDropPercent, vatCutDate } = data;
 
   if (isPostCut && summary.passThroughPercent != null) {
     const pt = summary.passThroughPercent;
@@ -29,6 +36,8 @@ export function Hero({ data }: Props) {
     );
   }
 
+  const daysLeft = daysUntil(vatCutDate);
+
   return (
     <header className="hero" role="banner">
       <h1>
@@ -37,14 +46,23 @@ export function Hero({ data }: Props) {
         den 1 april 2026
       </h1>
       <p className="lead">
-        Vi bevakar {summary.totalProducts} matvaror i {summary.totalStores}{" "}
-        butiker från {summary.totalChains} kedjor för att mäta om prissänkningen
-        når konsumenterna. Priserna <em>borde</em> sjunka med{" "}
-        {expectedDropPercent}%.
+        Priserna <em>borde</em> sjunka med {expectedDropPercent}% &mdash; men gör
+        de det? Vi mäter dagligen {summary.totalProducts} matvaror i{" "}
+        {summary.totalStores} butiker från ICA, Coop och Willys för att ta reda
+        på det.
       </p>
-      <div style={{ marginTop: "1.5rem" }}>
-        <span className="badge baseline">Baslinjedata samlas in</span>
-      </div>
+      {daysLeft > 0 ? (
+        <div className="countdown">
+          <div className="countdown-number">{daysLeft}</div>
+          <div className="countdown-label">
+            {daysLeft === 1 ? "dag" : "dagar"} kvar till momssänkningen
+          </div>
+        </div>
+      ) : (
+        <div style={{ marginTop: "1.5rem" }}>
+          <span className="badge live">Momssänkningen är här</span>
+        </div>
+      )}
     </header>
   );
 }

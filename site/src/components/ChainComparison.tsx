@@ -24,7 +24,7 @@ export function ChainComparison({ data }: Props) {
         <h2>
           Genomslag per kedja
           <span className="subtitle">
-            Andel av {expectedDropPercent}%-sankningen som natt konsumenterna
+            Andel av {expectedDropPercent}%-sänkningen som nått konsumenterna
           </span>
         </h2>
         {byChain.map((chain) => {
@@ -50,44 +50,35 @@ export function ChainComparison({ data }: Props) {
     );
   }
 
-  // Pre-cut: show average prices as preview
+  // Pre-cut: show chain overview with store counts and avg prices
   return (
     <div className="card" id="kedja">
       <h2>
-        Prisdata per kedja
+        Bevakade kedjor
         <span className="subtitle">
-          Genomsnittspris i baslinjeperioden (fore momssankningen)
+          Från 1 april visas hur stor del av momssänkningen varje kedja
+          för vidare till konsumenterna
         </span>
       </h2>
       {byChain.map((chain) => (
         <div className="chain-bar" key={chain.chain}>
-          <span className="chain-name">{chain.chainName}</span>
+          <span className="chain-name" style={{ width: "80px" }}>{chain.chainName}</span>
           <div className="bar-container">
             <div
               className="bar-fill"
               style={{
-                width: `${chain.hitRate}%`,
+                width: "0%",
                 background: CHAIN_COLORS[chain.chain] ?? "var(--color-accent)",
+                opacity: 0.3,
               }}
-            >
-              {chain.hitRate > 20 && `${chain.hitRate}%`}
-            </div>
+            />
+            <span className="bar-pending">Väntar på momssänkningen...</span>
           </div>
-          <span className="bar-value">
-            {chain.avgPrice != null ? `${chain.avgPrice.toFixed(0)} kr` : "—"}
+          <span className="bar-value" style={{ color: "var(--color-text-secondary)" }}>
+            {chain.stores} {chain.stores === 1 ? "butik" : "butiker"}
           </span>
         </div>
       ))}
-      <p
-        style={{
-          fontSize: "0.8rem",
-          color: "var(--color-text-secondary)",
-          marginTop: "1rem",
-        }}
-      >
-        Stapeln visar traffsaker (andel produkter med pris). Fran 1 april visas
-        genomslaget av momssankningen.
-      </p>
     </div>
   );
 }
