@@ -27,6 +27,7 @@ OLD_VAT = 0.12
 NEW_VAT = 0.06
 # Expected price drop fraction: 1 - (1+new)/(1+old)
 EXPECTED_DROP_FRAC = 1 - (1 + NEW_VAT) / (1 + OLD_VAT)  # ~0.0536
+MAX_VALID_PRICE = 500  # Filter out obviously wrong prices
 
 OUTPUT_DIR = Path(__file__).parent.parent / "site" / "public" / "data"
 
@@ -265,7 +266,7 @@ def build_products(c, is_post_cut: bool) -> list:
             JOIN products p ON o.product_id = p.id
             JOIN stores s ON o.store_id = s.id
             JOIN categories cat ON p.category_id = cat.id
-            WHERE o.price IS NOT NULL
+            WHERE o.price IS NOT NULL AND o.price <= 500
             ORDER BY p.canonical_name, s.chain_id, o.observed_at DESC
         """)
     ).fetchall()
@@ -339,7 +340,7 @@ def compute_chain_passthrough(c, chain_id: str) -> float | None:
                 SELECT o.product_id, o.store_id, avg(o.price) as baseline_price
                 FROM price_observations o
                 JOIN stores s ON o.store_id = s.id
-                WHERE o.price IS NOT NULL AND date(o.observed_at) < :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) < :cut_date
                   AND o.is_campaign = 0 AND s.chain_id = :chain
                 GROUP BY o.product_id, o.store_id
             ),
@@ -347,7 +348,7 @@ def compute_chain_passthrough(c, chain_id: str) -> float | None:
                 SELECT o.product_id, o.store_id, o.price as current_price
                 FROM price_observations o
                 JOIN stores s ON o.store_id = s.id
-                WHERE o.price IS NOT NULL AND date(o.observed_at) >= :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) >= :cut_date
                   AND o.is_campaign = 0 AND s.chain_id = :chain
                   AND o.id IN (
                       SELECT max(id) FROM price_observations
@@ -377,7 +378,7 @@ def compute_category_passthrough(c, category_id: int) -> float | None:
                 SELECT o.product_id, o.store_id, avg(o.price) as baseline_price
                 FROM price_observations o
                 JOIN products p ON o.product_id = p.id
-                WHERE o.price IS NOT NULL AND date(o.observed_at) < :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) < :cut_date
                   AND o.is_campaign = 0 AND p.category_id = :cat_id
                 GROUP BY o.product_id, o.store_id
             ),
@@ -385,7 +386,7 @@ def compute_category_passthrough(c, category_id: int) -> float | None:
                 SELECT o.product_id, o.store_id, o.price as current_price
                 FROM price_observations o
                 JOIN products p ON o.product_id = p.id
-                WHERE o.price IS NOT NULL AND date(o.observed_at) >= :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) >= :cut_date
                   AND o.is_campaign = 0 AND p.category_id = :cat_id
                   AND o.id IN (
                       SELECT max(id) FROM price_observations

@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 # Price validation bounds (SEK)
 MIN_VALID_PRICE = 0.50
-MAX_VALID_PRICE = 5000.0
+MAX_VALID_PRICE = 500.0  # No tracked grocery item should exceed 500 SEK
 
 # Retry configuration
 MAX_RETRIES = 3
