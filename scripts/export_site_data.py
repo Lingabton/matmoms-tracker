@@ -270,10 +270,16 @@ def build_price_preview(c) -> list:
             by_product[name]["prices"][chain] = r[4]
 
     # Only include products with prices from ALL three chains
-    all_chains = [
-        p for p in by_product.values()
-        if all(c in p["prices"] for c in ("ica", "coop", "willys"))
-    ]
+    # and where prices are within reasonable range (max 2x spread)
+    all_chains = []
+    for p in by_product.values():
+        if not all(c in p["prices"] for c in ("ica", "coop", "willys")):
+            continue
+        prices = list(p["prices"].values())
+        if max(prices) > 2.5 * min(prices):
+            continue  # Too much spread = likely a mismatch
+        all_chains.append(p)
+
     all_chains.sort(key=lambda p: p["name"])
     return all_chains[:12]
 
