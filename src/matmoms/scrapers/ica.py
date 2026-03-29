@@ -130,36 +130,73 @@ class IcaScraper(BaseScraper):
         except Exception as e:
             logger.debug(f"ICA store API call failed: {e}")
 
-    def get_search_term(self, product: Product) -> str:
-        """Get search term, stripping pack size suffixes that break ICA search."""
-        term = super().get_search_term(product)
-        # ICA's search chokes on pack sizes like "1.5L", "1L", "500g" at end
-        term = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", term)
-        return term
+    def _build_search_terms(self, product: Product) -> list[str]:
+        """Build progressively shorter search terms for ICA.
+
+        ICA's search often fails with 3+ words. Strategy:
+        1. Full term without pack size (e.g., "AXA havrefrön original")
+        2. Product type + brand (e.g., "havrefrön AXA") — reversed order works better
+        3. Just product type (e.g., "havrefrön")
+        """
+        base = super().get_search_term(product)
+        # Strip pack size
+        base = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", base)
+        # Strip percentage like "3%", "1.5%"
+        base = re.sub(r"\s+\d+(?:[.,]\d+)?%", "", base)
+        # Strip & which ICA search can't handle
+        base = base.replace(" & ", " ")
+
+        terms = [base]
+
+        words = base.split()
+        if len(words) >= 3:
+            # Try: product words + brand (reversed)
+            brand = words[0]
+            product_words = " ".join(words[1:])
+            terms.append(f"{product_words} {brand}")
+
+            # Try: just the product words (no brand)
+            terms.append(product_words)
+
+            # Try: just the first two words
+            if len(words) >= 4:
+                terms.append(" ".join(words[:2]))
+
+        # Deduplicate while preserving order
+        seen = set()
+        unique = []
+        for t in terms:
+            t_lower = t.lower()
+            if t_lower not in seen:
+                seen.add(t_lower)
+                unique.append(t)
+
+        return unique
 
     async def search_product(self, page: Page, product: Product) -> RawPriceResult:
-        """Search for a product — API first, DOM fallback."""
+        """Search for a product — try progressively shorter search terms."""
         result = RawPriceResult(
             product_id=product.id,
             store_id=self.store.id,
         )
 
-        search_term = self.get_search_term(product)
+        search_terms = self._build_search_terms(product)
 
-        # Try direct API call
-        api_result = await self._search_via_api(page, search_term, result, product)
-        if api_result and api_result.found:
-            return api_result
+        for term in search_terms:
+            api_result = await self._search_via_api(page, term, result, product)
+            if api_result and api_result.found:
+                return api_result
 
-        # Fallback: navigate to search page and parse DOM
+        # Final fallback: navigate to search page with shortest term and parse DOM
+        fallback_term = search_terms[-1] if search_terms else product.canonical_name
         search_url = (
             f"{ICA_SHOP_BASE}/stores/{self._account_id}"
-            f"/search?q={search_term.replace(' ', '+')}"
+            f"/search?q={fallback_term.replace(' ', '+')}"
         )
         await page.goto(search_url, wait_until="domcontentloaded", timeout=20000)
         await page.wait_for_timeout(2000)
 
-        return await self._search_dom(page, result, search_term)
+        return await self._search_dom(page, result, fallback_term)
 
     async def _search_via_api(
         self, page: Page, search_term: str, result: RawPriceResult, product: Product
