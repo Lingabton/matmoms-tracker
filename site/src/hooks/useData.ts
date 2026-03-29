@@ -69,6 +69,12 @@ export interface SiteData {
     isCampaign: boolean;
     observedAt: string;
   }[];
+  pricePreview: {
+    name: string;
+    brand: string;
+    category: string;
+    prices: Record<string, number>;
+  }[];
 }
 
 const BASE = import.meta.env.BASE_URL;

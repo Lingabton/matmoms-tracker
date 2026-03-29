@@ -225,12 +225,39 @@ nav.site-nav .links a:hover { color: var(--color-text); }
 }
 .cta-box a.btn:hover { transform: translateY(-1px); }
 
+/* Card footnote */
+.card-footnote {
+  font-size: 0.8rem; color: var(--color-text-secondary);
+  margin-top: 1rem; font-style: italic;
+}
+
+/* Share bar */
+.share-bar {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1rem; font-size: 0.85rem;
+}
+.share-bar span { color: var(--color-text-secondary); font-weight: 500; }
+.share-bar a {
+  color: var(--color-accent); text-decoration: none; font-weight: 500;
+  padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid var(--color-border);
+  font-size: 0.8rem; transition: background 0.15s;
+}
+.share-bar a:hover { background: var(--color-accent-light); }
+
 /* Footer */
 footer {
   border-top: 1px solid var(--color-border); padding: 2rem 0;
   margin-top: 3rem; text-align: center; font-size: 0.8rem;
   color: var(--color-text-secondary);
 }
+.footer-links {
+  margin-top: 0.5rem; display: flex; justify-content: center;
+  gap: 0.5rem; align-items: center;
+}
+.footer-links a {
+  color: var(--color-text-secondary); text-decoration: none;
+}
+.footer-links a:hover { color: var(--color-text); }
 
 /* Mobile */
 @media (max-width: 640px) {

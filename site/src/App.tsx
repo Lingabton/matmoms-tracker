@@ -3,6 +3,7 @@ import { useData } from "./hooks/useData";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { BaselineProgress } from "./components/BaselineProgress";
+import { PricePreview } from "./components/PricePreview";
 import { ChainComparison } from "./components/ChainComparison";
 import { CategoryTable } from "./components/CategoryTable";
 import { Methodology } from "./components/Methodology";
@@ -10,6 +11,11 @@ import { JournalistCTA } from "./components/JournalistCTA";
 
 function App() {
   const { data, loading, error } = useData();
+
+  // Smooth scroll for anchor links
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+  }, []);
 
   // Dynamic title update with live data
   useEffect(() => {
@@ -50,6 +56,10 @@ function App() {
             </section>
           )}
 
+          <section aria-label="Prisexempel">
+            <PricePreview data={data} />
+          </section>
+
           <section aria-label="Jämförelse per kedja">
             <ChainComparison data={data} />
           </section>
@@ -59,7 +69,7 @@ function App() {
           </section>
         </article>
 
-        <aside aria-label="För journalister">
+        <aside aria-label="För journalister och forskare">
           <JournalistCTA data={data} />
         </aside>
 
@@ -70,12 +80,19 @@ function App() {
       <footer>
         <div className="container">
           <p>
-            Matmoms &mdash; Oberoende bevakning av matmomssänkningen 2026.
+            <strong>Matmoms</strong> — Oberoende bevakning av matmomssänkningen 2026
           </p>
-          <p style={{ marginTop: "0.25rem" }}>
-            Data uppdateras dagligen. Senast uppdaterad:{" "}
+          <p style={{ marginTop: "0.5rem" }}>
+            Data uppdateras dagligen kl. 06:00. Senast uppdaterad:{" "}
             {new Date(data.generatedAt).toLocaleDateString("sv-SE")}.
           </p>
+          <div className="footer-links">
+            <a href="https://github.com/Lingabton/matmoms-tracker">GitHub</a>
+            <span>·</span>
+            <a href="mailto:gabriel.linton@gmail.com">Kontakt</a>
+            <span>·</span>
+            <span>Byggt med öppen data</span>
+          </div>
         </div>
       </footer>
     </>

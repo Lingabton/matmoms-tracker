@@ -4,22 +4,8 @@ interface Props {
   data: SiteData;
 }
 
-// Show all planned categories even if data is sparse
-const ALL_CATEGORIES = [
-  "Mjölk", "Ost", "Yoghurt", "Grädde", "Smör & Margarin", "Ägg",
-  "Nötkött", "Fläskkött", "Kyckling", "Chark & Pålägg",
-  "Fisk & Skaldjur", "Frukt", "Grönsaker", "Frysta grönsaker",
-  "Färskt bröd", "Knäckebröd", "Frukost & Flingor",
-  "Pasta & Ris", "Mjöl & Socker", "Konserver", "Såser & Kryddor",
-  "Olja & Vinäger", "Barnmat", "Färdigrätter",
-  "Juice", "Läsk", "Vatten",
-  "Choklad", "Godis", "Chips", "Glass",
-];
-
 export function CategoryTable({ data }: Props) {
   const { byCategory, isPostCut } = data;
-
-  const catMap = new Map(byCategory.map((c) => [c.category, c]));
 
   if (isPostCut) {
     const sorted = [...byCategory].sort(
@@ -70,29 +56,37 @@ export function CategoryTable({ data }: Props) {
     );
   }
 
-  // Pre-cut: show all categories with status indicators
+  // Pre-cut: show only categories with data
+  const withData = byCategory.filter((c) => c.found > 0);
+  const withoutData = byCategory.length > 0 ? byCategory.filter((c) => c.found === 0) : [];
+
+  if (withData.length === 0) return null;
+
   return (
     <div className="card" id="kategori">
       <h2>
         Bevakade kategorier
         <span className="subtitle">
-          31 livsmedelskategorier bevakas. Från 1 april visas genomslaget per kategori.
+          Kategorier med insamlad prisdata. Från 1 april visas genomslaget per kategori.
         </span>
       </h2>
       <div className="category-grid">
-        {ALL_CATEGORIES.map((name) => {
-          const cat = catMap.get(name);
-          const hasData = cat && cat.found > 0;
-          return (
-            <div
-              key={name}
-              className={`category-chip ${hasData ? "active" : ""}`}
-            >
-              {name}
-              {hasData && <span className="category-count">{cat.found}</span>}
+        {withData
+          .sort((a, b) => b.found - a.found)
+          .map((cat) => (
+            <div key={cat.categoryId} className="category-chip active">
+              {cat.category}
+              <span className="category-count">{cat.found}</span>
             </div>
-          );
-        })}
+          ))}
+        {withoutData.length > 0 && (
+          <div
+            className="category-chip"
+            style={{ fontStyle: "italic" }}
+          >
+            +{withoutData.length} kategorier väntar på data
+          </div>
+        )}
       </div>
     </div>
   );
