@@ -25,6 +25,6 @@ def health(db: Session = Depends(get_db)):
 
     return {
         "status": "ok",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now().isoformat(),
         "chains": chain_status,
     }

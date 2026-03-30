@@ -71,7 +71,7 @@ class Product(Base):
     unit_quantity: Mapped[float | None] = mapped_column(Float)
     unit_type: Mapped[str | None] = mapped_column(String(10))
     vat_applicable: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: __import__('matmoms.tz', fromlist=['now']).now())
 
     category: Mapped["Category"] = relationship(back_populates="products")
     observations: Mapped[list["PriceObservation"]] = relationship(back_populates="product")
@@ -112,8 +112,9 @@ class PriceObservation(Base):
     store_id: Mapped[str] = mapped_column(ForeignKey("stores.id"), nullable=False)
     scrape_run_id: Mapped[int] = mapped_column(ForeignKey("scrape_runs.id"), nullable=False)
 
-    price: Mapped[float] = mapped_column(Float, nullable=False)
+    price: Mapped[float | None] = mapped_column(Float, nullable=True)
     unit_price: Mapped[float | None] = mapped_column(Float)
+    is_available: Mapped[bool] = mapped_column(Boolean, default=True)
     is_campaign: Mapped[bool] = mapped_column(Boolean, default=False)
     campaign_label: Mapped[str | None] = mapped_column(String(200))
     member_price: Mapped[float | None] = mapped_column(Float)

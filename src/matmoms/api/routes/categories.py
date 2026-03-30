@@ -18,7 +18,8 @@ def list_categories(
     comparison_date: date | None = Query(None),
     db: Session = Depends(get_db),
 ):
-    comp_date = comparison_date or date.today()
+    from matmoms.tz import today as _today
+    comp_date = comparison_date or _today()
     categories = list(
         db.scalars(select(Category).where(Category.parent_id.is_(None))).all()
     )
@@ -57,7 +58,8 @@ def category_metrics(
     if not cat:
         raise HTTPException(status_code=404, detail="Category not found")
 
-    comp_date = comparison_date or date.today()
+    from matmoms.tz import today as _today
+    comp_date = comparison_date or _today()
 
     result = compute_passthrough(
         db,

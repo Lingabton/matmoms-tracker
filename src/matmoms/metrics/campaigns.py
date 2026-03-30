@@ -33,7 +33,8 @@ def detect_statistical_campaigns(
 
     Returns the number of newly flagged observations.
     """
-    cutoff = datetime.utcnow() - timedelta(days=lookback_days)
+    from matmoms.tz import now as _now
+    cutoff = _now() - timedelta(days=lookback_days)
 
     # Get all non-campaign observations in the lookback window
     stmt = (
