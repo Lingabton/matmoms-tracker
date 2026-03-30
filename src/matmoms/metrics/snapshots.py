@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import date, datetime
+from datetime import date
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from matmoms.db.models import Category, Chain, MetricSnapshot, Store
 from matmoms.metrics.passthrough import PassthroughResult, compute_passthrough
+from matmoms.tz import now as _now, today as _today
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ def materialize_snapshots(
     - Per-category (all categories)
     """
     if comparison_date is None:
-        comparison_date = date.today()
+        comparison_date = _today()
 
     snapshots: list[MetricSnapshot] = []
     period_label = comparison_date.isoformat()
@@ -111,7 +112,7 @@ def _result_to_snapshot(
     }
 
     return MetricSnapshot(
-        computed_at=datetime.utcnow(),
+        computed_at=_now(),
         scope_type=result.scope_type,
         scope_id=result.scope_id,
         period_label=period_label,

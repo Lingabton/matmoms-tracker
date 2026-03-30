@@ -12,12 +12,13 @@ Pass-through percentage = observed_avg_change / -5.36 * 100
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import date
 from statistics import median, quantiles
 
 from sqlalchemy.orm import Session
 
 from matmoms.db.queries import get_baseline_prices, get_current_prices
+from matmoms.tz import today as _today
 
 # Theoretical max consumer price drop from 12% -> 6% VAT
 THEORETICAL_CHANGE_PCT = -5.36
@@ -84,7 +85,7 @@ def compute_passthrough(
         store_ids: Optional list of store IDs to restrict to (for format-level analysis)
     """
     if comparison_date is None:
-        comparison_date = date.today()
+        comparison_date = _today()
 
     # Build filter kwargs based on scope
     filters: dict = {}

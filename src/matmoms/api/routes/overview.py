@@ -19,7 +19,8 @@ def overview(
     exclude_campaigns: bool = Query(True, description="Exclude campaign prices"),
     db: Session = Depends(get_db),
 ):
-    comp_date = comparison_date or date.today()
+    from matmoms.tz import today as _today
+    comp_date = comparison_date or _today()
     days_since_cut = (comp_date - VAT_CUT_DATE).days
 
     # National aggregate

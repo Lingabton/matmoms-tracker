@@ -89,7 +89,8 @@ def export_csv(
         ])
 
     output.seek(0)
-    filename = f"matmoms_export_{date.today().isoformat()}.csv"
+    from matmoms.tz import today as _today
+    filename = f"matmoms_export_{_today().isoformat()}.csv"
 
     return StreamingResponse(
         iter([output.getvalue()]),

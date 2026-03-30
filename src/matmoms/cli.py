@@ -10,6 +10,8 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from matmoms.tz import today as _today
+
 import typer
 import yaml
 from rich.console import Console
@@ -205,7 +207,7 @@ def metrics_snapshot(
 
     from sqlalchemy.orm import Session
 
-    comp_date = date.fromisoformat(comparison_date) if comparison_date else date.today()
+    comp_date = date.fromisoformat(comparison_date) if comparison_date else _today()
 
     engine = get_engine()
     with Session(engine) as db:
@@ -225,7 +227,7 @@ def metrics_passthrough(
 
     from sqlalchemy.orm import Session
 
-    comp_date = date.fromisoformat(comparison_date) if comparison_date else date.today()
+    comp_date = date.fromisoformat(comparison_date) if comparison_date else _today()
 
     engine = get_engine()
     with Session(engine) as db:
