@@ -81,13 +81,21 @@ def _extract_brand(canonical_name: str) -> str:
         "standardmjölk", "mellanmjölk", "lättmjölk", "minimjölk",
         "filmjölk", "yoghurt", "grädde", "gräddfil", "crème", "cream",
         "sill", "sardiner", "korv", "skinka", "färs", "filé", "bitar",
-        "knäckebröd", "müsli", "havrefrön", "flingor",
+        "fläskkarré", "fläskkotletter", "kotletter", "kassler", "julskinka",
+        "nötfärs", "högrev", "falukorv",
+        "knäckebröd", "müsli", "havrefrön", "flingor", "limpa",
         "ketchup", "senap", "majonäs", "tacokrydda", "tacosås",
-        "chips", "dip", "godis", "choklad", "glass",
+        "lingonsylt", "senap",
+        "chips", "naturchips", "dip", "godis", "choklad", "glass",
+        "digestive", "schweizernöt", "japp", "sandwich",
         "juice", "läsk", "vatten", "dryck", "havredryck",
         "blöjor", "kikärtor", "kidneybönor", "tomater", "potatis",
         "äpplen", "bananer", "apelsiner", "vitlök", "tomat",
-        "riven", "skivad", "kokt", "rökt", "strimlad",
+        "paprika", "rödlök", "zucchini", "broccoli", "majs",
+        "haricots", "granatäpple",
+        "riven", "skivad", "kokt", "rökt", "strimlad", "gravad",
+        "gratäng", "fiskgratäng", "nuggets", "stroganoff",
+        "sesamolja", "vaniljsocker",
     }
     words = []
     for w in canonical_name.split():
@@ -143,15 +151,18 @@ def best_match(
         item_size_raw = item.get(size_key) if size_key else None
 
         reject_reason = ""
+        size_verified = False
 
-        # === CHECK 1: SIZE (mandatory if both sides have size info) ===
+        # === CHECK 1: SIZE ===
         if target_vol and size_key:
             item_vol = normalize_volume(item_size_raw)
             if item_vol:
                 ratio = item_vol / target_vol
                 if not (0.85 <= ratio <= 1.15):
                     reject_reason = f"size mismatch: target={target_vol}, got={item_vol} ({ratio:.2f}x)"
-            # If item has no size info, we can't verify — still risky but allow with penalty
+                else:
+                    size_verified = True
+            # If item has no size info, allow but require strong name match later
 
         # === CHECK 2: BRAND (mandatory for branded products) ===
         if not reject_reason and target_brand:
@@ -195,22 +206,29 @@ def best_match(
         # === SCORING (only for candidates that passed all checks) ===
         score = 0.0
 
-        # Size match bonus (exact match)
-        if target_vol and size_key:
-            item_vol = normalize_volume(item_size_raw)
-            if item_vol:
-                ratio = item_vol / target_vol
-                score += 50 * (1 - abs(1 - ratio) * 10)  # Perfect=50, edge=42.5
+        # Size match bonus
+        if size_verified:
+            score += 50
+        elif target_vol and not size_verified:
+            score -= 10  # Penalty for unverified size
 
         # Name keyword overlap
         item_keywords = {w for w in item_name.split() if len(w) > 1}
         overlap = len(canonical_keywords & item_keywords)
         score += overlap * 10
 
+        # If size not verified, require at least 2 keyword overlap as safety net
+        if not size_verified and overlap < 2:
+            logger.debug(
+                f"Rejected '{item_name[:50]}' for '{canonical}': "
+                f"unverified size and low name overlap ({overlap})"
+            )
+            continue
+
         # Position preference (earlier results are usually more relevant)
         score -= idx * 0.5
 
-        candidates.append((score, idx, item, item_name))
+        candidates.append((score, idx, item, item_name, size_verified))
 
     if not candidates:
         logger.debug(f"No valid match for '{canonical}' among {len(items)} results")
@@ -218,11 +236,12 @@ def best_match(
 
     # Sort by score descending
     candidates.sort(key=lambda x: (-x[0], x[1]))
-    best_score, _, best_item, best_name = candidates[0]
+    best_score, _, best_item, best_name, best_size_verified = candidates[0]
 
+    verified_tag = "verified" if best_size_verified else "UNVERIFIED-SIZE"
     logger.debug(
         f"Matched '{canonical}' -> '{best_name}' (score={best_score:.0f}, "
-        f"{len(candidates)}/{len(items)} candidates passed checks)"
+        f"{len(candidates)}/{len(items)} passed, {verified_tag})"
     )
 
     return best_item
