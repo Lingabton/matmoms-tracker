@@ -239,6 +239,7 @@ def build_by_city(c, is_post_cut: bool) -> list:
 
 def build_price_preview(c) -> list:
     """Pick common products that have prices from multiple chains for preview."""
+    # Only use VERIFIED observations (api_item in raw_payload)
     rows = c.execute(
         text("""
             SELECT p.canonical_name, p.brand, cat.name_sv,
@@ -248,36 +249,37 @@ def build_price_preview(c) -> list:
             JOIN stores s ON o.store_id = s.id
             JOIN categories cat ON p.category_id = cat.id
             WHERE o.price IS NOT NULL AND o.price <= 500
+              AND o.raw_payload LIKE '%api_item%'
               AND o.id IN (
                   SELECT max(id) FROM price_observations
                   WHERE price IS NOT NULL AND price <= 500
+                    AND raw_payload LIKE '%api_item%'
                   GROUP BY product_id, store_id
               )
             ORDER BY p.canonical_name, s.chain_id
         """)
     ).fetchall()
 
-    # Group by product, pick those with 2+ chains
+    # Group by product
     by_product: dict[str, dict] = {}
     for r in rows:
         name = r[0]
         if name not in by_product:
             by_product[name] = {
-                "name": name, "brand": r[1], "category": r[2], "prices": {}
+                "name": name, "brand": r[1], "category": r[2], "prices": {},
             }
         chain = r[3]
         if chain not in by_product[name]["prices"]:
             by_product[name]["prices"][chain] = r[4]
 
-    # Only include products with prices from ALL three chains
-    # and where prices are within reasonable range (max 2x spread)
+    # Only products with ALL three chains verified, max 2x price spread
     all_chains = []
     for p in by_product.values():
         if not all(c in p["prices"] for c in ("ica", "coop", "willys")):
             continue
         prices = list(p["prices"].values())
-        if max(prices) > 2.5 * min(prices):
-            continue  # Too much spread = likely a mismatch
+        if max(prices) > 2.0 * min(prices):
+            continue
         all_chains.append(p)
 
     all_chains.sort(key=lambda p: p["name"])
