@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run daily scrape, export data for site, and push to GitHub.
+# Run daily scrape, export data for site, build, and push to GitHub.
 # Called by launchd at 06:00 daily.
 
 set -e
@@ -23,8 +23,15 @@ python scripts/export_site_data.py >> "$LOG_FILE" 2>&1
 
 echo "=== Export finished at $(date) ===" >> "$LOG_FILE"
 
-# Commit and push the updated data
-git add site/public/data/latest.json
+# Build the React site with new data
+cd site
+npm run build >> "$LOG_FILE" 2>&1
+cd ..
+
+echo "=== Build finished at $(date) ===" >> "$LOG_FILE"
+
+# Commit and push
+git add site/public/data/latest.json site/public/data/products.json
 if git diff --cached --quiet; then
     echo "No data changes to commit" >> "$LOG_FILE"
 else
