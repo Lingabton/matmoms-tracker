@@ -8,6 +8,7 @@ import { ChainComparison } from "./components/ChainComparison";
 import { CategoryTable } from "./components/CategoryTable";
 import { Methodology } from "./components/Methodology";
 import { JournalistCTA } from "./components/JournalistCTA";
+import { NewsBanner } from "./components/NewsBanner";
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -69,6 +70,7 @@ function App() {
       <Hero data={data} />
 
       <div className="section">
+        <NewsBanner />
         {!data.isPostCut && <BaselineProgress data={data} />}
         <PricePreview data={data} />
         <ChainComparison data={data} />
