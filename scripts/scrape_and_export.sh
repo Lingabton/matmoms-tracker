@@ -38,4 +38,11 @@ else
     git commit -m "data: daily price update $(date +%Y-%m-%d)" >> "$LOG_FILE" 2>&1
     git push origin main >> "$LOG_FILE" 2>&1
     echo "=== Pushed to GitHub at $(date) ===" >> "$LOG_FILE"
+
+    # Notify search engines about new content
+    sleep 60  # Wait for GitHub Pages to deploy
+    curl -s -X POST "https://api.indexnow.org/indexnow" \
+      -H "Content-Type: application/json" \
+      -d '{"host":"matmoms.se","key":"b08af54ab21b2b92e8c4452202f6ea3e","keyLocation":"https://matmoms.se/b08af54ab21b2b92e8c4452202f6ea3e.txt","urlList":["https://matmoms.se/"]}' >> "$LOG_FILE" 2>&1
+    echo "=== IndexNow pinged at $(date) ===" >> "$LOG_FILE"
 fi
