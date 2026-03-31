@@ -9,6 +9,7 @@ import { CategoryTable } from "./components/CategoryTable";
 import { Methodology } from "./components/Methodology";
 import { JournalistCTA } from "./components/JournalistCTA";
 import { NewsBanner } from "./components/NewsBanner";
+import { EmbedInfo } from "./components/EmbedInfo";
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -75,6 +76,10 @@ function App() {
         <PricePreview data={data} />
         <ChainComparison data={data} />
         <CategoryTable data={data} />
+      </div>
+
+      <div className="section">
+        <EmbedInfo />
       </div>
 
       <JournalistCTA data={data} />
