@@ -376,6 +376,32 @@ nav .links a:hover { color: var(--accent); }
   font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;
 }
 
+/* ============ EMBED ============ */
+.embed-preview {
+  margin-bottom: 1.25rem;
+}
+.embed-code {
+  display: flex; gap: 0.75rem; align-items: stretch;
+}
+.embed-code code {
+  flex: 1; font-family: var(--font-mono); font-size: 0.7rem;
+  background: var(--bg-deep); color: rgba(255,255,255,0.75);
+  padding: 0.75rem 1rem; border-radius: 6px;
+  overflow-x: auto; white-space: nowrap;
+  display: flex; align-items: center;
+}
+.copy-btn {
+  font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+  background: var(--accent); color: white;
+  border: none; padding: 0.75rem 1.25rem; border-radius: 6px;
+  cursor: pointer; white-space: nowrap;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.copy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,77,77,0.3);
+}
+
 /* ============ FOOTER ============ */
 footer {
   border-top: 1px solid var(--border);

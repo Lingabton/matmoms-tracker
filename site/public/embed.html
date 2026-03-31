@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    background: #f8f7f4; color: #0a1628;
+    padding: 1.25rem; max-width: 480px;
+  }
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .logo {
+    font-weight: 700; font-size: 0.85rem;
+    text-decoration: none; color: #0a1628;
+  }
+  .logo span { color: #ff4d4d; }
+  .badge {
+    font-family: "Space Mono", monospace;
+    font-size: 0.6rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #ff4d4d; background: rgba(255,77,77,0.1);
+    padding: 0.25rem 0.5rem; border-radius: 100px;
+  }
+  h2 {
+    font-size: 1.3rem; font-weight: 700;
+    line-height: 1.2; margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+  }
+  h2 em { font-style: normal; color: #ff4d4d; }
+  .subtitle {
+    font-size: 0.8rem; color: #5a6577;
+    margin-bottom: 1.25rem; line-height: 1.5;
+  }
+  /* Big number for post-cut */
+  .big-num {
+    font-family: "Space Mono", monospace;
+    font-size: 3.5rem; font-weight: 700;
+    line-height: 1; margin: 0.5rem 0;
+  }
+  .big-num.good { color: #00b34a; }
+  .big-num.mid { color: #2b5cff; }
+  .big-num.bad { color: #ff4d4d; }
+  /* Chain bars */
+  .chain { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; }
+  .chain + .chain { border-top: 1px solid #e8e6e1; }
+  .chain-name { font-size: 0.8rem; font-weight: 600; width: 55px; }
+  .track {
+    flex: 1; height: 24px; background: rgba(10,22,40,0.04);
+    border-radius: 4px; overflow: hidden;
+  }
+  .fill {
+    height: 100%; border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.22,1,0.36,1);
+    min-width: 2px;
+  }
+  .val {
+    font-family: "Space Mono", monospace;
+    font-size: 0.8rem; font-weight: 700;
+    width: 70px; text-align: right;
+  }
+  /* Footer */
+  .footer {
+    margin-top: 1rem; padding-top: 0.75rem;
+    border-top: 1px solid #e8e6e1;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer a {
+    font-size: 0.7rem; color: #ff4d4d;
+    text-decoration: none; font-weight: 600;
+  }
+  .footer .updated {
+    font-size: 0.6rem; color: #8b95a5;
+    font-family: "Space Mono", monospace;
+  }
+  /* Countdown */
+  .countdown {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+  .countdown-num {
+    font-family: "Space Mono", monospace;
+    font-size: 2.5rem; font-weight: 700; color: #ff4d4d;
+    line-height: 1;
+  }
+  .countdown-label {
+    font-size: 0.85rem; color: #5a6577; font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div id="widget"></div>
+<script>
+const COLORS = { ica: '#e13205', coop: '#00aa46', willys: '#e30613' };
+const NAMES = { ica: 'ICA', coop: 'Coop', willys: 'Willys' };
+
+function daysUntil(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return Math.max(0, Math.ceil((d - new Date()) / 86400000));
+}
+
+fetch('https://matmoms.se/data/latest.json')
+  .then(r => r.json())
+  .then(data => {
+    const el = document.getElementById('widget');
+    const { summary, byChain, isPostCut, vatCutDate, expectedDropPercent } = data;
+    const updated = new Date(data.generatedAt).toLocaleDateString('sv-SE');
+
+    if (isPostCut && summary.passThroughPercent != null) {
+      const pt = summary.passThroughPercent;
+      const cls = pt >= 80 ? 'good' : pt >= 40 ? 'mid' : 'bad';
+      const maxPt = Math.max(...byChain.map(c => Math.abs(c.passThroughPercent || 0)), 100);
+
+      el.innerHTML = `
+        <div class="header">
+          <a class="logo" href="https://matmoms.se" target="_blank">mat<span>moms</span></a>
+          <span class="badge">Live data</span>
+        </div>
+        <h2>Matpriserna sjönk med</h2>
+        <div class="big-num ${cls}">${pt.toFixed(0)}%</div>
+        <div class="subtitle">av förväntade ${expectedDropPercent}% — baserat på ${summary.foundObservations.toLocaleString('sv-SE')} prisobservationer</div>
+        ${byChain.map(c => {
+          const cpt = c.passThroughPercent || 0;
+          const w = Math.max(3, Math.abs(cpt) / maxPt * 100);
+          return `<div class="chain">
+            <span class="chain-name">${c.chainName}</span>
+            <div class="track"><div class="fill" style="width:${w}%;background:${COLORS[c.chain]}"></div></div>
+            <span class="val">${cpt.toFixed(0)}%</span>
+          </div>`;
+        }).join('')}
+        <div class="footer">
+          <a href="https://matmoms.se" target="_blank">matmoms.se →</a>
+          <span class="updated">Uppdaterad ${updated}</span>
+        </div>
+      `;
+    } else {
+      const days = daysUntil(vatCutDate);
+      const maxObs = Math.max(...byChain.map(c => c.found), 1);
+
+      el.innerHTML = `
+        <div class="header">
+          <a class="logo" href="https://matmoms.se" target="_blank">mat<span>moms</span></a>
+          <span class="badge">Baslinjedata</span>
+        </div>
+        <h2>Blir maten <em>verkligen</em> billigare?</h2>
+        <div class="subtitle">Momsen sänks från 12% till 6%. Vi mäter ${summary.totalProducts} varor i ${summary.totalStores} butiker dagligen.</div>
+        ${days > 0 ? `<div class="countdown">
+          <span class="countdown-num">${days}</span>
+          <span class="countdown-label">${days === 1 ? 'dag' : 'dagar'} till momssänkningen</span>
+        </div>` : ''}
+        ${byChain.map(c => {
+          const w = Math.max(3, c.found / maxObs * 100);
+          return `<div class="chain">
+            <span class="chain-name">${c.chainName}</span>
+            <div class="track"><div class="fill" style="width:${w}%;background:${COLORS[c.chain]}"></div></div>
+            <span class="val">${c.found}</span>
+          </div>`;
+        }).join('')}
+        <div class="footer">
+          <a href="https://matmoms.se" target="_blank">matmoms.se →</a>
+          <span class="updated">Uppdaterad ${updated}</span>
+        </div>
+      `;
+    }
+  });
+</script>
+</body>
+</html>

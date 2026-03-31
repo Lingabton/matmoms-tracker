@@ -23,6 +23,7 @@ export function Nav() {
           <a href="#priser" onClick={() => setOpen(false)}>Priser</a>
           <a href="#kedja" onClick={() => setOpen(false)}>Kedjor</a>
           <a href="#kategori" onClick={() => setOpen(false)}>Kategorier</a>
+          <a href="#embed" onClick={() => setOpen(false)}>Embed</a>
           <a href="#data" onClick={() => setOpen(false)}>Data</a>
           <a href="#metod" onClick={() => setOpen(false)}>Metod</a>
         </div>
