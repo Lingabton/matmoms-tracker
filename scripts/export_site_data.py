@@ -69,6 +69,58 @@ def export():
         json.dump(products, f, ensure_ascii=False)
     print(f"Exported {products_path.name} ({products_path.stat().st_size:,} bytes)")
 
+    # Dynamic sitemap with today's date
+    generate_sitemap(today, data)
+
+
+def generate_sitemap(today: date, data: dict) -> None:
+    """Generate sitemap.xml with current date and data-driven content."""
+    sitemap_path = OUTPUT_DIR.parent / "sitemap.xml"
+
+    summary = data.get("summary", {})
+    obs = summary.get("foundObservations", 0)
+    stores = summary.get("totalStores", 33)
+    products = summary.get("totalProducts", 419)
+
+    # Headline adapts to whether we're post-cut
+    if data.get("isPostCut"):
+        pt = summary.get("passThroughPercent")
+        headline = (
+            f"Matmomssänkningen 2026: {pt:.0f}% genomslag — "
+            f"baserat på {obs} prisobservationer"
+            if pt is not None
+            else "Matmomssänkningen 2026: Hur mycket billigare blev maten?"
+        )
+    else:
+        headline = (
+            f"Matmomssänkningen 2026: Baslinje med {obs} priser "
+            f"från {stores} butiker"
+        )
+
+    sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://matmoms.se/</loc>
+    <lastmod>{today.isoformat()}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Matmoms</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>{today.isoformat()}</news:publication_date>
+      <news:title>{headline}</news:title>
+      <news:keywords>matmoms, momssänkning mat 2026, matpriser, ICA, Coop, Willys, livsmedelspriser Sverige</news:keywords>
+    </news:news>
+  </url>
+</urlset>
+"""
+    with open(sitemap_path, "w", encoding="utf-8") as f:
+        f.write(sitemap.strip())
+    print(f"Generated sitemap.xml (lastmod={today})")
+
 
 def build_summary(c, is_post_cut: bool) -> dict:
     """Aggregate summary stats."""
