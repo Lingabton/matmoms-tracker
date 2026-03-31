@@ -164,16 +164,22 @@ def best_match(
                     size_verified = True
             # If item has no size info, allow but require strong name match later
 
-        # === CHECK 2: BRAND (mandatory for branded products) ===
+        # === CHECK 2: BRAND ===
         if not reject_reason and target_brand:
             brand_found = False
-            # Check in dedicated brand field
+            # Check if extracted brand matches API brand field
             if item_brand:
                 brand_found = (
                     target_brand in item_brand
                     or any(bw in item_brand for bw in target_brand.split() if len(bw) > 2)
                 )
-            # Also check in product name
+            # Check if API brand appears in our canonical name (reverse check)
+            # Handles "Arla Bregott" where brand=Bregott in API
+            if not brand_found and item_brand:
+                brand_found = any(
+                    bw in canonical_lower for bw in item_brand.split() if len(bw) > 2
+                )
+            # Check if brand words appear in product name
             if not brand_found:
                 brand_found = any(
                     bw in item_name for bw in target_brand.split() if len(bw) > 2
