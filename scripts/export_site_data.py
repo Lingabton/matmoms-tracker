@@ -32,12 +32,90 @@ MAX_VALID_PRICE = 500  # Filter out obviously wrong prices
 OUTPUT_DIR = Path(__file__).parent.parent / "site" / "public" / "data"
 
 
+def flag_outliers(c) -> int:
+    """Flag price observations that are statistical outliers.
+
+    Marks observations as is_available=0 (soft-delete) if:
+    1. Price is >2x the median for same product across all stores
+    2. Price is <0.4x the median (suspiciously cheap = wrong product)
+
+    Returns number of flagged observations.
+    """
+    flagged = 0
+
+    # Pass 1: Flag outliers vs global median per product
+    result = c.execute(
+        text("""
+            UPDATE price_observations
+            SET is_available = 0
+            WHERE id IN (
+                SELECT pp.id FROM price_observations pp
+                JOIN (
+                    SELECT product_id,
+                           avg(price) as median_price,
+                           count(*) as n
+                    FROM price_observations
+                    WHERE price IS NOT NULL AND price <= 500 AND is_available = 1
+                    GROUP BY product_id
+                    HAVING n >= 3
+                ) pm ON pp.product_id = pm.product_id
+                WHERE pp.price IS NOT NULL
+                  AND pp.is_available = 1
+                  AND (pp.price > pm.median_price * 1.8
+                       OR pp.price < pm.median_price * 0.5)
+            )
+        """)
+    )
+    flagged += result.rowcount
+
+    # Pass 2: Flag outliers vs same-chain median (catches per-chain mismatches)
+    result = c.execute(
+        text("""
+            UPDATE price_observations
+            SET is_available = 0
+            WHERE id IN (
+                SELECT pp.id FROM price_observations pp
+                JOIN stores s ON pp.store_id = s.id
+                JOIN (
+                    SELECT o.product_id, st.chain_id,
+                           avg(o.price) as chain_median,
+                           count(*) as n
+                    FROM price_observations o
+                    JOIN stores st ON o.store_id = st.id
+                    WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
+                    GROUP BY o.product_id, st.chain_id
+                    HAVING n >= 2
+                ) cm ON pp.product_id = cm.product_id AND s.chain_id = cm.chain_id
+                WHERE pp.price IS NOT NULL
+                  AND pp.is_available = 1
+                  AND (pp.price > cm.chain_median * 1.8
+                       OR pp.price < cm.chain_median * 0.5)
+            )
+        """)
+    )
+    flagged = result.rowcount
+    if flagged > 0:
+        c.commit()
+        print(f"Flagged {flagged} outlier observations (>2x or <0.4x median)")
+    return flagged
+
+
 def export():
     engine = get_engine()
     today = date.today()
     is_post_cut = today >= VAT_CUT_DATE
 
     with engine.connect() as c:
+        # Run outlier detection before export
+        total_flagged = 0
+        for _ in range(3):  # Multiple passes catch cascading outliers
+            flagged = flag_outliers(c)
+            total_flagged += flagged
+            if flagged == 0:
+                break
+        if total_flagged:
+            print(f"Total flagged across passes: {total_flagged}")
+
         products = build_products(c, is_post_cut)
         price_preview = build_price_preview(c)
 
@@ -300,7 +378,7 @@ def build_price_preview(c) -> list:
             JOIN products p ON o.product_id = p.id
             JOIN stores s ON o.store_id = s.id
             JOIN categories cat ON p.category_id = cat.id
-            WHERE o.price IS NOT NULL AND o.price <= 500
+            WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
               AND o.raw_payload LIKE '%api_item%'
               AND o.id IN (
                   SELECT max(id) FROM price_observations
@@ -330,8 +408,8 @@ def build_price_preview(c) -> list:
         if not all(c in p["prices"] for c in ("ica", "coop", "willys")):
             continue
         prices = list(p["prices"].values())
-        if max(prices) > 2.0 * min(prices):
-            continue
+        if max(prices) > 1.6 * min(prices):
+            continue  # More than 60% spread = likely mismatch
         all_chains.append(p)
 
     all_chains.sort(key=lambda p: p["name"])
@@ -377,7 +455,7 @@ def build_products(c, is_post_cut: bool) -> list:
             JOIN products p ON o.product_id = p.id
             JOIN stores s ON o.store_id = s.id
             JOIN categories cat ON p.category_id = cat.id
-            WHERE o.price IS NOT NULL AND o.price <= 500
+            WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
             ORDER BY p.canonical_name, s.chain_id, o.observed_at DESC
         """)
     ).fetchall()
@@ -451,7 +529,7 @@ def compute_chain_passthrough(c, chain_id: str) -> float | None:
                 SELECT o.product_id, o.store_id, avg(o.price) as baseline_price
                 FROM price_observations o
                 JOIN stores s ON o.store_id = s.id
-                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) < :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1 AND date(o.observed_at) < :cut_date
                   AND o.is_campaign = 0 AND s.chain_id = :chain
                 GROUP BY o.product_id, o.store_id
             ),
@@ -459,7 +537,7 @@ def compute_chain_passthrough(c, chain_id: str) -> float | None:
                 SELECT o.product_id, o.store_id, o.price as current_price
                 FROM price_observations o
                 JOIN stores s ON o.store_id = s.id
-                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) >= :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1 AND date(o.observed_at) >= :cut_date
                   AND o.is_campaign = 0 AND s.chain_id = :chain
                   AND o.id IN (
                       SELECT max(id) FROM price_observations
@@ -489,7 +567,7 @@ def compute_category_passthrough(c, category_id: int) -> float | None:
                 SELECT o.product_id, o.store_id, avg(o.price) as baseline_price
                 FROM price_observations o
                 JOIN products p ON o.product_id = p.id
-                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) < :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1 AND date(o.observed_at) < :cut_date
                   AND o.is_campaign = 0 AND p.category_id = :cat_id
                 GROUP BY o.product_id, o.store_id
             ),
@@ -497,7 +575,7 @@ def compute_category_passthrough(c, category_id: int) -> float | None:
                 SELECT o.product_id, o.store_id, o.price as current_price
                 FROM price_observations o
                 JOIN products p ON o.product_id = p.id
-                WHERE o.price IS NOT NULL AND o.price <= 500 AND date(o.observed_at) >= :cut_date
+                WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1 AND date(o.observed_at) >= :cut_date
                   AND o.is_campaign = 0 AND p.category_id = :cat_id
                   AND o.id IN (
                       SELECT max(id) FROM price_observations
