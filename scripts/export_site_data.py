@@ -106,15 +106,18 @@ def export():
     is_post_cut = today >= VAT_CUT_DATE
 
     with engine.connect() as c:
-        # Run outlier detection before export
-        total_flagged = 0
-        for _ in range(3):  # Multiple passes catch cascading outliers
-            flagged = flag_outliers(c)
-            total_flagged += flagged
-            if flagged == 0:
-                break
-        if total_flagged:
-            print(f"Total flagged across passes: {total_flagged}")
+        # Run outlier detection (skip if DB is locked by scraper)
+        try:
+            total_flagged = 0
+            for _ in range(3):
+                flagged = flag_outliers(c)
+                total_flagged += flagged
+                if flagged == 0:
+                    break
+            if total_flagged:
+                print(f"Total flagged across passes: {total_flagged}")
+        except Exception as e:
+            print(f"Skipping outlier detection (DB busy): {e}")
 
         products = build_products(c, is_post_cut)
         price_preview = build_price_preview(c)
