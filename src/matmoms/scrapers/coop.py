@@ -156,14 +156,15 @@ class CoopScraper(BaseScraper):
                 if vat:
                     result.raw_data["vat_percent"] = vat.get("value")
 
-                # Campaign via onlinePromotions
+                # Campaign via onlinePromotions — flag but keep regular price
                 promos = item.get("onlinePromotions", [])
                 if promos:
                     result.is_campaign = True
                     promo = promos[0]
+                    result.campaign_label = promo.get("description", "")
                     promo_price = promo.get("priceData", {}).get("b2cPrice")
-                    if promo_price is not None:
-                        # The promotion price is the current effective price
+                    if promo_price is not None and promo_price < result.price:
+                        # Only use campaign price if it's LOWER (a real discount)
                         result.original_price = result.price
                         result.price = float(promo_price)
                     result.campaign_label = promo.get("description", "")
