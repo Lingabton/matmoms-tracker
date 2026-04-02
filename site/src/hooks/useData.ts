@@ -29,6 +29,7 @@ export interface SiteData {
     avgPrice: number | null;
     stores: number;
     passThroughPercent?: number;
+    verified?: boolean;
   }[];
   byCategory: {
     category: string;

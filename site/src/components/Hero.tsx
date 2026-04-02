@@ -18,16 +18,15 @@ export function Hero({ data }: Props) {
     const colorClass = pt >= 80 ? "positive" : pt >= 40 ? "neutral" : "negative";
     return (
       <header className="hero">
-        <div className="overline">Matmomssänkningen 2026</div>
+        <div className="overline">Matmomssänkningen 2026 &mdash; ICA</div>
         <h1>
-          Maten blev <em>{pt >= 80 ? "billigare" : pt >= 40 ? "lite billigare" : "knappt billigare"}</em>
+          ICA sänkte priserna med <em>{(pt * expectedDropPercent / 100).toFixed(1)}%</em>
         </h1>
         <div className={`big-number ${colorClass}`}>{pt.toFixed(0)}%</div>
         <p className="lead">
-          av den förväntade prissänkningen på {expectedDropPercent}% har nått
-          konsumenterna. Baserat på{" "}
-          {summary.foundObservations.toLocaleString("sv-SE")} prisobservationer
-          från {summary.totalStores} butiker.
+          av den förväntade prissänkningen på {expectedDropPercent}% har
+          nått konsumenterna hos ICA. Coop och Willys data under
+          verifiering.
         </p>
       </header>
     );

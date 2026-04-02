@@ -30,13 +30,22 @@ export function ChainComparison({ data }: Props) {
         if (isPostCut) {
           const pt = chain.passThroughPercent ?? 0;
           const w = Math.max(3, (Math.abs(pt) / maxVal) * 100);
+          const unverified = chain.verified === false;
           return (
-            <div className="chain-row" key={chain.chain}>
-              <div className="chain-name">{chain.chainName}</div>
-              <div className="chain-track">
-                <div className="chain-fill" style={{ width: `${w}%`, background: COLORS[chain.chain] }} />
+            <div className="chain-row" key={chain.chain} style={unverified ? { opacity: 0.45 } : {}}>
+              <div className="chain-name">
+                {chain.chainName}
+                {unverified && <span style={{ fontSize: "0.6rem", display: "block", color: "var(--text-muted)" }}>verifieras</span>}
               </div>
-              <div className="chain-value">{pt.toFixed(0)}%</div>
+              <div className="chain-track">
+                <div className="chain-fill" style={{
+                  width: `${w}%`,
+                  background: unverified ? "var(--text-muted)" : COLORS[chain.chain],
+                }} />
+              </div>
+              <div className="chain-value" style={unverified ? { color: "var(--text-muted)" } : {}}>
+                {unverified ? "—" : `${pt.toFixed(0)}%`}
+              </div>
             </div>
           );
         }
