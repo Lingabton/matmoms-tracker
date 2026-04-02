@@ -232,8 +232,10 @@ def build_summary(c, is_post_cut: bool) -> dict:
     }
 
     if is_post_cut:
-        pt = compute_aggregate_passthrough(c)
+        # Use only ICA for headline number — Coop/Willys have matching issues
+        pt = compute_chain_passthrough(c, "ica")
         result["passThroughPercent"] = pt
+        result["passThroughNote"] = "Baserat på ICA-data. Coop och Willys under verifiering."
 
     return result
 
@@ -303,6 +305,7 @@ def build_by_chain(c, is_post_cut: bool) -> list:
         }
         if is_post_cut:
             chain["passThroughPercent"] = compute_chain_passthrough(c, r[0])
+            chain["verified"] = r[0] == "ica"  # Only ICA has verified matching
         result.append(chain)
 
     return result
