@@ -9,7 +9,7 @@ const COLORS: Record<string, string> = {
 };
 
 export function ChainComparison({ data }: Props) {
-  const { byChain, isPostCut, expectedDropPercent } = data;
+  const { byChain, isPostCut } = data;
 
   const maxVal = isPostCut
     ? Math.max(...byChain.map((c) => Math.abs(c.passThroughPercent ?? 0)), 100)
@@ -18,11 +18,11 @@ export function ChainComparison({ data }: Props) {
   return (
     <div className="section-block reveal" id="kedja">
       <div className="section-header">
-        <h2>{isPostCut ? "Genomslag per kedja" : "Insamlad data per kedja"}</h2>
+        <h2>Data per kedja</h2>
         <p>
           {isPostCut
-            ? `Andel av ${expectedDropPercent}%-sänkningen som nått konsumenterna`
-            : "Antal verifierade prisobservationer hittills i baslinjeperioden"}
+            ? "Antal prisobservationer och momssänkningens genomslag (ICA verifierad)"
+            : "Antal verifierade prisobservationer hittills"}
         </p>
       </div>
 

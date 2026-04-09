@@ -14,10 +14,10 @@ export function PricePreview({ data }: Props) {
   return (
     <div className="section-block reveal" id="priser">
       <div className="section-header">
-        <h2>Prisexempel</h2>
+        <h2>Prisjämförelse</h2>
         <p>
-          Aktuella priser från ICA, Coop och Willys. Från 1 april jämförs
-          dessa med baslinjen.
+          Aktuella priser på vanliga matvaror. Lägsta pris markerat i grönt.
+          Uppdateras dagligen.
         </p>
       </div>
       <div style={{ overflowX: "auto" }}>
@@ -47,7 +47,7 @@ export function PricePreview({ data }: Props) {
                     const isCheapest = price === min && valid.length > 1;
                     return (
                       <td key={c} className={`price-cell ${isCheapest ? "cheapest" : ""}`}>
-                        {price.toFixed(2)}
+                        {price.toFixed(2)} kr
                       </td>
                     );
                   })}
