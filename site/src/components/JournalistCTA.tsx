@@ -5,7 +5,7 @@ interface Props {
 }
 
 export function JournalistCTA({ data }: Props) {
-  const shareText = "Matmomsen sänks från 12% till 6%. Blev maten billigare? Kolla matmoms.se";
+  const shareText = "Var är maten billigast — ICA, Coop eller Willys? Daglig prisjämförelse på matmoms.se";
   const shareUrl = "https://matmoms.se";
 
   return (
