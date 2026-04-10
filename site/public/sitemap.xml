@@ -3,7 +3,7 @@
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://matmoms.se/</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <news:news>
@@ -11,8 +11,8 @@
         <news:name>Matmoms</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-04-09</news:publication_date>
-      <news:title>Matmomssänkningen 2026: 42% genomslag — baserat på 30271 prisobservationer</news:title>
+      <news:publication_date>2026-04-10</news:publication_date>
+      <news:title>Matmomssänkningen 2026: 37% genomslag — baserat på 34194 prisobservationer</news:title>
       <news:keywords>matmoms, momssänkning mat 2026, matpriser, ICA, Coop, Willys, livsmedelspriser Sverige</news:keywords>
     </news:news>
   </url>
