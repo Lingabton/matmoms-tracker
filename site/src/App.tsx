@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useData } from "./hooks/useData";
+import { useCatalog } from "./hooks/useCatalog";
+import { useBasket } from "./hooks/useBasket";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { PricePreview } from "./components/PricePreview";
+import { ProductSearch } from "./components/ProductSearch";
+import { BasketBuilder } from "./components/BasketBuilder";
 import { ChainComparison } from "./components/ChainComparison";
 import { CategoryTable } from "./components/CategoryTable";
 import { Methodology } from "./components/Methodology";
@@ -11,6 +16,13 @@ import { Timeline } from "./components/Timeline";
 
 function App() {
   const { data, loading, error } = useData();
+  const { catalog, load: loadCatalog } = useCatalog();
+  const basket = useBasket();
+
+  // Load catalog eagerly once main data is ready
+  useEffect(() => {
+    if (data) loadCatalog();
+  }, [data]);
 
   if (loading) {
     return (
@@ -28,13 +40,34 @@ function App() {
     );
   }
 
+  const basketIds = new Set(basket.items.map((i) => i.productId));
+
   return (
     <>
-      <Nav />
+      <Nav basketCount={basket.count} />
       <Hero data={data} />
 
       <div className="section">
         <PricePreview data={data} />
+
+        {catalog && (
+          <ProductSearch
+            catalog={catalog}
+            onAdd={(p) => basket.add({ id: p.id, name: p.name, brand: p.brand, prices: p.prices })}
+            basketIds={basketIds}
+          />
+        )}
+
+        {basket.items.length > 0 && (
+          <BasketBuilder
+            items={basket.items}
+            totals={basket.totals()}
+            onUpdateQty={basket.updateQty}
+            onRemove={basket.remove}
+            onClear={basket.clear}
+          />
+        )}
+
         <Timeline data={data} />
         <ChainComparison data={data} />
         <CategoryTable data={data} />

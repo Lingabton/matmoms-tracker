@@ -121,6 +121,7 @@ def export():
 
         products = build_products(c, is_post_cut)
         price_preview = build_price_preview(c)
+        catalog = build_catalog(c)
 
         data = {
             "generatedAt": datetime.now().isoformat(),
@@ -149,6 +150,12 @@ def export():
     with open(products_path, "w", encoding="utf-8") as f:
         json.dump(products, f, ensure_ascii=False)
     print(f"Exported {products_path.name} ({products_path.stat().st_size:,} bytes)")
+
+    # Catalog file: all products with current prices + history for search/basket/trends
+    catalog_path = OUTPUT_DIR / "catalog.json"
+    with open(catalog_path, "w", encoding="utf-8") as f:
+        json.dump(catalog, f, ensure_ascii=False)
+    print(f"Exported {catalog_path.name} ({catalog_path.stat().st_size:,} bytes)")
 
     # Dynamic sitemap with today's date
     generate_sitemap(today, data)
@@ -602,6 +609,90 @@ def compute_category_passthrough(c, category_id: int) -> float | None:
     ).fetchone()
 
     return round(row[0], 1) if row and row[0] is not None else None
+
+
+def build_catalog(c) -> list:
+    """All products with current prices per chain + daily price history.
+
+    Output: lightweight catalog for search, basket builder, and trend charts.
+    """
+    # Current prices: latest observation per product per chain
+    current_rows = c.execute(
+        text("""
+            SELECT p.id, p.canonical_name, p.brand, cat.name_sv, cat.id as cat_id,
+                   p.unit_quantity, p.unit_type,
+                   s.chain_id, o.price
+            FROM price_observations o
+            JOIN products p ON o.product_id = p.id
+            JOIN stores s ON o.store_id = s.id
+            JOIN categories cat ON p.category_id = cat.id
+            WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
+              AND o.id IN (
+                  SELECT max(id) FROM price_observations
+                  WHERE price IS NOT NULL AND price <= 500 AND is_available = 1
+                  GROUP BY product_id, store_id
+              )
+            ORDER BY p.id
+        """)
+    ).fetchall()
+
+    # Build product map with averaged current prices per chain
+    products: dict[int, dict] = {}
+    chain_prices: dict[tuple[int, str], list[float]] = {}
+
+    for r in current_rows:
+        pid = r[0]
+        if pid not in products:
+            products[pid] = {
+                "id": pid,
+                "name": r[1],
+                "brand": r[2],
+                "category": r[3],
+                "categoryId": r[4],
+                "quantity": r[5],
+                "unit": r[6],
+                "prices": {},
+                "history": [],
+            }
+        key = (pid, r[7])
+        if key not in chain_prices:
+            chain_prices[key] = []
+        chain_prices[key].append(r[8])
+
+    # Average prices per chain
+    for (pid, chain), prices in chain_prices.items():
+        if pid in products:
+            products[pid]["prices"][chain] = round(sum(prices) / len(prices), 2)
+
+    # Daily price history per product per chain
+    history_rows = c.execute(
+        text("""
+            SELECT p.id, date(o.observed_at) as day, s.chain_id,
+                   avg(o.price) as avg_price
+            FROM price_observations o
+            JOIN products p ON o.product_id = p.id
+            JOIN stores s ON o.store_id = s.id
+            WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
+            GROUP BY p.id, date(o.observed_at), s.chain_id
+            ORDER BY p.id, day
+        """)
+    ).fetchall()
+
+    # Group history by product and date
+    for r in history_rows:
+        pid = r[0]
+        if pid not in products:
+            continue
+        day = r[1]
+        chain = r[2]
+        avg_p = round(r[3], 2)
+
+        hist = products[pid]["history"]
+        if not hist or hist[-1]["date"] != day:
+            hist.append({"date": day})
+        hist[-1][chain] = avg_p
+
+    return list(products.values())
 
 
 if __name__ == "__main__":

@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export function Nav() {
+interface Props {
+  basketCount: number;
+}
+
+export function Nav({ basketCount }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -21,10 +25,12 @@ export function Nav() {
         </button>
         <div className={`links ${open ? "open" : ""}`}>
           <a href="#priser" onClick={() => setOpen(false)}>Priser</a>
+          <a href="#sok" onClick={() => setOpen(false)}>Sök</a>
+          <a href="#varukorg" onClick={() => setOpen(false)} className="nav-basket">
+            Varukorg{basketCount > 0 && <span className="nav-badge">{basketCount}</span>}
+          </a>
           <a href="#kedja" onClick={() => setOpen(false)}>Kedjor</a>
           <a href="#kategori" onClick={() => setOpen(false)}>Kategorier</a>
-          <a href="#embed" onClick={() => setOpen(false)}>Embed</a>
-          <a href="#data" onClick={() => setOpen(false)}>Data</a>
           <a href="#metod" onClick={() => setOpen(false)}>Metod</a>
         </div>
       </div>
