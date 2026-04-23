@@ -406,7 +406,7 @@ def build_price_preview(c) -> list:
         if chain not in by_product[name]["prices"]:
             by_product[name]["prices"][chain] = r[4]
 
-    # Only products with ALL three chains verified, max 2x price spread
+    # Only products with ALL three chains verified, max 60% price spread
     all_chains = []
     for p in by_product.values():
         if not all(c in p["prices"] for c in ("ica", "coop", "willys")):
@@ -414,10 +414,40 @@ def build_price_preview(c) -> list:
         prices = list(p["prices"].values())
         if max(prices) > 1.6 * min(prices):
             continue  # More than 60% spread = likely mismatch
+        # Price spread in kr (how interesting is the comparison?)
+        p["_spread"] = max(prices) - min(prices)
         all_chains.append(p)
 
-    all_chains.sort(key=lambda p: p["name"])
-    return all_chains[:12]
+    # Pick a diverse mix: 1 product per category, prioritize biggest price differences
+    import random
+    random.seed(date.today().toordinal())  # Deterministic per day, changes daily
+
+    by_cat: dict[str, list] = {}
+    for p in all_chains:
+        by_cat.setdefault(p["category"], []).append(p)
+
+    # Sort each category by spread (most interesting first)
+    for cat in by_cat:
+        by_cat[cat].sort(key=lambda p: -p["_spread"])
+
+    # Round-robin across categories, picking top spread from each
+    picked: list[dict] = []
+    cats = sorted(by_cat.keys())
+    random.shuffle(cats)
+    idx = 0
+    while len(picked) < 12 and idx < max(len(v) for v in by_cat.values()):
+        for cat in cats:
+            if len(picked) >= 12:
+                break
+            if idx < len(by_cat[cat]):
+                picked.append(by_cat[cat][idx])
+        idx += 1
+
+    # Clean up internal key
+    for p in picked:
+        p.pop("_spread", None)
+
+    return picked
 
 
 def build_timeline(c) -> list:
