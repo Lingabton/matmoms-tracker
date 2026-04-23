@@ -223,11 +223,11 @@ def best_match(
         overlap = len(canonical_keywords & item_keywords)
         score += overlap * 10
 
-        # If size not verified, require at least 2 keyword overlap as safety net
-        if not size_verified and overlap < 2:
+        # If size not verified, require at least 1 keyword overlap as safety net
+        if not size_verified and overlap < 1:
             logger.debug(
                 f"Rejected '{item_name[:50]}' for '{canonical}': "
-                f"unverified size and low name overlap ({overlap})"
+                f"unverified size and no name overlap"
             )
             continue
 

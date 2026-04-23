@@ -46,19 +46,56 @@ class CoopScraper(BaseScraper):
 
         logger.info(f"Coop store set: {self.store.name} (ext_id={self.store.external_id})")
 
+    def _build_search_terms(self, product: Product) -> list[str]:
+        """Build progressively shorter search terms for Coop.
+
+        Coop's search can be picky — try multiple strategies:
+        1. Chain-specific or canonical name (without size/%)
+        2. Product words + brand (reversed order)
+        3. Just product words (no brand)
+        4. First two words only
+        """
+        base = super().get_search_term(product)
+        # Strip pack size
+        base = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", base)
+        # Strip percentage
+        base = re.sub(r"\s+\d+(?:[.,]\d+)?%", "", base)
+
+        terms = [base]
+
+        words = base.split()
+        if len(words) >= 3:
+            brand = words[0]
+            product_words = " ".join(words[1:])
+            terms.append(f"{product_words} {brand}")
+            terms.append(product_words)
+            if len(words) >= 4:
+                terms.append(" ".join(words[:2]))
+
+        # Deduplicate
+        seen: set[str] = set()
+        unique: list[str] = []
+        for t in terms:
+            t_lower = t.lower()
+            if t_lower not in seen:
+                seen.add(t_lower)
+                unique.append(t)
+
+        return unique
+
     async def search_product(self, page: Page, product: Product) -> RawPriceResult:
-        """Search via POST API call, DOM fallback."""
+        """Search via POST API call with progressive term fallback."""
         result = RawPriceResult(
             product_id=product.id,
             store_id=self.store.id,
         )
 
-        search_term = self.get_search_term(product)
+        search_terms = self._build_search_terms(product)
 
-        # API-only — no DOM fallback to avoid mismatches
-        api_result = await self._search_via_api(page, search_term, result, product)
-        if api_result and api_result.found:
-            return api_result
+        for term in search_terms:
+            api_result = await self._search_via_api(page, term, result, product)
+            if api_result and api_result.found:
+                return api_result
 
         # Not found via API — report as not found rather than risk mismatch
         result.found = False
@@ -90,7 +127,7 @@ class CoopScraper(BaseScraper):
                                 query: query,
                                 resultsOptions: {
                                     skip: 0,
-                                    take: 10,
+                                    take: 25,
                                     sortBy: [],
                                     facets: []
                                 },

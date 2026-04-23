@@ -37,7 +37,7 @@ export function Timeline({ data }: Props) {
     <div className="section-block reveal" id="tidslinje">
       <div className="section-header">
         <h2>Prisutveckling</h2>
-        <p>Genomsnittspris per kedja och dag. Streckad linje = momssänkningen 1 april.</p>
+        <p>Genomsnittspris per kedja och dag. Streckad linje = momssänkning 1 april (12% &rarr; 6%).</p>
       </div>
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>

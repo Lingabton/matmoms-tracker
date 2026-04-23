@@ -21,7 +21,7 @@ export function ChainComparison({ data }: Props) {
         <h2>Data per kedja</h2>
         <p>
           {isPostCut
-            ? "Antal prisobservationer och momssänkningens genomslag (ICA verifierad)"
+            ? "Antal prisobservationer och prisjustering sedan 1 april (ICA verifierad)"
             : "Antal verifierade prisobservationer hittills"}
         </p>
       </div>

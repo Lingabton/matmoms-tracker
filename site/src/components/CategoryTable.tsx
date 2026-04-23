@@ -16,7 +16,7 @@ export function CategoryTable({ data }: Props) {
       <div className="section-block reveal" id="kategori">
         <div className="section-header">
           <h2>Per produktkategori</h2>
-          <p>Genomslag av momssänkningen per kategori</p>
+          <p>Prisjustering per kategori sedan 1 april</p>
         </div>
         <table className="price-table">
           <thead>

@@ -170,20 +170,11 @@ def generate_sitemap(today: date, data: dict) -> None:
     stores = summary.get("totalStores", 33)
     products = summary.get("totalProducts", 419)
 
-    # Headline adapts to whether we're post-cut
-    if data.get("isPostCut"):
-        pt = summary.get("passThroughPercent")
-        headline = (
-            f"Matmomssänkningen 2026: {pt:.0f}% genomslag — "
-            f"baserat på {obs} prisobservationer"
-            if pt is not None
-            else "Matmomssänkningen 2026: Hur mycket billigare blev maten?"
-        )
-    else:
-        headline = (
-            f"Matmomssänkningen 2026: Baslinje med {obs} priser "
-            f"från {stores} butiker"
-        )
+    # Headline for price comparison (VAT as secondary angle)
+    headline = (
+        f"Jämför matpriser: ICA, Coop och Willys — "
+        f"{obs:,} prisobservationer från {stores} butiker".replace(",", " ")
+    )
 
     sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"

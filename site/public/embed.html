@@ -145,14 +145,10 @@ fetch('https://matmoms.se/data/latest.json')
       el.innerHTML = `
         <div class="header">
           <a class="logo" href="https://matmoms.se" target="_blank">mat<span>moms</span></a>
-          <span class="badge">Baslinjedata</span>
+          <span class="badge">Prisdata</span>
         </div>
-        <h2>Blir maten <em>verkligen</em> billigare?</h2>
-        <div class="subtitle">Momsen sänks från 12% till 6%. Vi mäter ${summary.totalProducts} varor i ${summary.totalStores} butiker dagligen.</div>
-        ${days > 0 ? `<div class="countdown">
-          <span class="countdown-num">${days}</span>
-          <span class="countdown-label">${days === 1 ? 'dag' : 'dagar'} till momssänkningen</span>
-        </div>` : ''}
+        <h2>Var är maten <em>billigast</em>?</h2>
+        <div class="subtitle">Vi jämför ${summary.totalProducts} varor i ${summary.totalStores} butiker dagligen hos ICA, Coop och Willys.</div>
         ${byChain.map(c => {
           const w = Math.max(3, c.found / maxObs * 100);
           return `<div class="chain">

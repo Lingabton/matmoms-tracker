@@ -25,11 +25,11 @@ export function Methodology() {
           </p>
         </div>
         <div className="method-item">
-          <h4>Momssänkningen</h4>
+          <h4>Prishistorik</h4>
           <p>
-            Matmomsen sänktes från 12% till 6% den 1 april 2026. Vi mäter
-            genomslaget: faktisk prissänkning delat med förväntade 5,36%.
-            ICA-data är verifierad. Coop/Willys under verifiering.
+            Vi sparar dagliga priser per produkt och kedja sedan mars 2026.
+            Prishistoriken visar trender och säsongsvariationer.
+            Data inkluderar uppföljning av momssänkningen (12% &rarr; 6%, 1 april 2026).
           </p>
         </div>
         <div className="method-item">
@@ -42,7 +42,7 @@ export function Methodology() {
         </div>
 
         <div className="formula-block">
-{`Genomslag (momssänkning):
+{`Prisjustering (genomslag av momssänkning):
 genomslag = (baslinjepris − nytt pris) / (baslinjepris × 0.0536)
 där 0.0536 = 1 − 1.06/1.12 = förväntad prissänkning`}
         </div>
