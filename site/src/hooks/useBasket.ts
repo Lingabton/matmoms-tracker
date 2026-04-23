@@ -13,7 +13,19 @@ const STORAGE_KEY = "matmoms-basket";
 function readStorage(): BasketItem[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (item: unknown): item is BasketItem =>
+        typeof item === "object" && item !== null &&
+        typeof (item as BasketItem).productId === "number" &&
+        typeof (item as BasketItem).name === "string" &&
+        typeof (item as BasketItem).brand === "string" &&
+        typeof (item as BasketItem).qty === "number" &&
+        (item as BasketItem).qty > 0 &&
+        typeof (item as BasketItem).prices === "object"
+    );
   } catch {
     return [];
   }

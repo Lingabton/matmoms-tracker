@@ -5,6 +5,7 @@
 BASE="/Users/gabriellinton/matmoms-tracker"
 cd "$BASE"
 source .venv/bin/activate
+[ -f "$BASE/.env" ] && set -a && source "$BASE/.env" && set +a
 
 mkdir -p "$BASE/logs"
 LOG="$BASE/logs/scrape-$(date +%Y-%m-%d).log"
@@ -30,7 +31,7 @@ cd "$BASE"
 echo "=== Build finished at $(date) ===" >> "$LOG"
 
 # Commit and push
-git add site/public/data/latest.json site/public/data/products.json site/public/sitemap.xml
+git add site/public/data/latest.json site/public/data/products.json site/public/data/catalog.json site/public/sitemap.xml
 if git diff --cached --quiet; then
     echo "No data changes to commit" >> "$LOG"
 else
@@ -39,8 +40,9 @@ else
     echo "=== Pushed to GitHub at $(date) ===" >> "$LOG"
 
     sleep 60
+    INDEXNOW_KEY="${INDEXNOW_KEY:-b08af54ab21b2b92e8c4452202f6ea3e}"
     curl -s -X POST "https://api.indexnow.org/indexnow" \
       -H "Content-Type: application/json" \
-      -d '{"host":"matmoms.se","key":"b08af54ab21b2b92e8c4452202f6ea3e","keyLocation":"https://matmoms.se/b08af54ab21b2b92e8c4452202f6ea3e.txt","urlList":["https://matmoms.se/"]}' >> "$LOG" 2>&1
+      -d "{\"host\":\"matmoms.se\",\"key\":\"${INDEXNOW_KEY}\",\"keyLocation\":\"https://matmoms.se/${INDEXNOW_KEY}.txt\",\"urlList\":[\"https://matmoms.se/\"]}" >> "$LOG" 2>&1
     echo "=== IndexNow pinged at $(date) ===" >> "$LOG"
 fi

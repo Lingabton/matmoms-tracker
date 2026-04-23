@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 
 from playwright.async_api import Browser, Page, Response
@@ -21,16 +22,13 @@ logger = logging.getLogger(__name__)
 COOP_BASE_URL = "https://www.coop.se/handla"
 COOP_API_BASE = "https://external.api.coop.se"
 
-# Static subscription key embedded in Coop's SPA
-COOP_API_KEY = "***REDACTED***"
-
 
 class CoopScraper(BaseScraper):
     chain_id = "coop"
 
     def __init__(self, store: Store, products: list[Product], browser: Browser):
         super().__init__(store, products, browser)
-        self._api_key: str = COOP_API_KEY
+        self._api_key: str = os.environ.get("COOP_API_KEY", "")
 
     async def select_store(self, page: Page) -> None:
         """Navigate to Coop — store is set via API query param, no UI needed."""
