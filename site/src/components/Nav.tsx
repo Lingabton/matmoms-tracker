@@ -24,14 +24,13 @@ export function Nav({ basketCount }: Props) {
           <span />
         </button>
         <div className={`links ${open ? "open" : ""}`}>
-          <a href="#priser" onClick={() => setOpen(false)}>Priser</a>
           <a href="#sok" onClick={() => setOpen(false)}>Sök</a>
           <a href="#varukorg" onClick={() => setOpen(false)} className="nav-basket">
             Varukorg{basketCount > 0 && <span className="nav-badge">{basketCount}</span>}
           </a>
+          <a href="#priser" onClick={() => setOpen(false)}>Priser</a>
           <a href="#kedja" onClick={() => setOpen(false)}>Kedjor</a>
           <a href="#kategori" onClick={() => setOpen(false)}>Kategorier</a>
-          <a href="#metod" onClick={() => setOpen(false)}>Metod</a>
         </div>
       </div>
     </nav>

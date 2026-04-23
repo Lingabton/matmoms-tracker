@@ -4,22 +4,20 @@ import { useCatalog } from "./hooks/useCatalog";
 import { useBasket } from "./hooks/useBasket";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
-import { PricePreview } from "./components/PricePreview";
 import { ProductSearch } from "./components/ProductSearch";
 import { BasketBuilder } from "./components/BasketBuilder";
+import { PricePreview } from "./components/PricePreview";
 import { ChainComparison } from "./components/ChainComparison";
 import { CategoryTable } from "./components/CategoryTable";
+import { Timeline } from "./components/Timeline";
 import { Methodology } from "./components/Methodology";
 import { JournalistCTA } from "./components/JournalistCTA";
-import { EmbedInfo } from "./components/EmbedInfo";
-import { Timeline } from "./components/Timeline";
 
 function App() {
   const { data, loading, error } = useData();
   const { catalog, load: loadCatalog } = useCatalog();
   const basket = useBasket();
 
-  // Load catalog eagerly once main data is ready
   useEffect(() => {
     if (data) loadCatalog();
   }, [data]);
@@ -48,8 +46,6 @@ function App() {
       <Hero data={data} />
 
       <div className="section">
-        <PricePreview data={data} />
-
         {catalog && (
           <ProductSearch
             catalog={catalog}
@@ -68,20 +64,17 @@ function App() {
           />
         )}
 
+        <PricePreview data={data} />
+        <ChainComparison catalog={catalog} />
+        <CategoryTable catalog={catalog} />
         <Timeline data={data} />
-        <ChainComparison data={data} />
-        <CategoryTable data={data} />
       </div>
-
-      <div className="section">
-        <EmbedInfo />
-      </div>
-
-      <JournalistCTA data={data} />
 
       <div className="section">
         <Methodology />
       </div>
+
+      <JournalistCTA data={data} />
 
       <footer>
         <div className="section">

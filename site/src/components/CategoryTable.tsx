@@ -1,73 +1,106 @@
-import type { SiteData } from "../hooks/useData";
+import type { CatalogProduct } from "../hooks/useCatalog";
 
 interface Props {
-  data: SiteData;
+  catalog: CatalogProduct[] | null;
 }
 
-export function CategoryTable({ data }: Props) {
-  const { byCategory, isPostCut } = data;
+const CHAINS = ["ica", "coop", "willys"] as const;
+const CHAIN_LABELS: Record<string, string> = { ica: "ICA", coop: "Coop", willys: "Willys" };
+const CHAIN_COLORS: Record<string, string> = {
+  ica: "var(--ica)", coop: "var(--coop)", willys: "var(--willys)",
+};
 
-  if (isPostCut) {
-    const sorted = [...byCategory].sort(
-      (a, b) => (b.passThroughPercent ?? 0) - (a.passThroughPercent ?? 0)
-    );
+interface CatRow {
+  category: string;
+  avgs: Record<string, number | null>;
+  cheapest: string | null;
+  productCount: number;
+}
 
-    return (
-      <div className="section-block reveal" id="kategori">
-        <div className="section-header">
-          <h2>Per produktkategori</h2>
-          <p>Prisjustering per kategori sedan 1 april</p>
-        </div>
-        <table className="price-table">
-          <thead>
-            <tr>
-              <th>Kategori</th>
-              <th className="right">Produkter</th>
-              <th className="right">Genomslag</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((cat) => (
-              <tr key={cat.categoryId}>
-                <td>{cat.category}</td>
-                <td className="price-cell">{cat.found}</td>
-                <td className="price-cell" style={{
-                  color: (cat.passThroughPercent ?? 0) >= 80 ? "var(--green)"
-                    : (cat.passThroughPercent ?? 0) >= 40 ? "var(--blue)" : "var(--accent)"
-                }}>
-                  {cat.passThroughPercent != null ? `${cat.passThroughPercent.toFixed(0)}%` : "—"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+export function CategoryTable({ catalog }: Props) {
+  if (!catalog) return null;
+
+  // Compute avg price per chain per category
+  const byCat: Record<string, Record<string, { sum: number; n: number }>> = {};
+  const catCounts: Record<string, number> = {};
+
+  for (const p of catalog) {
+    const cat = p.category;
+    if (!byCat[cat]) {
+      byCat[cat] = {};
+      catCounts[cat] = 0;
+    }
+    catCounts[cat]++;
+    for (const c of CHAINS) {
+      const price = p.prices[c];
+      if (price != null) {
+        if (!byCat[cat][c]) byCat[cat][c] = { sum: 0, n: 0 };
+        byCat[cat][c].sum += price;
+        byCat[cat][c].n += 1;
+      }
+    }
   }
 
-  const withData = byCategory.filter((c) => c.found > 0);
-  const withoutCount = byCategory.filter((c) => c.found === 0).length;
+  const rows: CatRow[] = Object.entries(byCat).map(([cat, chains]) => {
+    const avgs: Record<string, number | null> = {};
+    for (const c of CHAINS) {
+      const d = chains[c];
+      avgs[c] = d && d.n > 0 ? Math.round(d.sum / d.n * 100) / 100 : null;
+    }
+    const valid = CHAINS.filter((c) => avgs[c] != null);
+    const cheapest = valid.length > 1
+      ? valid.reduce((a, b) => (avgs[a]! < avgs[b]! ? a : b))
+      : null;
+    return { category: cat, avgs, cheapest, productCount: catCounts[cat] };
+  });
 
-  if (withData.length === 0) return null;
+  rows.sort((a, b) => a.category.localeCompare(b.category, "sv"));
 
   return (
     <div className="section-block reveal" id="kategori">
       <div className="section-header">
-        <h2>Bevakade kategorier</h2>
-        <p>Kategorier med insamlad prisdata. Från 1 april visas genomslaget.</p>
+        <h2>Billigast per kategori</h2>
+        <p>Genomsnittligt pris per kedja och kategori. Lägst markerat.</p>
       </div>
-      <div className="chip-grid">
-        {withData
-          .sort((a, b) => b.found - a.found)
-          .map((cat) => (
-            <div key={cat.categoryId} className="chip active">
-              {cat.category}
-              <span className="count">{cat.found}</span>
-            </div>
-          ))}
-        {withoutCount > 0 && (
-          <div className="chip">+{withoutCount} väntar på data</div>
-        )}
+      <div style={{ overflowX: "auto" }}>
+        <table className="price-table">
+          <thead>
+            <tr>
+              <th>Kategori</th>
+              {CHAINS.map((c) => (
+                <th key={c} className="right">{CHAIN_LABELS[c]}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.category}>
+                <td className="product-name">
+                  {row.category}
+                  <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginLeft: "0.4rem" }}>
+                    ({row.productCount})
+                  </span>
+                </td>
+                {CHAINS.map((c) => {
+                  const avg = row.avgs[c];
+                  if (avg == null) {
+                    return <td key={c} className="price-cell missing">&mdash;</td>;
+                  }
+                  const isCheapest = c === row.cheapest;
+                  return (
+                    <td
+                      key={c}
+                      className={`price-cell ${isCheapest ? "cheapest" : ""}`}
+                      style={isCheapest ? { color: CHAIN_COLORS[c] } : undefined}
+                    >
+                      {avg.toFixed(0)} kr
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
