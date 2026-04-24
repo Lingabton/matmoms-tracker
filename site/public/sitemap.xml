@@ -3,7 +3,7 @@
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://matmoms.se/</loc>
-    <lastmod>2026-04-23</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <news:news>
@@ -11,8 +11,8 @@
         <news:name>Matmoms</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-04-23</news:publication_date>
-      <news:title>Jämför matpriser: ICA  Coop och Willys — 70 132 prisobservationer från 33 butiker</news:title>
+      <news:publication_date>2026-04-24</news:publication_date>
+      <news:title>Jämför matpriser: ICA  Coop och Willys — 73 732 prisobservationer från 33 butiker</news:title>
       <news:keywords>matmoms, momssänkning mat 2026, matpriser, ICA, Coop, Willys, livsmedelspriser Sverige</news:keywords>
     </news:news>
   </url>
