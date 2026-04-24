@@ -478,7 +478,7 @@ def build_timeline(c) -> list:
 
 
 def build_products(c, is_post_cut: bool) -> list:
-    """Product-level data for journalist tier."""
+    """Product-level data for journalist tier — latest price per product per store."""
     rows = c.execute(
         text("""
             SELECT p.id, p.canonical_name, p.brand, cat.name_sv,
@@ -490,7 +490,12 @@ def build_products(c, is_post_cut: bool) -> list:
             JOIN stores s ON o.store_id = s.id
             JOIN categories cat ON p.category_id = cat.id
             WHERE o.price IS NOT NULL AND o.price <= 500 AND o.is_available = 1
-            ORDER BY p.canonical_name, s.chain_id, o.observed_at DESC
+              AND o.id IN (
+                  SELECT max(id) FROM price_observations
+                  WHERE price IS NOT NULL AND price <= 500 AND is_available = 1
+                  GROUP BY product_id, store_id
+              )
+            ORDER BY p.canonical_name, s.chain_id
         """)
     ).fetchall()
 

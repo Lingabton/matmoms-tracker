@@ -253,6 +253,34 @@ def best_match(
     return best_item
 
 
+def _trim_payload(raw_data: dict) -> dict:
+    """Keep only essential fields from raw_data to save storage.
+
+    Full API responses are ~5KB each; we only need ~100 bytes for traceability.
+    """
+    trimmed: dict = {}
+    if "api_item" in raw_data:
+        item = raw_data["api_item"]
+        trimmed["api_item"] = {
+            k: item[k] for k in ("name", "ean") if k in item
+        }
+        # Keep brand from whichever key exists
+        for bk in ("brand", "manufacturerName"):
+            if bk in item:
+                trimmed["api_item"][bk] = item[bk]
+                break
+        # Keep size info
+        for sk in ("packSizeDescription", "packageSizeInformation", "packageSize"):
+            if sk in item:
+                trimmed["api_item"][sk] = item[sk]
+                break
+    # Keep non-item keys (api_url, vat_percent, etc.) as-is — they're small
+    for k, v in raw_data.items():
+        if k != "api_item":
+            trimmed[k] = v
+    return trimmed
+
+
 class BaseScraper(ABC):
     """Abstract scraper — one instance per store per scrape run.
 
@@ -389,25 +417,14 @@ class BaseScraper(ABC):
                             member_price=result.member_price,
                             original_price=result.original_price,
                             observed_at=_now(),
-                            raw_payload=json.dumps(result.raw_data, ensure_ascii=False),
+                            raw_payload=json.dumps(
+                                _trim_payload(result.raw_data), ensure_ascii=False
+                            ),
                         )
                         db.add(obs)
                         found += 1
                     else:
-                        # Record unavailability for traceability
-                        obs = PriceObservation(
-                            product_id=product.id,
-                            store_id=self.store.id,
-                            scrape_run_id=scrape_run.id,
-                            price=None,
-                            is_available=False,
-                            observed_at=_now(),
-                            raw_payload=json.dumps(
-                                {"error": result.error, "raw": result.raw_data},
-                                ensure_ascii=False,
-                            ),
-                        )
-                        db.add(obs)
+                        # Log but don't store missed observations
                         missed += 1
                         logger.warning(
                             f"Not found: {product.canonical_name} "
