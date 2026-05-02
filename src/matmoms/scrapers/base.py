@@ -256,7 +256,7 @@ def best_match(
 def _trim_payload(raw_data: dict) -> dict:
     """Keep only essential fields from raw_data to save storage.
 
-    Full API responses are ~5KB each; we only need ~100 bytes for traceability.
+    Full API responses are ~5KB each; we only need ~150 bytes for traceability.
     """
     trimmed: dict = {}
     if "api_item" in raw_data:
@@ -274,6 +274,10 @@ def _trim_payload(raw_data: dict) -> dict:
             if sk in item:
                 trimmed["api_item"][sk] = item[sk]
                 break
+        # Keep country of origin
+        for ok in ("countryOfOriginCodes", "fromSweden", "countryOfOrigin"):
+            if ok in item:
+                trimmed["api_item"][ok] = item[ok]
     # Keep non-item keys (api_url, vat_percent, etc.) as-is — they're small
     for k, v in raw_data.items():
         if k != "api_item":
