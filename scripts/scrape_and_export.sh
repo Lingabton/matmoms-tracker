@@ -51,6 +51,14 @@ else
     git push origin main >> "$LOG" 2>&1
     echo "=== Pushed to GitHub at $(date) ===" >> "$LOG"
 
+    # Monthly snapshot release (1st of each month)
+    if [ "$(date +%d)" = "01" ]; then
+        echo "=== Monthly snapshot export ===" >> "$LOG"
+        bash "$BASE/scripts/export_monthly_snapshot.sh" >> "$LOG" 2>&1 \
+            && echo "=== Monthly snapshot released at $(date) ===" >> "$LOG" \
+            || echo "=== Monthly snapshot FAILED at $(date) ===" >> "$LOG"
+    fi
+
     sleep 60
     INDEXNOW_KEY="${INDEXNOW_KEY:-b08af54ab21b2b92e8c4452202f6ea3e}"
     curl -s -X POST "https://api.indexnow.org/indexnow" \
