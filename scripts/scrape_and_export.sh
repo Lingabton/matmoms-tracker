@@ -10,6 +10,18 @@ source .venv/bin/activate
 mkdir -p "$BASE/logs"
 LOG="$BASE/logs/scrape-$(date +%Y-%m-%d).log"
 
+# Wait for network (max 5 min)
+for i in $(seq 1 30); do
+    curl -s --max-time 5 -o /dev/null https://www.willys.se/ && break
+    echo "$(date): Waiting for network ($i/30)..." >> "$LOG"
+    sleep 10
+done
+
+if ! curl -s --max-time 5 -o /dev/null https://www.willys.se/; then
+    echo "=== ABORTED at $(date): no network after 5 min ===" >> "$LOG"
+    exit 1
+fi
+
 echo "=== Scrape started at $(date) ===" >> "$LOG"
 
 # Kill any running scrape to avoid DB lock
