@@ -73,6 +73,11 @@ class Product(Base):
     vat_applicable: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: __import__('matmoms.tz', fromlist=['now']).now())
 
+    # Links equivalent store-brand products across chains.
+    # E.g. "ICA Krossade Tomater 400g" and "Garant Krossade Tomater 400g"
+    # share group "emv-krossade-tomater-400g". NULL for national brands.
+    product_group: Mapped[str | None] = mapped_column(String(200))
+
     category: Mapped["Category"] = relationship(back_populates="products")
     observations: Mapped[list["PriceObservation"]] = relationship(back_populates="product")
 

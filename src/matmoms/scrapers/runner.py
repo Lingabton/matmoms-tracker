@@ -23,6 +23,47 @@ CHAIN_SCRAPERS = {
     "willys": WillysScraper,
 }
 
+# Store-brand products should only be scraped at their own chain.
+# Maps brand name (lowercase) to the chain_id that carries it.
+CHAIN_EXCLUSIVE_BRANDS: dict[str, str] = {
+    "ica": "ica",
+    "eldorado": "willys",     # Axfood budget line
+    "coop": "coop",
+    "garant": "willys",       # Axfood own brand
+    "änglamark": "coop",      # Coop eco line
+    "xtra": "coop",           # Coop budget line
+}
+
+
+def _is_store_brand_product(p: Product) -> bool:
+    """True if this is a branded store product (name starts with brand).
+
+    Generic produce like 'Bananer 1kg' with brand=Garant is NOT a store
+    brand — it's sold everywhere. Only 'Garant Nötfärs 500g' where the
+    brand appears in the name is a true store brand.
+    """
+    brand = (p.brand or "").strip()
+    if not brand:
+        return False
+    return p.canonical_name.lower().startswith(brand.lower() + " ")
+
+
+def _filter_products_for_chain(
+    products: list[Product], chain_id: str
+) -> list[Product]:
+    """Exclude store-brand products that belong to a different chain.
+
+    Generic produce (brand set but not in name) is kept for all chains.
+    """
+    filtered = []
+    for p in products:
+        brand_lower = (p.brand or "").lower()
+        exclusive_to = CHAIN_EXCLUSIVE_BRANDS.get(brand_lower)
+        if exclusive_to and exclusive_to != chain_id and _is_store_brand_product(p):
+            continue
+        filtered.append(p)
+    return filtered
+
 
 class ScrapeRunner:
     """Orchestrates scraping across chains and stores."""
@@ -133,9 +174,15 @@ class ScrapeRunner:
             try:
                 scraper_cls = CHAIN_SCRAPERS[chain_id]
 
+                chain_products = _filter_products_for_chain(products, chain_id)
+                logger.info(
+                    f"{chain_id}: {len(chain_products)}/{len(products)} products "
+                    f"after excluding other chains' store brands"
+                )
+
                 for store in stores:
                     logger.info(f"Scraping {chain_id}: {store.name}")
-                    scraper = scraper_cls(store, products, browser)
+                    scraper = scraper_cls(store, chain_products, browser)
 
                     try:
                         run = await scraper.run(self.db)
