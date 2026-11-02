@@ -1,0 +1,1172 @@
+[
+  {
+    "category": "dairy-milk",
+    "scb_name": "Mjölk",
+    "coicop": "01.1.4.2.A",
+    "months": 7,
+    "correlation": 0.958,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 136.45,
+        "matmoms_avg_price": 18.24,
+        "matmoms_obs": 422,
+        "scb_yearly_change": -7.6
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 95.1,
+        "scb_index": 126.84,
+        "matmoms_avg_price": 17.35,
+        "matmoms_obs": 3424,
+        "scb_yearly_change": -13.2
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 95.4,
+        "scb_index": 124.81,
+        "matmoms_avg_price": 17.4,
+        "matmoms_obs": 3464,
+        "scb_yearly_change": -13.9
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 94.6,
+        "scb_index": 122.72,
+        "matmoms_avg_price": 17.26,
+        "matmoms_obs": 3392,
+        "scb_yearly_change": -15.6
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 93.3,
+        "scb_index": 121.45,
+        "matmoms_avg_price": 17.01,
+        "matmoms_obs": 3769,
+        "scb_yearly_change": -16.4
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 92.0,
+        "scb_index": 121.24,
+        "matmoms_avg_price": 16.78,
+        "matmoms_obs": 3892,
+        "scb_yearly_change": -16.8
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 91.8,
+        "scb_index": 121.16,
+        "matmoms_avg_price": 16.75,
+        "matmoms_obs": 3183,
+        "scb_yearly_change": -15.9
+      }
+    ]
+  },
+  {
+    "category": "dairy-cream",
+    "scb_name": "Grädde",
+    "coicop": "01.1.4.3.A",
+    "months": 7,
+    "correlation": -0.513,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 147.98,
+        "matmoms_avg_price": 20.16,
+        "matmoms_obs": 332,
+        "scb_yearly_change": -4.2
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 101.8,
+        "scb_index": 136.09,
+        "matmoms_avg_price": 20.53,
+        "matmoms_obs": 2387,
+        "scb_yearly_change": -8.4
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 105.5,
+        "scb_index": 135.54,
+        "matmoms_avg_price": 21.27,
+        "matmoms_obs": 2318,
+        "scb_yearly_change": -9.2
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 103.0,
+        "scb_index": 130.13,
+        "matmoms_avg_price": 20.76,
+        "matmoms_obs": 2117,
+        "scb_yearly_change": -12.6
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 103.6,
+        "scb_index": 129.32,
+        "matmoms_avg_price": 20.89,
+        "matmoms_obs": 2715,
+        "scb_yearly_change": -15.5
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 101.4,
+        "scb_index": 130.46,
+        "matmoms_avg_price": 20.44,
+        "matmoms_obs": 2451,
+        "scb_yearly_change": -14.0
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 102.6,
+        "scb_index": 131.16,
+        "matmoms_avg_price": 20.68,
+        "matmoms_obs": 1865,
+        "scb_yearly_change": -13.1
+      }
+    ]
+  },
+  {
+    "category": "dairy-cheese",
+    "scb_name": "Hårdost",
+    "coicop": "01.1.4.5.A",
+    "months": 7,
+    "correlation": -0.36,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 140.17,
+        "matmoms_avg_price": 48.45,
+        "matmoms_obs": 417,
+        "scb_yearly_change": -6.9
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 93.4,
+        "scb_index": 130.54,
+        "matmoms_avg_price": 45.26,
+        "matmoms_obs": 3075,
+        "scb_yearly_change": -11.8
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 111.7,
+        "scb_index": 129.17,
+        "matmoms_avg_price": 54.14,
+        "matmoms_obs": 3317,
+        "scb_yearly_change": -13.8
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 111.5,
+        "scb_index": 127.78,
+        "matmoms_avg_price": 54.03,
+        "matmoms_obs": 3319,
+        "scb_yearly_change": -14.8
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 98.8,
+        "scb_index": 127.61,
+        "matmoms_avg_price": 47.89,
+        "matmoms_obs": 3683,
+        "scb_yearly_change": -14.6
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 107.9,
+        "scb_index": 126.44,
+        "matmoms_avg_price": 52.29,
+        "matmoms_obs": 3854,
+        "scb_yearly_change": -14.4
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 104.4,
+        "scb_index": 126.19,
+        "matmoms_avg_price": 50.56,
+        "matmoms_obs": 2942,
+        "scb_yearly_change": -14.6
+      }
+    ]
+  },
+  {
+    "category": "dairy-butter",
+    "scb_name": "Olivolja",
+    "coicop": "01.1.5.1.A",
+    "months": 7,
+    "correlation": -0.151,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 133.04,
+        "matmoms_avg_price": 50.32,
+        "matmoms_obs": 111,
+        "scb_yearly_change": -5.8
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 112.6,
+        "scb_index": 125.08,
+        "matmoms_avg_price": 56.67,
+        "matmoms_obs": 937,
+        "scb_yearly_change": -10.6
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 127.0,
+        "scb_index": 124.74,
+        "matmoms_avg_price": 63.92,
+        "matmoms_obs": 1027,
+        "scb_yearly_change": -9.8
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 119.0,
+        "scb_index": 123.75,
+        "matmoms_avg_price": 59.87,
+        "matmoms_obs": 949,
+        "scb_yearly_change": -9.2
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 104.1,
+        "scb_index": 123.65,
+        "matmoms_avg_price": 52.4,
+        "matmoms_obs": 962,
+        "scb_yearly_change": -9.9
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 101.8,
+        "scb_index": 123.77,
+        "matmoms_avg_price": 51.23,
+        "matmoms_obs": 949,
+        "scb_yearly_change": -8.8
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 102.5,
+        "scb_index": 119.57,
+        "matmoms_avg_price": 51.6,
+        "matmoms_obs": 814,
+        "scb_yearly_change": -11.1
+      }
+    ]
+  },
+  {
+    "category": "meat-beef",
+    "scb_name": "Nötkött",
+    "coicop": "01.1.2.2.A",
+    "months": 7,
+    "correlation": 0.224,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 170.85,
+        "matmoms_avg_price": 98.96,
+        "matmoms_obs": 132,
+        "scb_yearly_change": 24.8
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 97.9,
+        "scb_index": 162.63,
+        "matmoms_avg_price": 96.84,
+        "matmoms_obs": 660,
+        "scb_yearly_change": 14.2
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 97.1,
+        "scb_index": 166.39,
+        "matmoms_avg_price": 96.07,
+        "matmoms_obs": 750,
+        "scb_yearly_change": 14.3
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 94.4,
+        "scb_index": 165.37,
+        "matmoms_avg_price": 93.44,
+        "matmoms_obs": 747,
+        "scb_yearly_change": 13.0
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 92.2,
+        "scb_index": 167.37,
+        "matmoms_avg_price": 91.2,
+        "matmoms_obs": 804,
+        "scb_yearly_change": 13.7
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 94.0,
+        "scb_index": 167.92,
+        "matmoms_avg_price": 93.07,
+        "matmoms_obs": 913,
+        "scb_yearly_change": 12.4
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 93.1,
+        "scb_index": 165.03,
+        "matmoms_avg_price": 92.14,
+        "matmoms_obs": 934,
+        "scb_yearly_change": 9.9
+      }
+    ]
+  },
+  {
+    "category": "meat-pork",
+    "scb_name": "Griskött",
+    "coicop": "01.1.2.2.B",
+    "months": 7,
+    "correlation": -0.572,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 130.25,
+        "matmoms_avg_price": 64.63,
+        "matmoms_obs": 257,
+        "scb_yearly_change": 0.4
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 91.1,
+        "scb_index": 126.07,
+        "matmoms_avg_price": 58.87,
+        "matmoms_obs": 1441,
+        "scb_yearly_change": -5.3
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 110.1,
+        "scb_index": 126.05,
+        "matmoms_avg_price": 71.17,
+        "matmoms_obs": 1264,
+        "scb_yearly_change": -3.7
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 110.9,
+        "scb_index": 122.82,
+        "matmoms_avg_price": 71.67,
+        "matmoms_obs": 1218,
+        "scb_yearly_change": -9.7
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 108.3,
+        "scb_index": 125.67,
+        "matmoms_avg_price": 69.99,
+        "matmoms_obs": 1505,
+        "scb_yearly_change": -11.5
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 115.3,
+        "scb_index": 124.79,
+        "matmoms_avg_price": 74.55,
+        "matmoms_obs": 1501,
+        "scb_yearly_change": -9.6
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 122.9,
+        "scb_index": 123.93,
+        "matmoms_avg_price": 79.43,
+        "matmoms_obs": 1119,
+        "scb_yearly_change": -7.6
+      }
+    ]
+  },
+  {
+    "category": "meat-chicken",
+    "scb_name": "Fjäderfä",
+    "coicop": "01.1.2.2.D",
+    "months": 7,
+    "correlation": -0.313,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 129.98,
+        "matmoms_avg_price": 100.58,
+        "matmoms_obs": 335,
+        "scb_yearly_change": 4.1
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 101.6,
+        "scb_index": 122.59,
+        "matmoms_avg_price": 102.2,
+        "matmoms_obs": 1979,
+        "scb_yearly_change": -1.9
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 108.2,
+        "scb_index": 123.98,
+        "matmoms_avg_price": 108.8,
+        "matmoms_obs": 1899,
+        "scb_yearly_change": -0.7
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 106.3,
+        "scb_index": 124.14,
+        "matmoms_avg_price": 106.93,
+        "matmoms_obs": 1659,
+        "scb_yearly_change": -1.4
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 103.1,
+        "scb_index": 124.12,
+        "matmoms_avg_price": 103.68,
+        "matmoms_obs": 2070,
+        "scb_yearly_change": -1.8
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 109.4,
+        "scb_index": 125.33,
+        "matmoms_avg_price": 110.06,
+        "matmoms_obs": 2003,
+        "scb_yearly_change": -2.0
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 103.8,
+        "scb_index": 122.9,
+        "matmoms_avg_price": 104.4,
+        "matmoms_obs": 1684,
+        "scb_yearly_change": -3.1
+      }
+    ]
+  },
+  {
+    "category": "fish",
+    "scb_name": "Annan fisk",
+    "coicop": "01.1.3.1.B",
+    "months": 7,
+    "correlation": 0.331,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 150.63,
+        "matmoms_avg_price": 67.95,
+        "matmoms_obs": 324,
+        "scb_yearly_change": 5.4
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 89.0,
+        "scb_index": 143.02,
+        "matmoms_avg_price": 60.48,
+        "matmoms_obs": 2604,
+        "scb_yearly_change": -0.5
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 94.3,
+        "scb_index": 144.58,
+        "matmoms_avg_price": 64.11,
+        "matmoms_obs": 2141,
+        "scb_yearly_change": 0.1
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 92.9,
+        "scb_index": 146.64,
+        "matmoms_avg_price": 63.13,
+        "matmoms_obs": 1974,
+        "scb_yearly_change": 1.7
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 91.5,
+        "scb_index": 151.94,
+        "matmoms_avg_price": 62.16,
+        "matmoms_obs": 2764,
+        "scb_yearly_change": 6.5
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 92.6,
+        "scb_index": 152.32,
+        "matmoms_avg_price": 62.9,
+        "matmoms_obs": 2094,
+        "scb_yearly_change": 6.5
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 98.4,
+        "scb_index": 148.65,
+        "matmoms_avg_price": 66.87,
+        "matmoms_obs": 1514,
+        "scb_yearly_change": 5.6
+      }
+    ]
+  },
+  {
+    "category": "produce-vegetables",
+    "scb_name": "Tomater",
+    "coicop": "01.1.7.2.A",
+    "months": 7,
+    "correlation": -0.329,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 134.95,
+        "matmoms_avg_price": 26.65,
+        "matmoms_obs": 639,
+        "scb_yearly_change": -1.7
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 94.8,
+        "scb_index": 139.71,
+        "matmoms_avg_price": 25.26,
+        "matmoms_obs": 4915,
+        "scb_yearly_change": 7.2
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 97.9,
+        "scb_index": 115.51,
+        "matmoms_avg_price": 26.08,
+        "matmoms_obs": 4857,
+        "scb_yearly_change": 1.4
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 99.8,
+        "scb_index": 107.51,
+        "matmoms_avg_price": 26.59,
+        "matmoms_obs": 4722,
+        "scb_yearly_change": 0.8
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 98.7,
+        "scb_index": 113.31,
+        "matmoms_avg_price": 26.31,
+        "matmoms_obs": 5568,
+        "scb_yearly_change": 1.7
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 100.2,
+        "scb_index": 120.25,
+        "matmoms_avg_price": 26.69,
+        "matmoms_obs": 5729,
+        "scb_yearly_change": 7.6
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 100.2,
+        "scb_index": 134.15,
+        "matmoms_avg_price": 26.69,
+        "matmoms_obs": 4759,
+        "scb_yearly_change": 15.8
+      }
+    ]
+  },
+  {
+    "category": "produce-fruit",
+    "scb_name": "Bananer",
+    "coicop": "01.1.6.1.A",
+    "months": 7,
+    "correlation": 0.168,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 106.49,
+        "matmoms_avg_price": 32.53,
+        "matmoms_obs": 548,
+        "scb_yearly_change": -11.6
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 98.6,
+        "scb_index": 103.58,
+        "matmoms_avg_price": 32.07,
+        "matmoms_obs": 3873,
+        "scb_yearly_change": -12.0
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 103.7,
+        "scb_index": 104.38,
+        "matmoms_avg_price": 33.73,
+        "matmoms_obs": 4171,
+        "scb_yearly_change": -14.6
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 107.2,
+        "scb_index": 103.64,
+        "matmoms_avg_price": 34.86,
+        "matmoms_obs": 4162,
+        "scb_yearly_change": -15.2
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 109.1,
+        "scb_index": 105.23,
+        "matmoms_avg_price": 35.49,
+        "matmoms_obs": 4882,
+        "scb_yearly_change": -13.1
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 109.5,
+        "scb_index": 104.21,
+        "matmoms_avg_price": 35.63,
+        "matmoms_obs": 5030,
+        "scb_yearly_change": -11.4
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 110.1,
+        "scb_index": 106.78,
+        "matmoms_avg_price": 35.8,
+        "matmoms_obs": 4008,
+        "scb_yearly_change": -9.1
+      }
+    ]
+  },
+  {
+    "category": "pantry-pasta",
+    "scb_name": "Makaroner, nudlar, couscous osv.",
+    "coicop": "01.1.1.5.A",
+    "months": 7,
+    "correlation": 0.13,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 128.48,
+        "matmoms_avg_price": 24.24,
+        "matmoms_obs": 432,
+        "scb_yearly_change": -4.7
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 95.2,
+        "scb_index": 116.63,
+        "matmoms_avg_price": 23.08,
+        "matmoms_obs": 3332,
+        "scb_yearly_change": -14.3
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 99.4,
+        "scb_index": 120.17,
+        "matmoms_avg_price": 24.09,
+        "matmoms_obs": 2630,
+        "scb_yearly_change": -11.7
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 98.4,
+        "scb_index": 122.83,
+        "matmoms_avg_price": 23.86,
+        "matmoms_obs": 2514,
+        "scb_yearly_change": -9.4
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 97.5,
+        "scb_index": 121.19,
+        "matmoms_avg_price": 23.63,
+        "matmoms_obs": 3384,
+        "scb_yearly_change": -10.4
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 102.7,
+        "scb_index": 118.19,
+        "matmoms_avg_price": 24.89,
+        "matmoms_obs": 2361,
+        "scb_yearly_change": -9.2
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 100.7,
+        "scb_index": 118.23,
+        "matmoms_avg_price": 24.4,
+        "matmoms_obs": 1794,
+        "scb_yearly_change": -10.6
+      }
+    ]
+  },
+  {
+    "category": "pantry-flour",
+    "scb_name": "Vetebröd",
+    "coicop": "01.1.1.3.A",
+    "months": 7,
+    "correlation": 0.212,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 124.41,
+        "matmoms_avg_price": 23.09,
+        "matmoms_obs": 593,
+        "scb_yearly_change": 2.3
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 100.6,
+        "scb_index": 116.63,
+        "matmoms_avg_price": 23.23,
+        "matmoms_obs": 4100,
+        "scb_yearly_change": -4.6
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 101.2,
+        "scb_index": 115.0,
+        "matmoms_avg_price": 23.37,
+        "matmoms_obs": 3284,
+        "scb_yearly_change": -5.0
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 100.0,
+        "scb_index": 112.03,
+        "matmoms_avg_price": 23.1,
+        "matmoms_obs": 3080,
+        "scb_yearly_change": -6.1
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 98.6,
+        "scb_index": 112.18,
+        "matmoms_avg_price": 22.77,
+        "matmoms_obs": 3892,
+        "scb_yearly_change": -6.1
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 100.0,
+        "scb_index": 113.57,
+        "matmoms_avg_price": 23.08,
+        "matmoms_obs": 3305,
+        "scb_yearly_change": -6.5
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 99.7,
+        "scb_index": 116.72,
+        "matmoms_avg_price": 23.03,
+        "matmoms_obs": 2524,
+        "scb_yearly_change": -3.0
+      }
+    ]
+  },
+  {
+    "category": "pantry-oil",
+    "scb_name": "Andra matoljor",
+    "coicop": "01.1.5.1.B",
+    "months": 7,
+    "correlation": -0.614,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 132.84,
+        "matmoms_avg_price": 64.55,
+        "matmoms_obs": 231,
+        "scb_yearly_change": -5.9
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 105.5,
+        "scb_index": 125.26,
+        "matmoms_avg_price": 68.13,
+        "matmoms_obs": 1561,
+        "scb_yearly_change": -10.5
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 114.2,
+        "scb_index": 125.58,
+        "matmoms_avg_price": 73.73,
+        "matmoms_obs": 1410,
+        "scb_yearly_change": -9.2
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 119.3,
+        "scb_index": 126.2,
+        "matmoms_avg_price": 77.02,
+        "matmoms_obs": 1204,
+        "scb_yearly_change": -7.4
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 121.9,
+        "scb_index": 126.34,
+        "matmoms_avg_price": 78.7,
+        "matmoms_obs": 1430,
+        "scb_yearly_change": -8.0
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 118.2,
+        "scb_index": 126.79,
+        "matmoms_avg_price": 76.32,
+        "matmoms_obs": 1307,
+        "scb_yearly_change": -6.6
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 120.1,
+        "scb_index": 126.77,
+        "matmoms_avg_price": 77.5,
+        "matmoms_obs": 999,
+        "scb_yearly_change": -5.7
+      }
+    ]
+  },
+  {
+    "category": "pantry-sauces",
+    "scb_name": "Såser, smaksättningar",
+    "coicop": "01.1.9.3.A",
+    "months": 7,
+    "correlation": -0.661,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 124.54,
+        "matmoms_avg_price": 23.45,
+        "matmoms_obs": 800,
+        "scb_yearly_change": -0.2
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 99.0,
+        "scb_index": 117.92,
+        "matmoms_avg_price": 23.21,
+        "matmoms_obs": 5382,
+        "scb_yearly_change": -6.1
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 104.0,
+        "scb_index": 117.86,
+        "matmoms_avg_price": 24.38,
+        "matmoms_obs": 4654,
+        "scb_yearly_change": -6.9
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 106.0,
+        "scb_index": 116.5,
+        "matmoms_avg_price": 24.86,
+        "matmoms_obs": 4397,
+        "scb_yearly_change": -7.7
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 103.1,
+        "scb_index": 118.2,
+        "matmoms_avg_price": 24.17,
+        "matmoms_obs": 5451,
+        "scb_yearly_change": -7.1
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 105.9,
+        "scb_index": 117.53,
+        "matmoms_avg_price": 24.84,
+        "matmoms_obs": 4812,
+        "scb_yearly_change": -7.2
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 106.4,
+        "scb_index": 115.81,
+        "matmoms_avg_price": 24.94,
+        "matmoms_obs": 3891,
+        "scb_yearly_change": -3.9
+      }
+    ]
+  },
+  {
+    "category": "pantry-canned",
+    "scb_name": "Konserverade eller processade grönsaker",
+    "coicop": "01.1.7.8.A",
+    "months": 7,
+    "correlation": 0.737,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 120.17,
+        "matmoms_avg_price": 22.81,
+        "matmoms_obs": 321,
+        "scb_yearly_change": -3.4
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 99.0,
+        "scb_index": 115.08,
+        "matmoms_avg_price": 22.58,
+        "matmoms_obs": 2264,
+        "scb_yearly_change": -8.0
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 90.1,
+        "scb_index": 115.1,
+        "matmoms_avg_price": 20.56,
+        "matmoms_obs": 2165,
+        "scb_yearly_change": -7.8
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 81.6,
+        "scb_index": 114.61,
+        "matmoms_avg_price": 18.61,
+        "matmoms_obs": 1813,
+        "scb_yearly_change": -8.8
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 84.3,
+        "scb_index": 115.32,
+        "matmoms_avg_price": 19.23,
+        "matmoms_obs": 2680,
+        "scb_yearly_change": -7.9
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 79.3,
+        "scb_index": 114.79,
+        "matmoms_avg_price": 18.08,
+        "matmoms_obs": 1912,
+        "scb_yearly_change": -7.6
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 77.1,
+        "scb_index": 112.5,
+        "matmoms_avg_price": 17.58,
+        "matmoms_obs": 1467,
+        "scb_yearly_change": -9.2
+      }
+    ]
+  },
+  {
+    "category": "cereals",
+    "scb_name": "Frukostflingor",
+    "coicop": "01.1.1.4.A",
+    "months": 7,
+    "correlation": -0.58,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 129.23,
+        "matmoms_avg_price": 39.75,
+        "matmoms_obs": 343,
+        "scb_yearly_change": 0.1
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 100.8,
+        "scb_index": 122.85,
+        "matmoms_avg_price": 40.06,
+        "matmoms_obs": 2445,
+        "scb_yearly_change": -5.7
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 101.8,
+        "scb_index": 123.48,
+        "matmoms_avg_price": 40.46,
+        "matmoms_obs": 2113,
+        "scb_yearly_change": -4.7
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 103.4,
+        "scb_index": 124.31,
+        "matmoms_avg_price": 41.09,
+        "matmoms_obs": 1994,
+        "scb_yearly_change": -4.2
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 101.7,
+        "scb_index": 124.62,
+        "matmoms_avg_price": 40.41,
+        "matmoms_obs": 2679,
+        "scb_yearly_change": -5.1
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 102.2,
+        "scb_index": 122.75,
+        "matmoms_avg_price": 40.63,
+        "matmoms_obs": 1855,
+        "scb_yearly_change": -6.7
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 105.5,
+        "scb_index": 122.46,
+        "matmoms_avg_price": 41.92,
+        "matmoms_obs": 1238,
+        "scb_yearly_change": -7.0
+      }
+    ]
+  },
+  {
+    "category": "bread-fresh",
+    "scb_name": "Mjukt bröd",
+    "coicop": "01.1.1.3.E",
+    "months": 7,
+    "correlation": 0.651,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 116.25,
+        "matmoms_avg_price": 25.32,
+        "matmoms_obs": 190,
+        "scb_yearly_change": -3.1
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 98.6,
+        "scb_index": 109.72,
+        "matmoms_avg_price": 24.97,
+        "matmoms_obs": 1461,
+        "scb_yearly_change": -7.2
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 97.6,
+        "scb_index": 110.66,
+        "matmoms_avg_price": 24.71,
+        "matmoms_obs": 1518,
+        "scb_yearly_change": -6.9
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 93.0,
+        "scb_index": 109.53,
+        "matmoms_avg_price": 23.55,
+        "matmoms_obs": 1849,
+        "scb_yearly_change": -8.1
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 92.3,
+        "scb_index": 110.18,
+        "matmoms_avg_price": 23.36,
+        "matmoms_obs": 2058,
+        "scb_yearly_change": -8.2
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 92.9,
+        "scb_index": 109.7,
+        "matmoms_avg_price": 23.53,
+        "matmoms_obs": 2310,
+        "scb_yearly_change": -7.3
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 95.0,
+        "scb_index": 110.75,
+        "matmoms_avg_price": 24.05,
+        "matmoms_obs": 1835,
+        "scb_yearly_change": -6.5
+      }
+    ]
+  },
+  {
+    "category": "frozen-vegetables",
+    "scb_name": "Frysta grönsaker",
+    "coicop": "01.1.7.6.A",
+    "months": 7,
+    "correlation": 0.729,
+    "data": [
+      {
+        "month": "2026M03",
+        "matmoms_index": 100.0,
+        "scb_index": 125.26,
+        "matmoms_avg_price": 25.37,
+        "matmoms_obs": 198,
+        "scb_yearly_change": 1.1
+      },
+      {
+        "month": "2026M04",
+        "matmoms_index": 96.8,
+        "scb_index": 119.51,
+        "matmoms_avg_price": 24.55,
+        "matmoms_obs": 1143,
+        "scb_yearly_change": -6.1
+      },
+      {
+        "month": "2026M05",
+        "matmoms_index": 98.4,
+        "scb_index": 120.18,
+        "matmoms_avg_price": 24.97,
+        "matmoms_obs": 921,
+        "scb_yearly_change": -6.5
+      },
+      {
+        "month": "2026M06",
+        "matmoms_index": 97.8,
+        "scb_index": 119.86,
+        "matmoms_avg_price": 24.81,
+        "matmoms_obs": 824,
+        "scb_yearly_change": -6.8
+      },
+      {
+        "month": "2026M07",
+        "matmoms_index": 97.2,
+        "scb_index": 118.18,
+        "matmoms_avg_price": 24.65,
+        "matmoms_obs": 1072,
+        "scb_yearly_change": -7.8
+      },
+      {
+        "month": "2026M08",
+        "matmoms_index": 98.9,
+        "scb_index": 118.27,
+        "matmoms_avg_price": 25.08,
+        "matmoms_obs": 963,
+        "scb_yearly_change": -0.9
+      },
+      {
+        "month": "2026M09",
+        "matmoms_index": 97.3,
+        "scb_index": 116.0,
+        "matmoms_avg_price": 24.69,
+        "matmoms_obs": 676,
+        "scb_yearly_change": -7.5
+      }
+    ]
+  }
+]
