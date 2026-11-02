@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Compare Matmoms price data with SCB's official KPI food indices.
 
-Maps Matmoms categories to SCB COICOP groups, computes monthly price
-indices from our data, and compares them with SCB's official figures.
+Uses two SCB data sources:
+- KPI2020EPG01M: Detailed 5-level COICOP (e.g. "01.1.4.2.A" = Mjölk)
+- KPI2020COICOPM: Aggregated COICOP (e.g. "01.1.4" = Mejeri totalt)
+
+Computes a weighted Matmoms food price index and compares with SCB's
+total food KPI ("01" = Livsmedel och alkoholfria drycker).
 
 Output: data/scb_comparison.json for the site, and a summary to stdout.
 """
@@ -13,75 +17,83 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 DB_PATH = BASE / "matmoms.db"
-SCB_PATH = BASE / "data" / "scb_kpi_food.json"
+SCB_DETAIL_PATH = BASE / "data" / "scb_kpi_food.json"
+SCB_AGG_PATH = BASE / "data" / "scb_kpi_coicop.json"
 OUT_PATH = BASE / "data" / "scb_comparison.json"
 
-# Map Matmoms category IDs to SCB COICOP codes
-# SCB uses 5-level COICOP codes like "01.1.4.2.A" = Mjölk
-CATEGORY_TO_COICOP = {
-    "dairy-milk":       ("01.1.4.2.A", "Mjölk"),
-    "dairy-cream":      ("01.1.4.3.A", "Grädde"),
-    "dairy-cheese":     ("01.1.4.5.A", "Hårdost"),
-    "dairy-yoghurt":    ("01.1.4.6.A", "Filmjölk och yoghurt"),
-    "dairy-butter":     ("01.1.5.1.A", "Olivolja"),  # closest: fats
-    "dairy-eggs":       ("01.1.4.8.A", "Ägg"),
-    "meat-beef":        ("01.1.2.2.A", "Nötkött"),
-    "meat-pork":        ("01.1.2.2.B", "Griskött"),
-    "meat-chicken":     ("01.1.2.2.D", "Fjäderfä"),
-    "meat-minced":      ("01.1.2.5.A", "Blandfärs"),
-    "chark":            ("01.1.2.3.A", "Skinka, bacon och salami"),
-    "fish":             ("01.1.3.1.B", "Annan fisk"),
-    "produce-vegetables": ("01.1.7.2.A", "Tomater"),  # proxy
-    "produce-fruit":    ("01.1.6.1.A", "Bananer"),    # proxy
-    "pantry-pasta":     ("01.1.1.5.A", "Makaroner, nudlar, couscous osv."),
-    "pantry-flour":     ("01.1.1.3.A", "Vetebröd"),   # closest
-    "pantry-oil":       ("01.1.5.1.B", "Andra matoljor"),
-    "pantry-sauces":    ("01.1.9.3.A", "Såser, smaksättningar"),
-    "pantry-canned":    ("01.1.7.8.A", "Konserverade eller processade grönsaker"),
-    "cereals":          ("01.1.1.4.A", "Frukostflingor"),
-    "bread-crisp":      ("01.1.1.3.D", "Hårt bröd"),
-    "bread-fresh":      ("01.1.1.3.E", "Mjukt bröd"),
-    "juice":            ("01.1.9.1.A", "Juice och nektar"),
-    "soda":             ("01.2.5.0.A", "Läsk och saft"),
-    "water":            ("01.2.3.0.A", "Mineralvatten, ej smaksatt"),
-    "chips":            ("01.1.7.9.A", "Potatischips"),
-    "chocolate":        ("01.1.8.5.A", "Choklad"),
-    "candy":            ("01.1.8.6.A", "Glass och is"),
-    "ice-cream":        ("01.1.8.6.A", "Glass och is"),
-    "frozen-vegetables": ("01.1.7.6.A", "Frysta grönsaker"),
-    "ready-meals":      ("01.1.9.1.A", "Färdiglagad mat"),
-    "baby-food":        ("01.1.9.2.A", "Barnmat"),
+# Map Matmoms categories to SCB COICOP codes.
+# Two tiers: detailed (5-level from EPG01M) and aggregated (from COICOPM).
+# "detail" = best match from the detailed table
+# "agg" = aggregated group for broader comparison
+CATEGORY_MAP = {
+    # Mejeri
+    "dairy-milk":       {"detail": "01.1.4.2.A", "agg": "01.1.4",  "name": "Mjölk"},
+    "dairy-cream":      {"detail": "01.1.4.3.A", "agg": "01.1.4",  "name": "Grädde"},
+    "dairy-cheese":     {"detail": "01.1.4.5.A", "agg": "01.1.4",  "name": "Ost"},
+    "dairy-yoghurt":    {"detail": "01.1.4.6.A", "agg": "01.1.4",  "name": "Yoghurt & fil"},
+    "dairy-eggs":       {"detail": "01.1.4.8.A", "agg": "01.1.4",  "name": "Ägg"},
+    "dairy-butter":     {"detail": "01.1.5.2.A", "agg": "01.1.5",  "name": "Smör"},
+    # Kött
+    "meat-beef":        {"detail": "01.1.2.2.A", "agg": "01.1.2",  "name": "Nötkött"},
+    "meat-pork":        {"detail": "01.1.2.2.B", "agg": "01.1.2",  "name": "Fläskkött"},
+    "meat-chicken":     {"detail": "01.1.2.2.D", "agg": "01.1.2",  "name": "Kyckling"},
+    "meat-minced":      {"detail": "01.1.2.5.A", "agg": "01.1.2",  "name": "Blandfärs"},
+    "chark":            {"detail": "01.1.2.3.A", "agg": "01.1.2",  "name": "Chark & pålägg"},
+    # Fisk
+    "fish":             {"detail": "01.1.3.1.B", "agg": "01.1.3",  "name": "Fisk"},
+    # Frukt & grönt
+    "produce-vegetables": {"detail": "01.1.7.2.A", "agg": "01.1.7", "name": "Grönsaker"},
+    "produce-fruit":    {"detail": "01.1.6.1.A", "agg": "01.1.6",  "name": "Frukt"},
+    "frozen-vegetables": {"detail": "01.1.7.8.A", "agg": "01.1.7", "name": "Frysta grönsaker"},
+    # Skafferi
+    "pantry-pasta":     {"detail": "01.1.1.5.A", "agg": "01.1.1",  "name": "Pasta & ris"},
+    "pantry-flour":     {"detail": "01.1.1.2.A", "agg": "01.1.1",  "name": "Mjöl"},
+    "pantry-oil":       {"detail": "01.1.5.1.B", "agg": "01.1.5",  "name": "Matolja"},
+    "pantry-sauces":    {"detail": "01.1.9.3.A", "agg": "01.1.9",  "name": "Såser & kryddor"},
+    "pantry-canned":    {"detail": "01.1.7.9.A", "agg": "01.1.7",  "name": "Konserver"},
+    # Bröd & flingor
+    "cereals":          {"detail": "01.1.1.4.A", "agg": "01.1.1",  "name": "Flingor"},
+    "bread-crisp":      {"detail": "01.1.1.3.D", "agg": "01.1.1",  "name": "Knäckebröd"},
+    "bread-fresh":      {"detail": "01.1.1.3.E", "agg": "01.1.1",  "name": "Färskt bröd"},
+    # Drycker
+    "juice":            {"detail": "01.2.1.0.A", "agg": "01.2.1",  "name": "Juice"},
+    "soda":             {"detail": "01.2.6.0.A", "agg": "01.2.6",  "name": "Läsk"},
+    "water":            {"detail": "01.2.5.0.A", "agg": "01.2.5",  "name": "Vatten"},
+    # Godis & snacks
+    "chips":            {"detail": "01.1.7.9.B", "agg": "01.1.8",  "name": "Chips"},
+    "chocolate":        {"detail": "01.1.8.5.A", "agg": "01.1.8",  "name": "Choklad"},
+    "candy":            {"detail": "01.1.8.9.A", "agg": "01.1.8",  "name": "Godis"},
+    "ice-cream":        {"detail": "01.1.8.6.A", "agg": "01.1.8",  "name": "Glass"},
+    # Övrigt
+    "ready-meals":      {"detail": "01.1.9.1.A", "agg": "01.1.9",  "name": "Färdigrätter"},
+    "baby-food":        {"detail": "01.1.9.2.A", "agg": "01.1.9",  "name": "Barnmat"},
 }
 
 
-def load_scb_data() -> dict[str, dict[str, dict]]:
-    """Load SCB KPI data into {coicop_code: {month: {index, change}}}."""
-    with open(SCB_PATH) as f:
+def load_scb(path: Path) -> dict[str, dict[str, dict]]:
+    """Load SCB data into {code: {month: {index, change}}}."""
+    with open(path) as f:
         raw = json.load(f)
 
     result: dict[str, dict[str, dict]] = {}
     for row in raw["data"]:
-        coicop = row["key"][0]
-        month = row["key"][1]  # "2026M04"
-        index_val = row["values"][0]
-        change_val = row["values"][1]
+        code = row["key"][0]
+        month = row["key"][1]
+        vals = row["values"]
 
-        if coicop not in result:
-            result[coicop] = {}
+        if code not in result:
+            result[code] = {}
 
-        result[coicop][month] = {
-            "index": float(index_val) if index_val and index_val != ".." else None,
-            "yearly_change": float(change_val) if change_val and change_val != ".." else None,
+        result[code][month] = {
+            "index": float(vals[0]) if vals[0] and vals[0] != ".." else None,
+            "yearly_change": float(vals[1]) if len(vals) > 1 and vals[1] and vals[1] != ".." else None,
         }
 
     return result
 
 
-def compute_matmoms_indices(db: sqlite3.Connection) -> dict[str, dict[str, dict]]:
-    """Compute monthly average prices per category from Matmoms data.
-
-    Returns {category_id: {month: {avg_price, n_obs, change_pct}}}.
-    """
+def compute_matmoms_monthly(db: sqlite3.Connection) -> dict[str, dict[str, dict]]:
+    """Compute monthly average prices per category (excluding campaigns)."""
     query = """
         SELECT
             p.category_id,
@@ -103,121 +115,200 @@ def compute_matmoms_indices(db: sqlite3.Connection) -> dict[str, dict[str, dict]
             result[cat] = {}
         result[cat][month] = {"avg_price": round(avg_price, 2), "n_obs": n_obs}
 
-    # Compute month-over-month and index (base = first month)
+    # Add index (base = first available month = 100)
     for cat, months in result.items():
         sorted_months = sorted(months.keys())
         if not sorted_months:
             continue
-
-        base_price = months[sorted_months[0]]["avg_price"]
-        prev_price = None
-
+        base = months[sorted_months[0]]["avg_price"]
         for m in sorted_months:
-            price = months[m]["avg_price"]
-            months[m]["index"] = round(price / base_price * 100, 1) if base_price else None
-
-            if prev_price:
-                months[m]["mom_change"] = round((price - prev_price) / prev_price * 100, 2)
-            else:
-                months[m]["mom_change"] = None
-            prev_price = price
+            months[m]["index"] = round(months[m]["avg_price"] / base * 100, 2) if base else None
 
     return result
 
 
-def compare(scb: dict, matmoms: dict) -> list[dict]:
-    """Compare SCB and Matmoms indices for mapped categories."""
-    comparisons = []
+def compute_total_index(matmoms: dict[str, dict[str, dict]]) -> dict[str, dict]:
+    """Compute a weighted total Matmoms food index across all categories.
 
-    for cat_id, (coicop, scb_name) in CATEGORY_TO_COICOP.items():
+    Weights by observation count (proxy for product coverage).
+    """
+    # Collect all months
+    all_months: set[str] = set()
+    for months in matmoms.values():
+        all_months.update(months.keys())
+
+    totals: dict[str, dict] = {}
+    for month in sorted(all_months):
+        weighted_sum = 0.0
+        total_weight = 0
+        for cat, months in matmoms.items():
+            if month in months:
+                entry = months[month]
+                if entry["index"] is not None:
+                    weighted_sum += entry["index"] * entry["n_obs"]
+                    total_weight += entry["n_obs"]
+
+        if total_weight > 0:
+            totals[month] = {
+                "index": round(weighted_sum / total_weight, 2),
+                "n_obs": total_weight,
+            }
+
+    return totals
+
+
+def pearson(xs: list[float], ys: list[float]) -> float | None:
+    """Compute Pearson correlation coefficient."""
+    n = len(xs)
+    if n < 3:
+        return None
+    mx = sum(xs) / n
+    my = sum(ys) / n
+    cov = sum((a - mx) * (b - my) for a, b in zip(xs, ys))
+    sx = sum((x - mx) ** 2 for x in xs) ** 0.5
+    sy = sum((y - my) ** 2 for y in ys) ** 0.5
+    if sx == 0 or sy == 0:
+        return None
+    return round(cov / (sx * sy), 3)
+
+
+def compare_categories(
+    scb_detail: dict, scb_agg: dict, matmoms: dict
+) -> list[dict]:
+    """Compare each Matmoms category with its SCB counterpart."""
+    results = []
+
+    for cat_id, mapping in CATEGORY_MAP.items():
         if cat_id not in matmoms:
             continue
-        if coicop not in scb:
+
+        mm = matmoms[cat_id]
+
+        # Try detailed match first, fall back to aggregated
+        scb_code = mapping["detail"]
+        scb_data = scb_detail.get(scb_code, {})
+        match_level = "detail"
+
+        if not scb_data:
+            scb_code = mapping["agg"]
+            scb_data = scb_agg.get(scb_code, {})
+            match_level = "aggregated"
+
+        if not scb_data:
             continue
 
-        mm_data = matmoms[cat_id]
-        scb_data = scb[coicop]
-
-        # Find overlapping months (Matmoms starts March 2026)
-        common_months = sorted(set(mm_data.keys()) & set(scb_data.keys()))
-        if not common_months:
+        common = sorted(set(mm.keys()) & set(scb_data.keys()))
+        if not common:
             continue
 
         monthly = []
-        for m in common_months:
-            mm = mm_data[m]
-            sc = scb_data[m]
+        mm_indices = []
+        scb_indices = []
+        for m in common:
+            mm_idx = mm[m].get("index")
+            scb_idx = scb_data[m].get("index")
             monthly.append({
                 "month": m,
-                "matmoms_index": mm.get("index"),
-                "scb_index": sc.get("index"),
-                "matmoms_avg_price": mm["avg_price"],
-                "matmoms_obs": mm["n_obs"],
-                "scb_yearly_change": sc.get("yearly_change"),
+                "matmoms_index": mm_idx,
+                "scb_index": scb_idx,
+                "matmoms_avg_price": mm[m]["avg_price"],
+                "matmoms_obs": mm[m]["n_obs"],
+                "scb_yearly_change": scb_data[m].get("yearly_change"),
             })
+            if mm_idx is not None and scb_idx is not None:
+                mm_indices.append(mm_idx)
+                scb_indices.append(scb_idx)
 
-        # Compute correlation between the two index series
-        mm_vals = [m["matmoms_index"] for m in monthly if m["matmoms_index"] and m["scb_index"]]
-        scb_vals = [m["scb_index"] for m in monthly if m["matmoms_index"] and m["scb_index"]]
-
-        correlation = None
-        if len(mm_vals) >= 3:
-            # Simple Pearson correlation
-            n = len(mm_vals)
-            mean_mm = sum(mm_vals) / n
-            mean_scb = sum(scb_vals) / n
-            cov = sum((a - mean_mm) * (b - mean_scb) for a, b in zip(mm_vals, scb_vals))
-            std_mm = (sum((x - mean_mm) ** 2 for x in mm_vals)) ** 0.5
-            std_scb = (sum((x - mean_scb) ** 2 for x in scb_vals)) ** 0.5
-            if std_mm > 0 and std_scb > 0:
-                correlation = round(cov / (std_mm * std_scb), 3)
-
-        comparisons.append({
+        results.append({
             "category": cat_id,
-            "scb_name": scb_name,
-            "coicop": coicop,
+            "name": mapping["name"],
+            "coicop": scb_code,
+            "match_level": match_level,
             "months": len(monthly),
-            "correlation": correlation,
+            "correlation": pearson(mm_indices, scb_indices),
             "data": monthly,
         })
 
-    return comparisons
+    return results
 
 
 def main():
     db = sqlite3.connect(str(DB_PATH))
 
-    print("Loading SCB KPI data...")
-    scb = load_scb_data()
-    print(f"  {len(scb)} COICOP groups loaded")
+    print("Loading SCB data...")
+    scb_detail = load_scb(SCB_DETAIL_PATH)
+    scb_agg = load_scb(SCB_AGG_PATH)
+    print(f"  Detail: {len(scb_detail)} groups, Aggregated: {len(scb_agg)} groups")
 
     print("Computing Matmoms indices...")
-    matmoms = compute_matmoms_indices(db)
-    print(f"  {len(matmoms)} categories with data")
+    matmoms = compute_matmoms_monthly(db)
+    print(f"  {len(matmoms)} categories")
 
-    print("Comparing...")
-    results = compare(scb, matmoms)
+    print("Comparing categories...")
+    categories = compare_categories(scb_detail, scb_agg, matmoms)
 
-    # Save for site
+    print("Computing total food index...")
+    mm_total = compute_total_index(matmoms)
+    scb_total = scb_agg.get("01", {})  # "01" = Livsmedel totalt
+
+    # Total food comparison
+    common_total = sorted(set(mm_total.keys()) & set(scb_total.keys()))
+    total_monthly = []
+    mm_vals = []
+    scb_vals = []
+    for m in common_total:
+        mm_idx = mm_total[m]["index"]
+        scb_idx = scb_total[m].get("index")
+        total_monthly.append({
+            "month": m,
+            "matmoms_index": mm_idx,
+            "scb_index": scb_idx,
+            "matmoms_obs": mm_total[m]["n_obs"],
+            "scb_yearly_change": scb_total[m].get("yearly_change"),
+        })
+        if mm_idx is not None and scb_idx is not None:
+            mm_vals.append(mm_idx)
+            scb_vals.append(scb_idx)
+
+    total_corr = pearson(mm_vals, scb_vals)
+
+    output = {
+        "total": {
+            "name": "Livsmedel totalt",
+            "scb_coicop": "01",
+            "correlation": total_corr,
+            "months": len(total_monthly),
+            "data": total_monthly,
+        },
+        "categories": sorted(categories, key=lambda x: x.get("correlation") or -2, reverse=True),
+    }
+
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_PATH, "w") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
+        json.dump(output, f, ensure_ascii=False, indent=2)
 
-    # Summary
-    print(f"\n{'Category':<25} {'SCB name':<35} {'Months':>6} {'Correlation':>12}")
-    print("-" * 82)
-    for r in sorted(results, key=lambda x: x.get("correlation") or 0, reverse=True):
+    # Print summary
+    print(f"\n{'='*80}")
+    print(f"TOTAL FOOD INDEX: Matmoms vs SCB")
+    print(f"  Correlation: {total_corr}")
+    print(f"  Months: {len(common_total)}")
+    for m in total_monthly:
+        print(f"    {m['month']}: Matmoms={m['matmoms_index']:.1f}  SCB={m['scb_index']:.1f}  "
+              f"SCB årsförändring={m['scb_yearly_change']}%")
+
+    print(f"\n{'Category':<22} {'Name':<20} {'COICOP':<12} {'Level':<6} {'r':>8}")
+    print("-" * 72)
+    for r in output["categories"]:
         corr = f"{r['correlation']:.3f}" if r["correlation"] is not None else "N/A"
-        print(f"{r['category']:<25} {r['scb_name']:<35} {r['months']:>6} {corr:>12}")
+        lvl = "det" if r["match_level"] == "detail" else "agg"
+        print(f"{r['category']:<22} {r['name']:<20} {r['coicop']:<12} {lvl:<6} {corr:>8}")
 
-    # Overall stats
-    corrs = [r["correlation"] for r in results if r["correlation"] is not None]
+    corrs = [r["correlation"] for r in categories if r["correlation"] is not None]
     if corrs:
-        avg_corr = sum(corrs) / len(corrs)
-        print(f"\nAverage correlation: {avg_corr:.3f} ({len(corrs)} categories)")
-        print(f"Strong (>0.7): {sum(1 for c in corrs if c > 0.7)}")
-        print(f"Moderate (0.3-0.7): {sum(1 for c in corrs if 0.3 <= c <= 0.7)}")
-        print(f"Weak (<0.3): {sum(1 for c in corrs if c < 0.3)}")
+        print(f"\nCategory correlations: avg={sum(corrs)/len(corrs):.3f}, "
+              f"strong(>0.7)={sum(1 for c in corrs if c > 0.7)}, "
+              f"moderate(0.3-0.7)={sum(1 for c in corrs if 0.3 <= c <= 0.7)}, "
+              f"weak(<0.3)={sum(1 for c in corrs if c < 0.3)}")
 
     db.close()
     print(f"\nSaved to {OUT_PATH}")
