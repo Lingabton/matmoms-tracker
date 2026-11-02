@@ -31,6 +31,7 @@ export function Nav({ basketCount }: Props) {
           <a href="#priser" onClick={() => setOpen(false)}>Priser</a>
           <a href="#kedja" onClick={() => setOpen(false)}>Kedjor</a>
           <a href="#kategori" onClick={() => setOpen(false)}>Kategorier</a>
+          <a href="#data" onClick={() => setOpen(false)}>Data</a>
         </div>
       </div>
     </nav>

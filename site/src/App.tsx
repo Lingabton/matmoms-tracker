@@ -11,6 +11,7 @@ import { ChainComparison } from "./components/ChainComparison";
 import { CategoryTable } from "./components/CategoryTable";
 import { Timeline } from "./components/Timeline";
 import { Methodology } from "./components/Methodology";
+import { DataDownload } from "./components/DataDownload";
 import { JournalistCTA } from "./components/JournalistCTA";
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <Methodology />
       </div>
 
+      <DataDownload data={data} />
       <JournalistCTA data={data} />
 
       <footer>

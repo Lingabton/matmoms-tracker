@@ -275,6 +275,75 @@ nav .links a:hover { color: var(--accent); }
   padding: 0.1rem 0.4rem; border-radius: 100px;
 }
 
+/* ============ DATA DOWNLOAD ============ */
+.data-download {
+  max-width: var(--max-w); margin: 0 auto; padding: 3rem 0;
+}
+.data-header { margin-bottom: 2rem; }
+.data-header h2 {
+  font-family: var(--font-display); font-size: 1.8rem;
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+.data-header p {
+  font-size: 1rem; color: var(--text-secondary); max-width: 540px;
+}
+.data-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.data-card {
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 2rem; display: flex; flex-direction: column; gap: 0.6rem;
+  background: var(--surface);
+}
+.data-card--full {
+  border-color: var(--accent); background: var(--accent-glow);
+}
+.data-card-label {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent); font-weight: 700;
+}
+.data-card h3 {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
+}
+.data-card p {
+  font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; flex: 1;
+}
+.data-btn {
+  display: inline-block; font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 600;
+  background: var(--accent); color: white;
+  padding: 0.65rem 1.5rem; border-radius: 6px;
+  text-decoration: none; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+}
+.data-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 77, 77, 0.25);
+}
+.data-btn--outline {
+  background: transparent; color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.data-btn--outline:hover {
+  background: var(--accent); color: white;
+}
+.data-license {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.data-attribution {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--text-secondary); padding: 1rem 1.25rem;
+  background: var(--bg); border-radius: 6px;
+  border: 1px solid var(--border);
+}
+@media (max-width: 640px) {
+  .data-grid { grid-template-columns: 1fr; }
+}
+
 /* ============ CTA ============ */
 .cta-section {
   background: var(--bg-deep); color: white;
