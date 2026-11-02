@@ -11,6 +11,8 @@ from dataclasses import dataclass, field
 from playwright.async_api import Browser, BrowserContext, Page
 from sqlalchemy.orm import Session
 
+from sqlalchemy import func, select
+
 from matmoms.db.models import PriceObservation, Product, ScrapeRun, Store
 from matmoms.tz import now as _now
 
@@ -19,6 +21,10 @@ logger = logging.getLogger(__name__)
 # Price validation bounds (SEK)
 MIN_VALID_PRICE = 0.50
 MAX_VALID_PRICE = 500.0  # No tracked grocery item should exceed 500 SEK
+
+# Price volatility threshold — reject if price deviates more than this
+# fraction from the historical median for the same product+store.
+PRICE_DEVIATION_THRESHOLD = 0.60  # 60%
 
 # Retry configuration
 MAX_RETRIES = 3
@@ -75,7 +81,7 @@ def normalize_volume(text: str | None) -> float | None:
 
 
 def _extract_brand(canonical_name: str) -> str:
-    """Extract brand from canonical product name (first word(s) before product type)."""
+    """Extract brand from canonical product name (first word(s) before product type or size)."""
     product_type_words = {
         "mjölk", "smör", "ost", "ägg", "bröd", "socker", "pasta", "ris",
         "standardmjölk", "mellanmjölk", "lättmjölk", "minimjölk",
@@ -89,6 +95,7 @@ def _extract_brand(canonical_name: str) -> str:
         "chips", "naturchips", "dip", "godis", "choklad", "glass",
         "digestive", "schweizernöt", "japp", "sandwich",
         "juice", "läsk", "vatten", "dryck", "havredryck",
+        "apelsinjuice", "äppeljuice",
         "blöjor", "kikärtor", "kidneybönor", "tomater", "potatis",
         "äpplen", "bananer", "apelsiner", "vitlök", "tomat",
         "paprika", "rödlök", "zucchini", "broccoli", "majs",
@@ -96,13 +103,30 @@ def _extract_brand(canonical_name: str) -> str:
         "riven", "skivad", "kokt", "rökt", "strimlad", "gravad",
         "gratäng", "fiskgratäng", "nuggets", "stroganoff",
         "sesamolja", "vaniljsocker",
+        "pastasås", "olivolja", "rapsolja",
     }
     words = []
     for w in canonical_name.split():
-        if w.lower() in product_type_words:
+        wl = w.lower()
+        if wl in product_type_words:
+            break
+        # Stop at size patterns like "1.5L", "500g", "200ml", "3%"
+        if re.match(r"^\d+(?:[.,]\d+)?(?:l|dl|cl|ml|kg|g|%)$", wl):
+            break
+        # Stop at pack patterns like "6-pack", "8-pack"
+        if re.match(r"^\d+-?pack$", wl):
             break
         words.append(w)
     return " ".join(words).lower() if words else ""
+
+
+def _normalize_brand(text: str) -> str:
+    """Normalize brand text for comparison: strip ®, ™, trailing suffixes."""
+    text = text.lower().strip()
+    text = re.sub(r"[®™©]", "", text)
+    # Strip common suffixes: "Arla Ko" -> "Arla", "Arla Köket" -> "Arla"
+    text = re.sub(r"\s+(ko|köket|foods?)$", "", text)
+    return text.strip()
 
 
 def best_match(
@@ -112,16 +136,15 @@ def best_match(
     brand_key: str | None = None,
     size_key: str | None = None,
 ) -> dict | None:
-    """Pick the best API result with strict triple-check validation.
+    """Pick the best API result with triple-check validation and size fallback.
 
-    Three mandatory checks (any failure = reject):
-    1. SIZE: Must match within ±15% (mandatory if size available)
-    2. BRAND: Must match (mandatory for branded products)
-    3. VARIANT: Eko/Laktosfri must match exactly
+    Hard gates (any failure = reject):
+    1. BRAND: Must match (mandatory for branded products)
+    2. VARIANT: Eko/Laktosfri must match exactly
 
-    Scoring for ranking among passing candidates:
-    - Name keyword overlap
-    - Position preference (earlier = better)
+    Size matching is tiered:
+    - Strict: ±25% → full score bonus
+    - Flexible: any size with strong brand+name match → reduced score
     """
     if not items:
         return None
@@ -130,11 +153,13 @@ def best_match(
     canonical = product.canonical_name
     canonical_lower = canonical.lower()
     target_vol = normalize_volume(canonical)
-    target_brand = _extract_brand(canonical)
+    target_brand = _normalize_brand(_extract_brand(canonical))
 
     # Strip size/percentage from canonical for keyword matching
     canonical_clean = re.sub(r"\s+\d+(?:[.,]\d+)?\s*(?:L|l|dl|cl|ml|kg|g)\s*$", "", canonical_lower)
     canonical_clean = re.sub(r"\s+\d+(?:[.,]\d+)?%", "", canonical_clean)
+    # Also strip pack counts like "6-pack"
+    canonical_clean = re.sub(r"\s+\d+-?pack\s*$", "", canonical_clean)
     canonical_keywords = {w for w in canonical_clean.split() if len(w) > 1}
 
     # Variant flags
@@ -142,52 +167,34 @@ def best_match(
     target_is_laktosfri = "laktosfri" in canonical_lower
     target_is_light = any(w in canonical_lower for w in ("lätt", "light", "0.5%", "0.1%"))
 
-    candidates: list[tuple[float, int, dict, str]] = []
+    candidates: list[tuple[float, int, dict, str, bool]] = []
 
     for idx, item in enumerate(items):
         item_name = (item.get(name_key) or "").lower()
         item_brand_raw = (item.get(brand_key) or "") if brand_key else ""
-        item_brand = item_brand_raw.lower()
+        item_brand = _normalize_brand(item_brand_raw)
         item_size_raw = item.get(size_key) if size_key else None
 
         reject_reason = ""
-        size_verified = False
 
-        # === CHECK 1: SIZE ===
-        if target_vol and size_key:
-            item_vol = normalize_volume(item_size_raw)
-            if item_vol:
-                ratio = item_vol / target_vol
-                if not (0.85 <= ratio <= 1.15):
-                    reject_reason = f"size mismatch: target={target_vol}, got={item_vol} ({ratio:.2f}x)"
-                else:
-                    size_verified = True
-            # If item has no size info, allow but require strong name match later
-
-        # === CHECK 2: BRAND ===
-        if not reject_reason and target_brand:
+        # === CHECK 1: BRAND ===
+        if target_brand:
             brand_found = False
-            # Check if extracted brand matches API brand field
-            if item_brand:
-                brand_found = (
-                    target_brand in item_brand
-                    or any(bw in item_brand for bw in target_brand.split() if len(bw) > 2)
-                )
-            # Check if API brand appears in our canonical name (reverse check)
-            # Handles "Arla Bregott" where brand=Bregott in API
-            if not brand_found and item_brand:
-                brand_found = any(
-                    bw in canonical_lower for bw in item_brand.split() if len(bw) > 2
-                )
-            # Check if brand words appear in product name
-            if not brand_found:
-                brand_found = any(
-                    bw in item_name for bw in target_brand.split() if len(bw) > 2
-                )
+            target_brand_words = {bw for bw in target_brand.split() if len(bw) > 2}
+            item_brand_words = {bw for bw in item_brand.split() if len(bw) > 2}
+            if item_brand_words and target_brand_words:
+                # Word-level overlap between brand fields
+                brand_found = bool(target_brand_words & item_brand_words)
+            # Reverse check: API brand words appear in our canonical name
+            if not brand_found and item_brand_words:
+                brand_found = any(bw in canonical_lower for bw in item_brand_words)
+            # Check if our brand words appear in API product name
+            if not brand_found and target_brand_words:
+                brand_found = any(bw in item_name for bw in target_brand_words)
             if not brand_found:
                 reject_reason = f"brand mismatch: target='{target_brand}', got='{item_brand}' / '{item_name[:40]}'"
 
-        # === CHECK 3: VARIANT (eko, laktosfri, light must match exactly) ===
+        # === CHECK 2: VARIANT (eko, laktosfri, light must match exactly) ===
         if not reject_reason:
             item_is_eko = any(w in item_name.split() for w in ("eko", "ekologisk", "ekologiska"))
             item_is_laktosfri = "laktosfri" in item_name
@@ -209,25 +216,49 @@ def best_match(
             )
             continue
 
-        # === SCORING (only for candidates that passed all checks) ===
+        # === SCORING (candidates passed brand + variant checks) ===
         score = 0.0
+        size_verified = False
 
-        # Size match bonus
-        if size_verified:
-            score += 50
-        elif target_vol and not size_verified:
-            score -= 10  # Penalty for unverified size
+        # Size scoring (tiered, not a hard gate)
+        if target_vol and size_key:
+            item_vol = normalize_volume(item_size_raw)
+            if item_vol:
+                ratio = item_vol / target_vol
+                if 0.75 <= ratio <= 1.25:
+                    # Strict match — strong bonus
+                    size_verified = True
+                    score += 50
+                elif 0.40 <= ratio <= 2.5:
+                    # Flexible match — nearby size, penalized
+                    score -= 30
+                else:
+                    # Too far — heavy penalty
+                    score -= 100
 
         # Name keyword overlap
         item_keywords = {w for w in item_name.split() if len(w) > 1}
         overlap = len(canonical_keywords & item_keywords)
+        # Non-brand overlap: keywords that match beyond just the brand name
+        non_brand_overlap = len(
+            (canonical_keywords - {target_brand} - set(target_brand.split()))
+            & item_keywords
+        )
         score += overlap * 10
 
-        # If size not verified, require at least 1 keyword overlap as safety net
+        # Require minimum confidence:
+        # - Size verified: need non-brand keyword overlap OR strong total overlap
+        # - Size not verified: need at least 1 keyword overlap total
+        if size_verified and non_brand_overlap < 1 and overlap < 2:
+            logger.debug(
+                f"Rejected '{item_name[:50]}' for '{canonical}': "
+                f"only brand overlap, no product match"
+            )
+            continue
         if not size_verified and overlap < 1:
             logger.debug(
                 f"Rejected '{item_name[:50]}' for '{canonical}': "
-                f"unverified size and no name overlap"
+                f"weak match (size_verified={size_verified}, overlap={overlap})"
             )
             continue
 
@@ -244,10 +275,17 @@ def best_match(
     candidates.sort(key=lambda x: (-x[0], x[1]))
     best_score, _, best_item, best_name, best_size_verified = candidates[0]
 
-    verified_tag = "verified" if best_size_verified else "UNVERIFIED-SIZE"
+    # Reject if best score is too low (weak match)
+    if best_score < -20:
+        logger.debug(
+            f"Rejected best match '{best_name}' (score={best_score:.0f}) for '{canonical}'"
+        )
+        return None
+
+    tag = "verified" if best_size_verified else "FLEX-SIZE"
     logger.debug(
         f"Matched '{canonical}' -> '{best_name}' (score={best_score:.0f}, "
-        f"{len(candidates)}/{len(items)} passed, {verified_tag})"
+        f"{len(candidates)}/{len(items)} passed, {tag})"
     )
 
     return best_item
@@ -303,6 +341,59 @@ class BaseScraper(ABC):
         self.browser = browser
         self.context: BrowserContext | None = None
         self.page: Page | None = None
+        self._median_prices: dict[int, float] = {}  # product_id -> median price
+
+    def _load_median_prices(self, db: Session) -> None:
+        """Load historical median prices for this store to detect anomalies."""
+        product_ids = [p.id for p in self.products]
+        if not product_ids:
+            return
+
+        # Use SQL to compute median via percentile approximation (average of
+        # middle values). SQLite doesn't have a native MEDIAN, so we use a
+        # subquery approach grouped by product.
+        rows = db.execute(
+            select(
+                PriceObservation.product_id,
+                func.avg(PriceObservation.price),
+                func.count(PriceObservation.price),
+            )
+            .where(
+                PriceObservation.store_id == self.store.id,
+                PriceObservation.product_id.in_(product_ids),
+                PriceObservation.price.isnot(None),
+            )
+            .group_by(PriceObservation.product_id)
+        ).all()
+
+        self._median_prices = {
+            row[0]: row[1] for row in rows if row[2] >= 5  # need ≥5 obs
+        }
+        logger.debug(
+            f"Loaded median prices for {len(self._median_prices)} products "
+            f"at {self.store.id}"
+        )
+
+    def _check_price_deviation(
+        self, product: Product, price: float
+    ) -> bool:
+        """Return True if price is within acceptable range of historical median.
+
+        Returns True (accept) if no historical data exists yet.
+        """
+        median = self._median_prices.get(product.id)
+        if median is None:
+            return True  # No history, accept
+
+        deviation = abs(price - median) / median
+        if deviation > PRICE_DEVIATION_THRESHOLD:
+            logger.warning(
+                f"Price anomaly for {product.canonical_name} at {self.store.id}: "
+                f"{price} SEK vs median {median:.2f} SEK "
+                f"({deviation:.0%} deviation) — skipping"
+            )
+            return False
+        return True
 
     @abstractmethod
     async def select_store(self, page: Page) -> None:
@@ -393,6 +484,7 @@ class BaseScraper(ABC):
             )
 
             logger.info(f"Selecting store: {self.store.name} ({self.store.id})")
+            self._load_median_prices(db)
             await self.select_store(self.page)
 
             for i, product in enumerate(self.products):
@@ -407,6 +499,10 @@ class BaseScraper(ABC):
                         result.original_price = validate_price(result.original_price)
 
                     if result.found and result.price is not None:
+                        if not self._check_price_deviation(product, result.price):
+                            missed += 1
+                            continue
+
                         result.is_campaign = self.detect_campaign(result)
 
                         obs = PriceObservation(
