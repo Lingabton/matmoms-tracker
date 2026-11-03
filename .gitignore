@@ -16,3 +16,6 @@ raw_snapshots/
 logs/
 site/node_modules/
 site/dist/
+.claude/worktrees/
+*.db.backup*
+exports/
